@@ -64,6 +64,7 @@ nav a:hover {
     font-weight: bold;
 }
 
+
 #login-pc{
     padding: 8px;
     display: flex;
@@ -140,4 +141,41 @@ footer {
 
 .copyright {
     font-size: 12px;
+}
+
+
+/*
+##################################################
+*/
+
+
+/*
+##################################################
+Top page
+##################################################
+*/
+
+.top-page {
+    font-family: 'Angkor', cursive;
+}
+
+.top-page h1 {
+    text-align: center;
+    font-size: 50px;
+}
+
+.top-page h2 {
+    color: #FBE315;
+    text-align: center;
+    font-size: 55px;
+    margin-top: -50px;
+}
+
+.top-page h3 {
+    text-align: right;
+    color: #FBE315; 
+}
+
+.top-page h3 .change {
+    color: black;
 }
