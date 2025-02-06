@@ -1,0 +1,92 @@
+body{
+    background-color: #ffffff;
+}
+
+/*
+##################################################
+Navbar
+##################################################
+*/
+
+nav {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 70px;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+
+    padding: 20px;
+    margin: 0;
+    gap: 20px;
+    align-items: center;
+    background-color: #EEEEEE;
+    list-style-type: none;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+}
+
+nav ul li {
+    cursor: pointer;
+}
+
+nav ul li.right {
+    margin-left: auto;
+}
+
+nav ul li.logo {
+    margin-right: 20px;
+}
+
+nav ul li.page-actuelle {
+    background: linear-gradient(to right, #e0e0e0, #EEEEEE);
+    padding: 8px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+nav a {
+    display: flex;
+    color: black;
+    text-decoration: none;
+    font-family: 'Single Line', sans-serif;
+    align-items: center;
+}
+
+nav a:hover {
+    font-weight: bold;
+}
+
+#login-pc{
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(29, 29, 29);
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+#login-portable{
+    display: none;
+}
+
+@media (max-width: 768px) {
+    #login-pc{
+      display: none;
+    }
+
+    #login-portable{
+        display: flex;
+    }
+  }
+
+/*
+##################################################
+*/
