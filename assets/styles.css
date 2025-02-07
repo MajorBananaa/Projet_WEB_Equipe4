@@ -114,10 +114,11 @@ recent offer
 
 .recent-offer-image {
     background-image:url(../images/Rouen.png) ;
-    padding: 100px;
+    padding: 150px;
     margin-bottom: 20px;
     border-radius: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
 }
 
 .recent-offer-image-texte {
@@ -125,6 +126,8 @@ recent offer
     text-shadow: 2px 2px 3px black;
     font-family: sans-serif;
     font-size: 46px;
+    margin-bottom: -25%;
+    margin-left: -10%;
 }
 
 .recent-offer-item {
