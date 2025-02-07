@@ -25,37 +25,52 @@
     <main>
 
         <div class="content">
-            <aside class="filters">
+            
+            <form class="filters">
 
-                <h3>Keywords</h3>
-                <div class="selected-keywords">
-                    <span class="tag">Spring ✖</span>
-                    <span class="tag">Smart ✖</span>
-                    <span class="tag">Modern W</span>
-                </div>
+                <h3><label for="type">Type de recherche</label></h3>
+                <select name="type" id="type">
+                <option value="">Veuillez choisir une option</option>
+                <option value="Entreprise">Entreprise</option>
+                <option value="Offres">Offres</option>
+                <option value="Etudiant">Etudiant</option>
+                </select>
 
-                <h3>Filtres</h3>
-                <label><input type="checkbox" class="filter-checkbox" value="label"> Label Description</label>
-                <label><input type="checkbox" class="filter-checkbox" value="label2"> Label Description</label>
-                <label><input type="checkbox" class="filter-checkbox" value="label3"> Label Description</label>
+                <h3><label for="Localisation">Localisation :</label></h3>
+                <input list="Localisations" id="Localisation" name="Localisation" type="text">
+
+                <datalist id="Localisations">
+                <option value="Ile de france">
+                <option value="Normandie">
+                <option value="Bretagne">
+                <option value="Nouvelle Aquitaine">
+                </datalist>
                 
-                <h3>Salaire</h3>
+                <h3>Distance</h3>
                 <input type="range" id="rangeFilter" min="0" max="10000" value="0">
                 
                 <h3><label for="domaines">Domaines</label></h3>
                 <select name="domaines" id="domaines">
-                <option value="">--Veuillez choisir une option--</option>
+                <option value="">Veuillez choisir une option</option>
                 <option value="Informatique">Informatique</option>
                 <option value="BTP">BTP</option>
                 <option value="Généraliste">Généraliste</option>
                 <option value="Systèmes embarqué">Systèmes embarqué</option>
                 </select>
-            </aside>
+
+                <h3>Filtres</h3>
+                <label><input type="checkbox" class="filter-checkbox" value="label"> Label Description</label>
+                <label><input type="checkbox" class="filter-checkbox" value="label2"> Label Description</label>
+                <label><input type="checkbox" class="filter-checkbox" value="label3"> Label Description</label>
+
+                <button type="submit">Mettre à jour</button>
+            </form>
             
             <section class="results" id="results">
                 <div class="search-container">
                     <input type="text" id="search" placeholder="Search">
                 </div>
+                
                 <div class="item" data-category="cat1">
                     <img src="images/Logo-Renault.png" alt="Renault">
                     <div>

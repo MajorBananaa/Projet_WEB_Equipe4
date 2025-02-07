@@ -1,7 +1,6 @@
 body{
     background-color: #ffffff;
     font-family: 'Single Line', sans-serif;
-
 }
 
 h1, h2 {
@@ -351,7 +350,7 @@ Search page
 /* Filtres à gauche */
 .filters {
     width: 250px;
-    height: 400px;
+    height: 510px;
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -361,15 +360,6 @@ Search page
 .filters h3 {
     margin-top: 20px;
     margin-bottom: 10px;
-}
-
-.filters .tag {
-    display: inline-block;
-    background: #e0e0e0;
-    padding: 5px 5px;
-    margin: 5px 5px 0 0;
-    border-radius: 5px;
-    font-size: 14px;
 }
 
 .filters label {
@@ -385,9 +375,9 @@ Search page
     background: #ddd;
     border-radius: 5px;
     outline: none;
-  }
-  
-  .filters input[type="range"]::-webkit-slider-thumb {
+}
+
+.filters input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 20px;
@@ -395,8 +385,7 @@ Search page
     background: #000000;
     border-radius: 50%;
     cursor: pointer;
-  }
-  
+}
 
 .filters select {
     width: 100%;
@@ -406,7 +395,17 @@ Search page
     background-color: white;
     font-size: 16px;
     cursor: pointer;
-  }
+}
+
+.filters button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 /* Barre de recherche */
 .search-container {
@@ -414,7 +413,7 @@ Search page
 }
 
 .search-container input {
-    width: 50%;
+    width: 80%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 20px;
