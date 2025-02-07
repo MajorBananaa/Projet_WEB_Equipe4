@@ -100,6 +100,53 @@ nav a:hover {
 
 /*
 ##################################################
+recent offer
+##################################################
+*/
+
+.recent-offer-bottom {
+    width: 80%;
+    margin-top: 50px;
+    margin: 0 auto;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.recent-offer-image {
+    background-image:url(../images/Rouen.png) ;
+    padding: 100px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.recent-offer-image-texte {
+    color: #ffffff;
+    text-shadow: 2px 2px 3px black;
+    font-family: sans-serif;
+    font-size: 46px;
+}
+
+.recent-offer-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/*
+##################################################
+*/
+
+
+
+/*
+##################################################
 Footer
 ##################################################
 */
