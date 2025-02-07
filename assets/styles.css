@@ -1,6 +1,11 @@
 body{
     background-color: #ffffff;
     font-family: 'Single Line', sans-serif;
+
+}
+
+h1, h2 {
+    color: #444;
 }
 
 /*
@@ -105,10 +110,13 @@ footer {
     font-family: Inter, sans-serif;
     border-top: 1px solid black;
     font-style: italic;
+    position: absolute;
+    left: 0;
+    width: 100%;
 }
 
 .footer-container {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -148,6 +156,17 @@ footer {
 ##################################################
 */
 
+.footer-sous-page {
+    line-height: 1.6;
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 800px;
+    background-color: #f4f4f4;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: white;
+}
 
 /*
 ##################################################
