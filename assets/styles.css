@@ -467,17 +467,6 @@ Search page
     color: #333;
 }
 
-.cookies-header {
-    background-color: #FFD700;
-    color: black; 
-    padding: 1rem 0;
-    text-align: center;
-}
-
-.cookies-title {
-    margin: 0;
-    font-size: 2rem;
-}
 
 .cookies-main {
     max-width: 800px;
