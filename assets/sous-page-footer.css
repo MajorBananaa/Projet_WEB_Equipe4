@@ -1,0 +1,17 @@
+.footer-sous-page {
+    line-height: 1.6;
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 60%;
+    background-color: #f4f4f4;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+
+.footer-sous-page a{
+    color: rgb(255, 255, 0);
+    font-weight: bold;
+}
