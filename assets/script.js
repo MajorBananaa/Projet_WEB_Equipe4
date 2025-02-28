@@ -5,54 +5,73 @@ document.addEventListener("DOMContentLoaded", () => {
     const salaireValue = document.getElementById("salaireValue");
     const dureeSelect = document.querySelector(".sidebar select[name='duree']");
     const tailleSelect = document.querySelector(".sidebar select[name='taille']");
-    const items = document.querySelectorAll(".result-item");
+    const items = Array.from(document.querySelectorAll(".result-item"));
     const noResultsMessage = document.getElementById("no-results");
 
+    const prevButton = document.getElementById("prevPage");
+    const nextButton = document.getElementById("nextPage");
+    const pageInfo = document.getElementById("pageInfo");
+
+    let currentPage = 1;
+    const itemsPerPage = 1;
+    let filteredItems = [];
 
     function filterResults() {
-
-        let noOffers = true;
-        
-        // Récupération des données des filtres
         const searchTerm = searchInput.value.toLowerCase();
         const selectedFilters = [...checkboxes].filter(cb => cb.checked).map(cb => cb.value);
         const selectedSalaire = parseInt(rangeFilter.value, 10);
         const selectedDuree = dureeSelect.value;
         const selectedTaille = tailleSelect.value;
 
-        // Filtrage des offres
-        items.forEach(item => {
+        filteredItems = items.filter(item => {
             const category = item.dataset.category || "";
             const salaire = parseInt(item.dataset.salaire || "0", 10);
             const remote = item.dataset.remote || "non";
             const itemText = item.innerText.toLowerCase();
 
-            // Vérification offres / filtres
             const matchesSearch = itemText.includes(searchTerm);
             const matchesCategory = selectedFilters.length === 0 || selectedFilters.includes(category) || (selectedFilters.includes("remote") && remote === "oui");
             const matchesSalaire = salaire >= selectedSalaire;
             const matchesDuree = selectedDuree === "" || itemText.includes(`${selectedDuree} mois`);
             const matchesTaille = selectedTaille === "" || itemText.includes(selectedTaille);
 
-            // Affichage ou non des offres
-            if (matchesSearch && matchesCategory && matchesSalaire && matchesDuree && matchesTaille) {
-                item.style.display = "flex";
-                noOffers = false;
-            } else {
-                item.style.display = "none";
-            }
+            return matchesSearch && matchesCategory && matchesSalaire && matchesDuree && matchesTaille;
         });
 
-        // Affichage du message si aucun élément n'est visible
-        if (noOffers) {
-            noResultsMessage.style.display = "flex";
-        } else {
-            noResultsMessage.style.display = "none";
-        }
+        noResultsMessage.style.display = filteredItems.length === 0 ? "flex" : "none";
 
+        currentPage = 1;
+        showPage();
     }
 
-    // Écouteurs d'événements pour filtrer dynamiquement
+    function showPage() {
+        const totalPages = Math.ceil(filteredItems.length / itemsPerPage) || 1;
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+
+        items.forEach(item => (item.style.display = "none"));
+        filteredItems.slice(start, end).forEach(item => (item.style.display = "flex"));
+
+        pageInfo.textContent = `Page ${currentPage} / ${totalPages}`;
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage >= totalPages;
+    }
+
+    prevButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            showPage();
+        }
+    });
+
+    nextButton.addEventListener("click", () => {
+        const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            showPage();
+        }
+    });
+
     searchInput.addEventListener("input", filterResults);
     checkboxes.forEach(cb => cb.addEventListener("change", filterResults));
     rangeFilter.addEventListener("input", () => {
@@ -61,4 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     dureeSelect.addEventListener("change", filterResults);
     tailleSelect.addEventListener("change", filterResults);
+
+    filterResults();
 });

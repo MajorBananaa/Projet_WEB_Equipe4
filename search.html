@@ -32,18 +32,34 @@
             <!-- Section des filtres -->
             <aside class="sidebar">
                 <h3>Type de contrat</h3>
-                <label><input type="checkbox" value="stage"> Stage</label>
-                <label><input type="checkbox" value="cdd"> CDD</label>
-                <label><input type="checkbox" value="cdi"> CDI</label>
-                <label><input type="checkbox" value="alternance"> Alternance</label>
-    
+                <label class="switch-container">
+                    <input type="checkbox" value="stage">
+                    <span class="switch"></span> Stage
+                </label>
+                <label class="switch-container">
+                    <input type="checkbox" value="cdd">
+                    <span class="switch"></span> CDD
+                </label>
+                <label class="switch-container">
+                    <input type="checkbox" value="cdi">
+                    <span class="switch"></span> CDI
+                </label>
+                <label class="switch-container">
+                    <input type="checkbox" value="alternance">
+                    <span class="switch"></span> Alternance
+                </label>
+
+
                 <h3>Salaire</h3>
                 <input type="range" id="rangeFilter" min="0" max="10000" value="0">
                 <span id="salaireValue">0 €</span>
-    
+
                 <h3>Télétravail</h3>
-                <label><input type="checkbox" value="remote"> Télétravail possible</label>
-    
+                <label class="switch-container">
+                    <input type="checkbox" value="remote">
+                    <span class="switch"></span> Télétravail possible
+                </label>
+
                 <h3>Durée du stage</h3>
                 <select name="duree">
                     <option value="">--Sélectionner--</option>
@@ -51,7 +67,7 @@
                     <option value="3">3 mois</option>
                     <option value="6">6 mois</option>
                 </select>
-    
+
                 <h3>Taille de l'entreprise</h3>
                 <select name="taille">
                     <option value="">--Sélectionner--</option>
@@ -60,32 +76,32 @@
                     <option value="grande">Grande</option>
                 </select>
             </aside>
-    
+
             <section class="results-container">
                 <!-- Barre de recherche -->
                 <div class="search-bar">
-                    <input type="text" id="search" placeholder="Rechercher un stage ou une entreprise">       
+                    <input type="text" id="search" placeholder="Rechercher un stage ou une entreprise">
                 </div>
-                      
+
                 <div id="no-results">
                     Aucune offre ne correspond à votre recherche.
-                </div>  
-                
+                </div>
+
                 <!-- Section des résultats -->
                 <div class="result-list">
-                    <div class="result-item" data-category="stage" data-salaire="800">
+                    <div class="result-item" data-category="stage" data-salaire="800" data-remote="oui">
                         <img src="images/Logo-Renault.png" alt="Renault">
                         <div class="result-details">
                             <h4>Stage BAC+5 / DATA Analyste (F/H)</h4>
-                            <p class="location">📍 Cléon | ⏳ 6 mois | 💰 800€/mois</p>
-                            <p class="description">Rejoignez Renault en tant que Data Analyste...</p>
+                            <p>📍 Cléon | ⏳ 6 mois | 💰 800€/mois</p>
+                            <p>Rejoignez Renault en tant que Data Analyste...</p>
                             <div class="result-badges">
                                 <span class="badge">Stage</span>
                                 <span class="badge remote">Télétravail possible</span>
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="result-item" data-category="cdi" data-salaire="3500">
                         <img src="images/Logo-Renault.png" alt="Renault">
                         <div class="result-details">
@@ -97,11 +113,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="pagination">
+                        <button id="prevPage">Précédent</button>
+                        <span id="pageInfo"></span>
+                        <button id="nextPage">Suivant</button>
+                    </div>
+                    
                 </div>
             </section>
         </div>
     </main>
-    
+
     <footer>
         <div class="footer-container">
             <div class="footer-links">
@@ -115,4 +137,5 @@
     </footer>
     <script src="assets/script.js"></script>
 </body>
+
 </html>
