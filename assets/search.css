@@ -11,7 +11,7 @@ Search page
 /* Filtres à gauche */
 .filters {
     width: 250px;
-    height: 400px;
+    height: 700px;
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -84,4 +84,12 @@ Search page
 .results {
     flex-grow: 1;
     margin-left: 20px;
+}
+
+.badge {
+    background: #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-left: 5px;
 }

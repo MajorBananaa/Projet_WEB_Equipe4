@@ -30,90 +30,73 @@
         </nav>
     </header>
     <main>
-
         <div class="content">
             <aside class="filters">
 
-                <h3>Keywords</h3>
-                <div class="selected-keywords">
-                    <span class="tag">Spring ✖</span>
-                    <span class="tag">Smart ✖</span>
-                    <span class="tag">Modern W</span>
-                </div>
 
-                <h3>Filtres</h3>
-                <label><input type="checkbox" class="filter-checkbox" value="label"> Label Description</label>
-                <label><input type="checkbox" class="filter-checkbox" value="label2"> Label Description</label>
-                <label><input type="checkbox" class="filter-checkbox" value="label3"> Label Description</label>
+                <h3>Type de contrat</h3>
+                <label><input type="checkbox" class="filter-checkbox" value="stage"> Stage</label>
+                <label><input type="checkbox" class="filter-checkbox" value="cdd"> CDD</label>
+                <label><input type="checkbox" class="filter-checkbox" value="cdi"> CDI</label>
+                <label><input type="checkbox" class="filter-checkbox" value="alternance"> Alternance</label>
 
                 <h3>Salaire</h3>
                 <input type="range" id="rangeFilter" min="0" max="10000" value="0">
+                <span id="salaireValue">0 €</span>
 
-                <h3><label for="domaines">Domaines</label></h3>
-                <select name="domaines" id="domaines">
-                    <option value="">--Veuillez choisir une option--</option>
-                    <option value="Informatique">Informatique</option>
-                    <option value="BTP">BTP</option>
-                    <option value="Généraliste">Généraliste</option>
-                    <option value="Systèmes embarqué">Systèmes embarqué</option>
+                <h3>Télétravail</h3>
+                <label><input type="checkbox" class="filter-checkbox" value="remote"> Télétravail possible</label>
+
+                <h3>Durée du stage</h3>
+                <select name="duree" id="duree">
+                    <option value="">--Sélectionner--</option>
+                    <option value="1">1 mois</option>
+                    <option value="3">3 mois</option>
+                    <option value="6">6 mois</option>
+                </select>
+
+                <h3>Taille de l'entreprise</h3>
+                <select name="taille" id="taille">
+                    <option value="">--Sélectionner--</option>
+                    <option value="petite">Petite</option>
+                    <option value="moyenne">Moyenne</option>
+                    <option value="grande">Grande</option>
                 </select>
             </aside>
 
+            <!-- Section des résultats -->
             <section class="results" id="results">
                 <div class="search-container">
-                    <input type="text" id="search" placeholder="Search">
+                    <input type="text" id="search" placeholder="Rechercher un stage ou une entreprise">
                 </div>
-                <div class="item" data-category="cat1">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>Stage BAC+5 / DATA Analyste (F/H)</h4>
-                        <p>Stage 6 mois - Cléon</p>
-                    </div>
-                </div>
-                <div class="item" data-category="cat2">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>CDD BAC+3 / Contrôle qualité (F/H)</h4>
-                        <p>CDD - Cléon</p>
-                    </div>
-                </div>
-                <div class="item" data-category="cat1">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>Stage BAC+5 / DATA Analyste (F/H)</h4>
-                        <p>Stage 6 mois - Cléon</p>
-                    </div>
-                </div>
-                <div class="item" data-category="cat2">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>CDD BAC+3 / Contrôle qualité (F/H)</h4>
-                        <p>CDD - Cléon</p>
-                    </div>
-                </div>
-                <div class="item" data-category="cat1">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>Stage BAC+5 / DATA Analyste (F/H)</h4>
-                        <p>Stage 6 mois - Cléon</p>
-                    </div>
-                </div>
-                <div class="item" data-category="cat2">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>CDD BAC+3 / Contrôle qualité (F/H)</h4>
-                        <p>CDD - Cléon</p>
-                    </div>
-                </div>
-                <div class="item" data-category="cat1">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>Stage BAC+5 / DATA Analyste (F/H)</h4>
-                        <p>Stage 6 mois - Cléon</p>
-                    </div>
 
+                <div class="item" data-category="stage" data-salaire="800" data-remote="oui">
+                    <img src="images/Logo-Renault.png" alt="Renault">
+                    <div class="item-details">
+                        <h4>Stage BAC+5 / DATA Analyste (F/H)</h4>
+                        <p class="location">📍 Cléon | ⏳ 6 mois | 💰 800€/mois</p>
+                        <p class="description">Rejoignez Renault en tant que Data Analyste et contribuez à l'analyse de
+                            données stratégiques pour nos opérations industrielles.</p>
+                        <div class="badges">
+                            <span class="badge">Stage</span>
+                            <span class="badge remote">Télétravail possible</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item" data-category="cdi" data-salaire="3500">
+                    <img src="images/Logo-Renault.png" alt="Renault">
+                    <div class="item-details">
+                        <h4>CDI / Ingénieur DevOps (F/H)</h4>
+                        <p class="location">📍 Paris | 💰 3500€/mois</p>
+                        <p class="description">En tant qu'Ingénieur DevOps, vous participerez à l'automatisation et à
+                            l'optimisation des processus de déploiement.</p>
+                        <div class="badges">
+                            <span class="badge cdi">CDI</span>
+                        </div>
+                    </div>
+                </div>
             </section>
-
         </div>
     </main>
     <footer>
