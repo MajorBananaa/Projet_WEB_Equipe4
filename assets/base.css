@@ -103,7 +103,7 @@ Footer
 ##################################################
 */
 footer {
-    background-color: #222222e9;
+    background-color: #222222;
     color: white;
     padding: 20px 0;
     font-family: Inter, sans-serif;
@@ -177,7 +177,7 @@ footer {
 }
 
 .item p {
-    margin: 5px 0 0;
+    margin: 5px 0 15px;
     font-size: 14px;
     color: gray;
 }
