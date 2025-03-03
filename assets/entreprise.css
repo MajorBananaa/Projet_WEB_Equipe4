@@ -1,0 +1,124 @@
+main{
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    height: auto; /* Assure que le parent ait une hauteur */
+}
+
+.main-entreprise{
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-entreprise{
+    margin-top: 5px;
+    height: 200px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+}
+
+.header-img{
+    width: 124px;
+    height: 124px;
+    margin-top: 40px;
+    margin-left: 40px;
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.header-entreprise img{
+    height: 80%;
+    width: 80%;
+}
+
+.name-entreprise{
+    margin-top: -10px;
+    margin-left: 40px;
+    font-size: 20px;
+}
+
+
+.type-entreprise{
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 50px auto;
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+    padding: 10px;
+  }
+  
+  .part{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+  }
+  
+
+hr{
+    background-color: red;
+}
+  
+.type-logo{
+    width: 30px;
+    height: 30px;
+    margin: 10px 0 10px 20px;
+    text-align: center;
+    line-height: 30px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.type-logo i{
+    color: black;
+    font-size: 20px;
+}
+
+.type-text {
+    width: 200px;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .type-title {
+    color: white;
+    font-size: 12px;
+  }
+  .type-response {
+    margin: 0 0 12px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+.description-entreprise{
+    width: 90%;
+    margin: 50px auto;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+
+
+
+.offre-entreprise{
+    width: 90%;
+    margin: 50px auto;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
