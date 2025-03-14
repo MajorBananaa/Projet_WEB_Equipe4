@@ -9,7 +9,7 @@
 }
 
 :root{
-    --bg-color: #0c0c0c;
+    --bg-color: #fbebd0;
     --text-color: #000000;
     --main-color: #FBE315;
 
@@ -22,6 +22,10 @@ body{
     color: var(--text-color);
 }
 
+html {
+    scroll-behavior: smooth;
+} 
+
 /*
 ##################################################
 navbar
@@ -29,8 +33,10 @@ navbar
 */
 
 header{
+    /*background-color: var(--bg-color);*/
     position: fixed;
     width: 100%;
+    height: 10vh;
     top: 0;
     right: 0;
     z-index: 1000;
@@ -113,7 +119,6 @@ section{
     position: relative;
     width: 100%;
     height: 100vh;
-    background: url(../img/bg.jpg);
     background-size: cover;
     background-position: center;
     display: grid;
@@ -208,16 +213,28 @@ section{
 ##################################################
 */
 
+/*
+##################################################
+home page bottom
+##################################################
+*/
 
-.home-page-bottom {
-    margin-top: 50px;
-    font-family: 'Single Line', sans-serif;
+.next-section{
     margin: 0;
     padding: 0;
+}
+
+
+.bot{
+    width: 100%;
+    height: 100vh;
+    margin-top: 50px;
+}
+
+.home-page-bottom {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 50px;
 }
 
 .container {
@@ -256,7 +273,6 @@ section{
     animation: pulse 0.5s ease-in-out;
 }
 
-
 .btn {
     display: inline-block;
     padding: 10px 15px;
@@ -292,16 +308,8 @@ section{
 ##################################################
 */
 
-
-/*
-##################################################
-footer
-##################################################
-*/
-
 footer{
     margin : 0;
-    padding : 0;
     box-sizing: border-box;
     width: 100%;
     position : bottom;
