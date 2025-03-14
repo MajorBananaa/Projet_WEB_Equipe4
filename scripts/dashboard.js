@@ -30,7 +30,7 @@ if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
 function lightMode() {
   body.classList.remove("dark-mode");
   light.classList.add("active");
-  dark.classList.add("active");
+  dark.classList.remove("active");
 }
 function darkMode() {
   body.classList.add("dark-mode");
