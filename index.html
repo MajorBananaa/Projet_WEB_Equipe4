@@ -4,100 +4,168 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - StageFinder</title>
+    <title>Home page top v2</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- css -->
     <link rel="stylesheet" href="assets/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Single+Line&display=swap" rel="stylesheet">
+
+    <!-- image onglet -->
     <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
+    
+    <!-- font google -->
+    <link href="https://fonts.googleapis.com/css2?family=Single+Line&display=swap" rel="stylesheet">
+
+    <!-- font awesome kit -->
     <script src="https://kit.fontawesome.com/5dd0552b99.js"></script>
+
+     <!-- style -->
+    <link rel="stylesheet" type="text/css" href="css/home-page.css">
+
+    <!-- box icons link -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  
+    <!-- remix icons link -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+
+    <!-- google fonts link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!-- AOS animations -->  
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
+
+<!-- header -->
+<header>
+    <a href="#" class="logo">
+        <img src="images/logo.png">
+    </a>
+    <ul class="navlist">
+        <li><a href="#">Offres</a></li>
+        <li><a href="#">Entreprises</a></li>
+        <li><a href="#">Trouver un étudiant</a></li>
+        <li><a href="#">Trouver un pilote</a></li>
+        <li><a href="#">Dashboard</a></li>
+    </ul>
+
+    <div class="right-content">
+        <a href="#" class="nav-btn">Connectez-vous</a>
+        <div class="ri-menu-line" id="menu-icon"></div>
+    </div>
+</header>
+
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li class="logo"><a href="#"><img src="images/cesi-logo.png" alt="" width="75" height="36"></a></li>
-                <li class="page-actuelle"><a href="">Accueil</a></li>
-                <li><a href="search.html">Trouver un job</a></li>
-                <li><a href="search.html">Trouver une entreprise</a></li>
-                <li><a href="">Guide d'utilisation</a></li>
-                <li><a href="">Contact</a></li>
-                <li class="right"><a href="login.html"><div id="login-pc"><img src="images/user-white.png" alt="">Se connecter</div><div id="login-portable"><img src="images/user-black.png" alt=""></div></a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="top-page">
-            <h1>CESI</h1>
-            <h2>StageFinder</h2>
-            <h3>Stages et talents<span class="change">, connectes en un instant !</span></h3>
-        </section>
+    <!-- home page top -->
+    <!-- hero -->
+    <section class="hero">
+        <div class="hero-text">
+            <h5 data-aos ="fade-right" data-aos-duration="1400">#Stage et Talents connectés en un instant</h5>
+            <h1 data-aos ="zoom-in-left" data-aos-duration="1400" data-aos-delay="200"> Cesi Stage Finder</h1>
+            <p data-aos ="fade-right" data-aos-duration="1400" data-aos-delay="300">Trouve facilement ton stage idéal au CESI et booste ta carrière dès aujourd’hui !</p>
 
-        <section>
-            <div class="home-page-bottom">
-                <div class="container">
-                    <div class="text-box">
-                        <p>La recherche de stage est une étape clé pour appliquer ses connaissances, découvrir le monde professionnel et développer des compétences. Un stage en entreprise permet d'acquérir de l'expérience, de mieux comprendre le secteur et d'affiner son orientation professionnelle. Il est aussi un atout pour l’insertion sur le marché du travail.</p>
-                        <div class="buttons">
-                            <a href="" class="btn btn-yellow">Nous rejoindre</a>
-                            <a href="" class="btn btn-black">Découvrir les offres</a>
-                        </div>
-                    </div>
-                    <img src="images/groupe-de-travail-en-entreprise.webp" alt="Groupe de travail en entreprise" id="image1">
-                </div>
-                <div class="container">
-                    <img src="images/etudiant-souriant.jpeg" alt="Étudiant souriant" id="image2">
-                    <div class="text-box">
-                        <p>Connaître les entreprises avant de postuler est essentiel pour s’assurer qu’elles correspondent à ses attentes et ambitions. Se renseigner sur leur domaine, leur culture et leurs opportunités permet d’adapter sa candidature et d’optimiser ses chances de décrocher un stage enrichissant et aligné avec son projet professionnel.</p>
-                        <div class="buttons">
-                            <a href="" class="btn btn-yellow">Nous rejoindre</a>
-                            <a href="" class="btn btn-black">Découvrir les entreprises partenaires</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class ="row">
-            <div class ="col">
-                <img src="images\Logo_cesi_2022.png" class="logo">
-                <p>Web4All est une entreprise spécialisée dans le développement de solutions web innovantes.</p>
-                <p>Nous concevons des plateformes sur mesure pour répondre aux besoins de nos clients.</p>
-            </div>
-            <div class ="col">
-                <h3>Bureau <div class="underline"><span></span></div></h3>
-                <p>80 avenue Edmund Halley</p>
-                <p>St-Étienne-du-Rouvray</p>
-                <p>Seine-Maritime, France</p>
-                <p class="email-id">contact@cesistagefinder.com</p>
-                <h4>+33 2 32 00 00 00</h4>
-            </div>
-            <div class ="col">
-                <h3>Liens<div class="underline"><span></span></div></h3>
-                <ul>
-                    <li><a href=".html"> A propos </a></li>
-                    <li><a href=".html"> Contact </a></li>
-                    <li><a href=".html"> Mentions légales </a></li>
-                    <li><a href=".html"> Politique de confidentialité </a></li>
-                </ul>
-            </div>
-            <div class ="col">
-                <h3>Newsletter<div class="underline"><span></span></div></h3>
-                <form>
-                    <i class="fa-regular fa-envelope"></i>
-                    <input type ="email" placeholder="  Entrer votre adresse email" required>
-                    <button type ="submit"><i class="fa-solid fa-arrow-right"></i></button>
-                </form>
-                <div class="social-icons">
-                    <i class="fa-brands fa-facebook-f"></i>
-                    <i class="fa-brands fa-x-twitter"></i>
-                    <i class="fa-brands fa-whatsapp"></i>
-                    <i class="fa-brands fa-pinterest"></i>
-                </div>
-
+            <div class="main-hero" data-aos ="flip-down" data-aos-duration="1400" data-aos-delay="400">
+                <a href="#" class="btn">Rejoignez Nous !</a>
+                <a href="#" class="price">16.00$ | <span>Regular Price</span></a>
             </div>
         </div>
-    <hr>
-    <p class="copyright"> Copyright © Cesi Stagefinder 2025 - Site de recherche de stage </p>
-    </footer>
+
+        <div class="hero-img" data-aos ="zoom-in" data-aos-duration="1400">
+            <img src="images/hero.png">
+        </div>
+     </section>
+
+    <!-- scroll -->
+     <div class="scroll" data-aos ="zoom-out-down" data-aos-duration="1400" data-aos-delay="550">
+        <a href="#">
+            <i class="ri-scroll-to-bottom-line"></i>
+            Scroll vers le bas
+        </a>
+     </div>
+
+
+
+    <!-- home page bottom -->
+    <section>
+        <div class="home-page-bottom">
+            <div class="container">
+                <div class="text-box">
+                    <p>La recherche de stage est une étape clé pour appliquer ses connaissances, découvrir le monde professionnel et développer des compétences. Un stage en entreprise permet d'acquérir de l'expérience, de mieux comprendre le secteur et d'affiner son orientation professionnelle. Il est aussi un atout pour l’insertion sur le marché du travail.</p>
+                    <div class="buttons">
+                        <a href="" class="btn btn-yellow">Nous rejoindre</a>
+                        <a href="" class="btn btn-black">Découvrir les offres</a>
+                    </div>
+                </div>
+                <img src="images/groupe-de-travail-en-entreprise.webp" alt="Groupe de travail en entreprise" id="image1">
+            </div>
+            <div class="container">
+                <img src="images/etudiant-souriant.jpeg" alt="Étudiant souriant" id="image2">
+                <div class="text-box">
+                    <p>Connaître les entreprises avant de postuler est essentiel pour s’assurer qu’elles correspondent à ses attentes et ambitions. Se renseigner sur leur domaine, leur culture et leurs opportunités permet d’adapter sa candidature et d’optimiser ses chances de décrocher un stage enrichissant et aligné avec son projet professionnel.</p>
+                    <div class="buttons">
+                        <a href="" class="btn btn-yellow">Nous rejoindre</a>
+                        <a href="" class="btn btn-black">Découvrir les entreprises partenaires</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+<!-- AOS animation -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script> AOS.init({offset:1,}); </script>
+
+<!--js link -->
+<script src="js/script.js"></script>
+
 </body>
+
+<footer>
+    <div class ="row">
+        <div class ="col">
+            <img src="images\Logo_cesi_2022.png" class="logo">
+            <p>Web4All est une entreprise spécialisée dans le développement de solutions web innovantes.</p>
+            <p>Nous concevons des plateformes sur mesure pour répondre aux besoins de nos clients.</p>
+        </div>
+        <div class ="col">
+            <h3>Bureau <div class="underline"><span></span></div></h3>
+            <p>80 avenue Edmund Halley</p>
+            <p>St-Étienne-du-Rouvray</p>
+            <p>Seine-Maritime, France</p>
+            <p class="email-id">contact@cesistagefinder.com</p>
+            <h4>+33 2 32 00 00 00</h4>
+        </div>
+        <div class ="col">
+            <h3>Liens<div class="underline"><span></span></div></h3>
+            <ul>
+                <li><a href=".html"> A propos </a></li>
+                <li><a href=".html"> Contact </a></li>
+                <li><a href=".html"> Mentions légales </a></li>
+                <li><a href=".html"> Politique de confidentialité </a></li>
+            </ul>
+        </div>
+        <div class ="col">
+            <h3>Newsletter<div class="underline"><span></span></div></h3>
+            <form>
+                <i class="fa-regular fa-envelope"></i>
+                <input type ="email" placeholder="  Entrer votre adresse email" required>
+                <button type ="submit"><i class="fa-solid fa-arrow-right"></i></button>
+            </form>
+            <div class="social-icons">
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-whatsapp"></i>
+                <i class="fa-brands fa-pinterest"></i>
+            </div>
+
+        </div>
+    </div>
+<hr>
+<p class="copyright"> Copyright © Cesi Stagefinder 2025 - Site de recherche de stage </p>
+</footer>
+
 </html>
