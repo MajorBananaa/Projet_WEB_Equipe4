@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout avec Flexbox</title>
+    <style>
+        /* Conteneur principal avec flexbox */
+        .container {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Div gauche (prend 50% de la largeur) */
+        .left {
+            width: 50%;
+            background-color: lightblue;
+            padding: 10px;
+        }
+
+        /* Conteneur pour les divs à droite */
+        .right-container {
+            display: flex;
+            flex-direction: column; /* Aligne les divs à droite en colonne */
+            width: 50%; /* Prend 50% de la largeur de l'écran */
+        }
+
+        /* Div droite 1 */
+        .right {
+            background-color: lightgreen;
+            padding: 10px;
+        }
+
+        /* Div droite 2 */
+        .right.second {
+            background-color: lightcoral;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="left">
+        Div à gauche
+    </div>
+    <div class="right-container">
+        <div class="right">
+            Div droite 1
+        </div>
+        <div class="right second">
+            Div droite 2
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
