@@ -1,6 +1,9 @@
 /*Media 1200 px*/
 
 @media screen and (max-width: 1200px) {
+    body {
+        overflow-y: auto;
+    }
     .dashboard-container {
         grid-template-columns: 1fr 6fr 5fr;
         gap: 2rem;
@@ -45,10 +48,6 @@
         align-items: center;
     }
 
-    .list-items li:last-child {
-        position: initial;
-        margin-top: 4rem;
-    }
 }
 /*Media 768 px*/
 
