@@ -11,41 +11,22 @@ class TaskController extends Controller {
     }
 
     public function welcomePage() {
-        // TODO: Retrieve the list of tasks from the model
-        echo $this->templateEngine->render('todo.twig.html', ['tasks' => $tasks]);
+        echo $this->templateEngine->render('index.html.twig');
     }
 
-    public function addTask() {
-        // TODO: First, we check if the 'task' parameter is present in the POST request
-        // TODO: If not, we redirect the user to the home page: header('Location: /');
-
-        // TODO: Then, we retrieve the value of the 'task' parameter
-        // TODO: We call the addTask method of the model with the task as a parameter
-        // TODO: Finally, we redirect the user to the home page: header('Location: /');
+    public function offerPage() {
+        echo $this->templateEngine->render('offer.html.twig');
     }
 
-    public function checkTask() {
-        // TODO: First, we check if the 'id' parameter is present in the POST request
-        // TODO: If not, we redirect the user to the home page
-
-        // TODO: Then, we retrieve the value of the 'id' parameter
-        // TODO: We call the checkTask method of the model with the id as a parameter
-        // TODO: Finally, we redirect the user to the home page
-
+    public function entreprisePage() {
+        echo $this->templateEngine->render('entreprise.html.twig');
     }
 
-    public function historyPage() {
-        // TODO: Retrieve the list of tasks from the model
-        // TDOO: Render the history.twig.html template with the list of tasks
+    public function studentPage() {
+        echo $this->templateEngine->render('student.html.twig');
     }
 
-    public function uncheckTask() {
-        // It's the same as the checkTask method, but we call the uncheckTask method of the model...
+    public function tuteurPage() {
+        echo $this->templateEngine->render('tuteur.html.twig');
     }
-
-    public function aboutPage() {
-        // TODO: Render the about.twig.html template
-    }
-
-
 }

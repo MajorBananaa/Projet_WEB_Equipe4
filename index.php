@@ -13,38 +13,29 @@ $twig = new \Twig\Environment($loader, [
     'debug' => true
 ]);
 
-if (isset($_GET['uri'])) {
-    $uri = $_GET['uri'];
-} else {
+$uri = $_SERVER['REQUEST_URI'];
+
+// Supprime les éventuels paramètres GET après "?"
+$uri = explode('?', $uri)[0];
+
+// Supprime "/index.php" s'il est présent dans l'URL
+$uri = str_replace('/index.php', '', $uri);
+
+// Si l'URI est vide ou "/", on met la page d'accueil
+if ($uri == '' || $uri == '/') {
     $uri = '/';
 }
+
+
 
 $controller = new TaskController($twig);
 
 switch ($uri) {
     case '/':
-        // TODO : call the welcomePage method of the controller
-        echo 'Welcome page';
+        $controller->welcomePage();
         break;
-    case 'add_task':
-        // TODO : call the addTask method of the controller
-        echo 'Add task action';
-        break;
-    case 'check_task':
-        // TODO : call the checkTask method of the controller
-        echo 'Check task action';
-        break;
-    case 'history':
-        // TODO : call the historyPage method of the controller
-        echo 'History page';
-        break;
-    case 'uncheck_task':
-        // TODO : call the uncheckTask method of the controller
-        echo 'Uncheck task action';
-        break;
-    case 'about':
-        // TODO : call the aboutPage method of the controller
-        echo 'About page';
+    case '/offer':
+        $controller->offerPage();
         break;
     default:
         // TODO : return a 404 error
