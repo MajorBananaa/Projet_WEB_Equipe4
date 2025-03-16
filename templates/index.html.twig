@@ -4,27 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - StageFinder</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- css -->
-    <link rel="stylesheet" href="assets/index.css">
+    <link rel="stylesheet" href="/assets/0.css">
+    <link rel="stylesheet" href="/assets/index.css">
+    
 
     <!-- image onglet -->
-    <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
-    
-    <!-- font google -->
-    <link href="https://fonts.googleapis.com/css2?family=Single+Line&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/images/Logo_cesi_2022.png">
 
     <!-- font awesome kit -->
     <script src="https://kit.fontawesome.com/5dd0552b99.js"></script>
 
-     <!-- style -->
-    <link rel="stylesheet" type="text/css" href="css/home-page.css">
-
-    <!-- box icons link -->
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-  
     <!-- remix icons link -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
 
@@ -32,29 +23,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
-    <!-- aos animations -->  
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 
 <!-- header -->
-<header>
-    <a href="#" class="logo">
-        <img src="images/logo.png">
-    </a>
-    <ul class="navlist">
-        <li><a href="search.html">Offres</a></li>
-        <li><a href="entreprise-profil.html">Entreprises</a></li>
-        <li><a href="#">Trouver un étudiant</a></li>
-        <li><a href="#">Trouver un pilote</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-    </ul>
-
-    <div class="right-content">
-        <a href="login.html" class="nav-btn">Connectez-vous</a>
-        <div class="ri-menu-line" id="menu-icon"></div>
-    </div>
-</header>
+{% include 'header.twig' %}
 
 <body>
     <!-- home page top -->
@@ -121,51 +93,9 @@
 
 <!--js link -->
 <script src="js/script.js"></script>
-
+{% include 'footer.twig' %}
 </body>
 
-<footer class="ft">
-    <div class ="row">
-        <div class ="col">
-            <img src="images\Logo_cesi_2022.png" class="logo">
-            <p>Web4All est une entreprise spécialisée dans le développement de solutions web innovantes.</p>
-            <p>Nous concevons des plateformes sur mesure pour répondre aux besoins de nos clients.</p>
-        </div>
-        <div class ="col">
-            <h3>Bureau <div class="underline"><span></span></div></h3>
-            <p>80 avenue Edmund Halley</p>
-            <p>St-Étienne-du-Rouvray</p>
-            <p>Seine-Maritime, France</p>
-            <p class="email-id">contact@cesistagefinder.com</p>
-            <h4>+33 2 32 00 00 00</h4>
-        </div>
-        <div class ="col">
-            <h3>Liens<div class="underline"><span></span></div></h3>
-            <ul>
-                <li><a href=".html"> A propos </a></li>
-                <li><a href=".html"> Contact </a></li>
-                <li><a href="mentions-legales.html"> Mentions légales </a></li>
-                <li><a href="politique-de-confidentialite.html"> Politique de confidentialité </a></li>
-            </ul>
-        </div>
-        <div class ="col">
-            <h3>Newsletter<div class="underline"><span></span></div></h3>
-            <form>
-                <i class="fa-regular fa-envelope"></i>
-                <input type ="email" placeholder="  Entrer votre adresse email" required>
-                <button type ="submit"><i class="fa-solid fa-arrow-right"></i></button>
-            </form>
-            <div class="social-icons">
-                <i class="fa-brands fa-facebook-f"></i>
-                <i class="fa-brands fa-x-twitter"></i>
-                <i class="fa-brands fa-whatsapp"></i>
-                <i class="fa-brands fa-pinterest"></i>
-            </div>
 
-        </div>
-    </div>
-<hr>
-<p class="copyright"> Copyright © Cesi Stagefinder 2025 - Site de recherche de stage </p>
-</footer>
 
 </html>
