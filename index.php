@@ -6,29 +6,22 @@
 
 require "vendor/autoload.php";
 
-use App\Controllers\TaskController;
+use App\Controllers\ControllerPage;
 
-$loader = new \Twig\Loader\FilesystemLoader('templates');
+$loader = new \Twig\Loader\FilesystemLoader('src/Views');
 $twig = new \Twig\Environment($loader, [
     'debug' => true
 ]);
 
 $uri = $_SERVER['REQUEST_URI'];
-
-// Supprime les éventuels paramètres GET après "?"
 $uri = explode('?', $uri)[0];
-
-// Supprime "/index.php" s'il est présent dans l'URL
 $uri = str_replace('/index.php', '', $uri);
 
-// Si l'URI est vide ou "/", on met la page d'accueil
 if ($uri == '' || $uri == '/') {
     $uri = '/';
 }
 
-
-
-$controller = new TaskController($twig);
+$controller = new ControllerPage($twig);
 
 switch ($uri) {
     case '/':
@@ -37,8 +30,10 @@ switch ($uri) {
     case '/offer':
         $controller->offerPage();
         break;
+    case '/login':
+        $controller->loginPage();
+        break;
     default:
-        // TODO : return a 404 error
         echo '404 Not Found';
         break;
 }
