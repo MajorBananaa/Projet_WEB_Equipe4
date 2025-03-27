@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - StageFinder</title>
+    <link rel="stylesheet" href="../assets/0.css">
+    <link rel="stylesheet" href="../assets/search.css">
+    <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
+</head>
+<body>
+    {% include 'header.twig' %}
+    <main class="bloc-page">
+        <!-- Section des filtres -->
+        <aside class="bloc-filters">
+            <h2>Filtres</h2>
+            
+            <h3>Type de contrat</h3>
+            <label><input type="checkbox" value="stage"> Stage</label>
+            <label><input type="checkbox" value="cdd"> CDD</label>
+            <label><input type="checkbox" value="cdi"> CDI</label>
+            <label><input type="checkbox" value="alternance"> Alternance</label>
+            
+            <h3>Salaire</h3>
+            <div class="salaire-container">
+                <label class="salaire-label">Min :</label>
+                <input type="range" min="0" max="10000" value="0" class="salaire-range" id="salaireRange">
+                <span class="salaire-valeur" id="salaireValeur">0 €</span>
+            </div>
+
+
+            
+            <h3>Télétravail</h3>
+            <label><input type="checkbox" value="remote"> Télétravail possible</label>
+            
+            <h3>Durée du stage</h3>
+            <select name="duree">
+                <option value="">-- Sélectionner --</option>
+                <option value="1">1 mois</option>
+                <option value="3">3 mois</option>
+                <option value="6">6 mois</option>
+            </select>
+            
+            <h3>Niveau d'étude</h3>
+            <select name="Niveau d'étude">
+                <option value="">-- Sélectionner --</option>
+                <option value="Bac">Bac</option>
+                <option value="bac+2">Bac +2</option>
+                <option value="bac+5">Bac +5</option>
+            </select>
+        </aside>
+        
+
+        <section class="bloc-search">
+            <!-- Barre de recherche -->
+            <div class="bloc-search-bar">
+                <input type="text" placeholder="Rechercher un stage ou une entreprise">
+            </div>
+
+            <!-- Section des résultats -->
+            <div class="bloc-result">
+                <div class="offre">
+                    <div class="offre-header">
+                        <h2>Développeur Web Full Stack (Stage)</h2>
+                        <button class="postuler-btn">Postuler</button>
+                    </div>
+                    <div class="offre-details">
+                        <p><strong>Entreprise :</strong> Web4All</p>
+                        <p><strong>Contrat :</strong> Stage</p>
+                        <p><strong>Durée :</strong> 6 mois</p>
+                        <p><strong>Salaire :</strong> 1000 €/mois</p>
+                        <p><strong>Télétravail :</strong> Oui</p>
+                        <p><strong>Taille :</strong> Moyenne</p>
+                    </div>
+                </div>
+                
+                <div class="offre">
+                    <div class="offre-header">
+                        <h2>Ingénieur IA (CDI)</h2>
+                        <button class="postuler-btn">Postuler</button>
+                    </div>
+                    <div class="offre-details">
+                        <p><strong>Entreprise :</strong> AI Solutions</p>
+                        <p><strong>Contrat :</strong> CDI</p>
+                        <p><strong>Durée :</strong> Indéterminée</p>
+                        <p><strong>Salaire :</strong> 4500 €/mois</p>
+                        <p><strong>Télétravail :</strong> Non</p>
+                        <p><strong>Taille :</strong> Grande</p>
+                    </div>
+                </div>
+                
+                <div class="offre">
+                    <div class="offre-header">
+                        <h2>Designer UX/UI (Alternance)</h2>
+                        <button class="postuler-btn">Postuler</button>
+                    </div>
+                    <div class="offre-details">
+                        <p><strong>Entreprise :</strong> CreativeLab</p>
+                        <p><strong>Contrat :</strong> Alternance</p>
+                        <p><strong>Durée :</strong> 12 mois</p>
+                        <p><strong>Salaire :</strong> 1200 €/mois</p>
+                        <p><strong>Télétravail :</strong> Partiel</p>
+                        <p><strong>Taille :</strong> Petite</p>
+                    </div>
+                </div>
+                
+                <div class="offre">
+                    <div class="offre-header">
+                        <h2>Technicien Réseau (CDD)</h2>
+                        <button class="postuler-btn">Postuler</button>
+                    </div>
+                    <div class="offre-details">
+                        <p><strong>Entreprise :</strong> NetSecure</p>
+                        <p><strong>Contrat :</strong> CDD</p>
+                        <p><strong>Durée :</strong> 12 mois</p>
+                        <p><strong>Salaire :</strong> 2800 €/mois</p>
+                        <p><strong>Télétravail :</strong> Non</p>
+                        <p><strong>Taille :</strong> Moyenne</p>
+                    </div>
+                </div>
+                
+                <div class="offre">
+                    <div class="offre-header">
+                        <h2>Analyste Cybersécurité (CDI)</h2>
+                        <button class="postuler-btn">Postuler</button>
+                    </div>
+                    <div class="offre-details">
+                        <p><strong>Entreprise :</strong> CyberDef</p>
+                        <p><strong>Contrat :</strong> CDI</p>
+                        <p><strong>Durée :</strong> Indéterminée</p>
+                        <p><strong>Salaire :</strong> 4000 €/mois</p>
+                        <p><strong>Télétravail :</strong> Oui</p>
+                        <p><strong>Taille :</strong> Grande</p>
+                    </div>
+                </div>
+                
+                <div class="offre">
+                    <div class="offre-header">
+                        <h2>Consultant Cloud (CDI)</h2>
+                        <button class="postuler-btn">Postuler</button>
+                    </div>
+                    <div class="offre-details">
+                        <p><strong>Entreprise :</strong> CloudExperts</p>
+                        <p><strong>Contrat :</strong> CDI</p>
+                        <p><strong>Durée :</strong> Indéterminée</p>
+                        <p><strong>Salaire :</strong> 4800 €/mois</p>
+                        <p><strong>Télétravail :</strong> Oui</p>
+                        <p><strong>Taille :</strong> Moyenne</p>
+                    </div>
+                </div>
+                
+                <div class="offre">
+                    <div class="offre-header">
+                        <h2>Chef de Projet IT (CDI)</h2>
+                        <button class="postuler-btn">Postuler</button>
+                    </div>
+                    <div class="offre-details">
+                        <p><strong>Entreprise :</strong> ITManage</p>
+                        <p><strong>Contrat :</strong> CDI</p>
+                        <p><strong>Durée :</strong> Indéterminée</p>
+                        <p><strong>Salaire :</strong> 5200 €/mois</p>
+                        <p><strong>Télétravail :</strong> Partiel</p>
+                        <p><strong>Taille :</strong> Grande</p>
+                    </div>
+                </div>
+                
+                <div class="offre">
+                    <div class="offre-header">
+                        <h2>Data Scientist (Stage)</h2>
+                        <button class="postuler-btn">Postuler</button>
+                    </div>
+                    <div class="offre-details">
+                        <p><strong>Entreprise :</strong> DataLab</p>
+                        <p><strong>Contrat :</strong> Stage</p>
+                        <p><strong>Durée :</strong> 4 mois</p>
+                        <p><strong>Salaire :</strong> 900 €/mois</p>
+                        <p><strong>Télétravail :</strong> Oui</p>
+                        <p><strong>Taille :</strong> Petite</p>
+                    </div>
+                </div>
+                
+                <div class="offre">
+                    <div class="offre-header">
+                        <h2>Développeur Mobile (Alternance)</h2>
+                        <button class="postuler-btn">Postuler</button>
+                    </div>
+                    <div class="offre-details">
+                        <p><strong>Entreprise :</strong> AppFactory</p>
+                        <p><strong>Contrat :</strong> Alternance</p>
+                        <p><strong>Durée :</strong> 24 mois</p>
+                        <p><strong>Salaire :</strong> 1300 €/mois</p>
+                        <p><strong>Télétravail :</strong> Partiel</p>
+                        <p><strong>Taille :</strong> Moyenne</p>
+                    </div>
+                </div>
+                
+                <div class="offre">
+                    <div class="offre-header">
+                        <h2>Support Informatique (CDD)</h2>
+                        <button class="postuler-btn">Postuler</button>
+                    </div>
+                    <div class="offre-details">
+                        <p><strong>Entreprise :</strong> HelpTech</p>
+                        <p><strong>Contrat :</strong> CDD</p>
+                        <p><strong>Durée :</strong> 6 mois</p>
+                        <p><strong>Salaire :</strong> 2500 €/mois</p>
+                        <p><strong>Télétravail :</strong> Non</p>
+                        <p><strong>Taille :</strong> Petite</p>
+                    </div>
+                </div>
+                        
+            </div>
+            <div class="bloc-pagination">
+                <button>Précédent</button>
+                <span><p>Page actuelle</p></span>
+                <button>Suivant</button>
+            </div>
+        </section>
+    </main>
+
+</body>
+{% include 'footer.twig' %}
+</html>

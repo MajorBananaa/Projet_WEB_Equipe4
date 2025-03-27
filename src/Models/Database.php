@@ -1,38 +1,34 @@
-<?php
-namespace App\Models;
-/**
- * This interface represents a database.
- */
-interface Database {
-    /**
-     * Retrieves all records from the database.
-     *
-     * @return array An array of records.
-     */
-    public function getAllRecords();
+<?php 
+namespace App\Controllers;
 
-    /**
-     * Retrieves a specific record from the database.
-     *
-     * @param int $id The ID of the record to retrieve.
-     * @return mixed The retrieved record, null otherwise.
-     */
-    public function getRecord($id);
+class Database {
 
-    /**
-     * Inserts a new record into the database.
-     *
-     * @param mixed $record The record to insert.
-     * @return int The last inserted index if the record was inserted successfully, -1 otherwise.
-     */
-    public function insertRecord($record);
+    public $dbh = null;
+    public $sth = null;
 
-    /**
-     * Updates a specific record in the database.
-     *
-     * @param int $id The ID of the record to update.
-     * @param mixed $record The updated record.
-     * @return bool True if the record was updated successfully, false otherwise.
-     */
-    public function updateRecord($id, $record);
+    public function __construct() {
+        $this->dbh = null;
+        $this->sth = null;
+        
+    }
+
+    public function connect() {
+        $this->dbh = new PDO('mysql:host=localhost;dbname=WS7', 'root');
+    }
+
+    public function close() {
+        $this->dbh = null;
+        $this->sth = null;
+    }
+
+    public function execute($sql) {
+        $request = $dbh->prepare($sql);
+        try {
+            $request->execute();
+            $result = $request->fetch(PDO::FETCH_OBJ);
+            return $result;
+        } catch (PDOException $e){
+            return false;
+        }
+    }
 }
