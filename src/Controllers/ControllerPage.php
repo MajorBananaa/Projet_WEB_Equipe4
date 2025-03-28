@@ -15,8 +15,8 @@ class ControllerPage {
         echo $this->templateEngine->render('index.html.twig');
     }
 
-    public function showSearchOffer() {
-        // Show search offer page
+    public function offerPage() {
+        echo $this->templateEngine->render('offer.html.twig');
     }
 
     public function showSearchEntreprise() {
@@ -47,7 +47,7 @@ class ControllerPage {
         // Show pilote dashboard
     }
 
-    public function showDashboardAdmin() {
-        // Show admin dashboard
+    public function showAPropos() {
+        echo $this->templateEngine->render('a-propos.html.twig');
     }
 }
