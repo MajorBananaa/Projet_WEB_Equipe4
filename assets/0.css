@@ -74,6 +74,8 @@ header{
 
 .nav-btn{
     display: inline-block;
+    justify-items: center;
+    align-items: center;
     padding: 9px 24px;
     background: transparent;
     border: 2px solid var(--text-color);
@@ -82,6 +84,10 @@ header{
     font-size: 15px;
     font-weight: 500;
     transition: all .6s ease;
+}
+
+.formheader {
+    margin: 0;
 }
 
 .nav-btn:hover{

@@ -16,7 +16,7 @@ class ControllerPage {
     }
 
     public function showSearchOffer() {
-        // Show search offer page
+        echo $this->templateEngine->render('offer.html.twig');
     }
 
     public function showSearchEntreprise() {
