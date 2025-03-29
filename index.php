@@ -7,6 +7,7 @@
 require "vendor/autoload.php";
 
 use App\Controllers\ControllerPage;
+use App\Controllers\ControllerAuthentification;
 
 $loader = new \Twig\Loader\FilesystemLoader('src/Views');
 $twig = new \Twig\Environment($loader, [
@@ -23,6 +24,8 @@ if ($uri == '' || $uri == '/') {
 
 $controller = new ControllerPage($twig);
 
+$uri = 0;
+
 switch ($uri) {
     case '/':
         $controller->welcomePage();
@@ -31,9 +34,11 @@ switch ($uri) {
         $controller->offerPage();
         break;
     case '/login':
-        $controller->loginPage();
+        $controller->showLogin();
         break;
     default:
-        echo '404 Not Found';
+        echo '404 Not Found <br>';
+        $auth = new ControllerAuthentification();
+        $auth ->login();
         break;
 }

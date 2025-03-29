@@ -50,4 +50,8 @@ class ControllerPage {
     public function showDashboardAdmin() {
         // Show admin dashboard
     }
+
+    public function showLogin() {
+        echo $this->templateEngine->render('login.html.twig');
+    }
 }
