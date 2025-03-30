@@ -25,7 +25,7 @@ class ControllerAuthentification{
         if ($result == false) {
             return false;
         } else {
-            if (/*password_verify($password, $result->mots_de_passe)*/ $password == $result->mots_de_passe) {
+            if ($password == $result->mots_de_passe) /*password_verify($password, $result->mots_de_passe)*/{
                 $_SESSION['user_id'] = $result->id_utilisateur;
                 $_SESSION['user_role'] = $result->id_role;
                 return true;
