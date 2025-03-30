@@ -36,13 +36,15 @@ class Database {
      * Exécute une requête SQL avec des paramètres et retourne le résultat.
      *
      * @param array|null $para Tableau des paramètres à lier à la requête, ou null si aucun.
-     * @param bool $fetchall Indique si tous les résultats doivent être retournés (true) ou un seul (false).
+     * @param bool $fetchall Indique si tous les résultats doivent être retournés (true) ou un seul (false) ou si (null) alors il ne revoit rien.
      * @return object|array|false Retourne un objet, un tableau d'objets ou false en cas d'erreur.
      */
     public function execute($para, $fetchall) {
         try {
             $this->sth->execute($para);
-            if ($fetchall) {
+            if ($fetchall == null) {
+                return true;
+            } elseif ($fetchall) {
                 return $this->sth->fetchAll(PDO::FETCH_OBJ);
             } else {
                 return $this->sth->fetch(PDO::FETCH_OBJ);
