@@ -11,7 +11,10 @@
     </ul>
 
     <div class="right-content">
-        <a href="login.html" class="nav-btn">Connectez-vous</a>
-        <div class="ri-menu-line" id="menu-icon"></div>
+        <form method="POST" class="formheader">
+            <input type="hidden" name="action" value="logout">
+            <button type="submit" class="nav-btn">Déconnexion</button>
+            <div class="ri-menu-line" id="menu-icon"></div>
+        </form>
     </div>
 </header>

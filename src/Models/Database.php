@@ -1,33 +1,53 @@
 <?php 
-namespace App\Controllers;
+namespace App\Models;
+use PDO;
+use PDOException;
 
 class Database {
 
     public $dbh = null;
     public $sth = null;
 
-    public function __construct() {
-        $this->dbh = null;
-        $this->sth = null;
-        
-    }
-
+    /**
+     * Établit une connexion à la base de données.
+     *
+     * @return void
+     */
     public function connect() {
-        $this->dbh = new PDO('mysql:host=localhost;dbname=WS7', 'root');
+        try {
+            $this->dbh = new PDO('mysql:host=localhost;dbname=Projet_WEB_Equipe4', 'root', '');
+            $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo("Erreur de connexion : " . $e->getMessage());
+        }
     }
 
+    /**
+    * Ferme la connexion à la base de données.
+    *
+    * @return void
+    */
     public function close() {
         $this->dbh = null;
         $this->sth = null;
     }
 
-    public function execute($sql) {
-        $request = $dbh->prepare($sql);
+    /**
+     * Exécute une requête SQL avec des paramètres et retourne le résultat.
+     *
+     * @param array|null $para Tableau des paramètres à lier à la requête, ou null si aucun.
+     * @param bool $fetchall Indique si tous les résultats doivent être retournés (true) ou un seul (false).
+     * @return object|array|false Retourne un objet, un tableau d'objets ou false en cas d'erreur.
+     */
+    public function execute($para, $fetchall) {
         try {
-            $request->execute();
-            $result = $request->fetch(PDO::FETCH_OBJ);
-            return $result;
-        } catch (PDOException $e){
+            $this->sth->execute($para);
+            if ($fetchall) {
+                return $this->sth->fetchAll(PDO::FETCH_OBJ);
+            } else {
+                return $this->sth->fetch(PDO::FETCH_OBJ);
+            }
+        } catch (PDOException $e) {
             return false;
         }
     }

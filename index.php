@@ -1,17 +1,17 @@
 <?php
-/**
- * This is the router, the main entry point of the application.
- * It handles the routing and dispatches requests to the appropriate controller methods.
- */
-
+session_start();
 require "vendor/autoload.php";
 
 use App\Controllers\ControllerPage;
+use App\Controllers\ControllerAuthentification;
 
 $loader = new \Twig\Loader\FilesystemLoader('src/Views');
 $twig = new \Twig\Environment($loader, [
     'debug' => true
 ]);
+
+$auth = new ControllerAuthentification();
+$auth->isLog();
 
 if (isset($_GET['uri'])) {
     $uri = $_GET['uri'];
@@ -26,12 +26,16 @@ switch ($uri) {
         $controller->welcomePage();
         break;
     case '/offer':
-        $controller->offerPage();
+        $controller->showSearchOffer();
         break;
     case '/login':
-        $controller->loginPage();
+        if (isset($_SESSION['user_id'])) {
+            header("Location: /");
+            exit();
+        }
+        $controller->showLogin();
         break;
     default:
-        echo '404 Not Found';
+        echo '404 Not Found <br>';
         break;
 }

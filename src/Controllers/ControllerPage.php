@@ -15,7 +15,7 @@ class ControllerPage {
         echo $this->templateEngine->render('index.html.twig');
     }
 
-    public function offerPage() {
+    public function showSearchOffer() {
         echo $this->templateEngine->render('offer.html.twig');
     }
 
@@ -49,5 +49,9 @@ class ControllerPage {
 
     public function showAPropos() {
         echo $this->templateEngine->render('a-propos.html.twig');
+    }
+
+    public function showLogin() {
+        echo $this->templateEngine->render('login.html.twig');
     }
 }
