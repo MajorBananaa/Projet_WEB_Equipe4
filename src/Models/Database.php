@@ -42,12 +42,12 @@ class Database {
     public function execute($para, $fetchall) {
         try {
             $this->sth->execute($para);
-            if ($fetchall == null) {
-                return true;
-            } elseif ($fetchall) {
+            if ($fetchall) {
                 return $this->sth->fetchAll(PDO::FETCH_OBJ);
-            } else {
+            } elseif (!$fetchall) {
                 return $this->sth->fetch(PDO::FETCH_OBJ);
+            } else {
+                return true;
             }
         } catch (PDOException $e) {
             return false;
