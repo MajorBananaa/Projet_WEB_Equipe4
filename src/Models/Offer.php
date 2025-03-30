@@ -26,6 +26,6 @@ class Offer extends Database {
         $result = $this->execute(null, true);
         $this->close();
         
-        return $result;
+        return $result ?: [];
     }
 }

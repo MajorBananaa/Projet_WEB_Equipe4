@@ -43,8 +43,5 @@ switch ($uri) {
         exit();
     default:
         echo '404 Not Found <br>';
-        $test = new SearchController();
-        $test->searchOffer();
-        print_r($test);
         break;
 }
