@@ -13,11 +13,9 @@ $twig = new \Twig\Environment($loader, [
 $auth = new ControllerAuthentification();
 $auth->isLog();
 
-$uri = $_SERVER['REQUEST_URI'];
-$uri = explode('?', $uri)[0];
-$uri = str_replace('/index.php', '', $uri);
-
-if ($uri == '' || $uri == '/') {
+if (isset($_GET['uri'])) {
+    $uri = $_GET['uri'];
+} else {
     $uri = '/';
 }
 
