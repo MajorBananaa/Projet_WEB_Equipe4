@@ -39,15 +39,14 @@ class Database {
      * @param bool $fetchall Indique si tous les résultats doivent être retournés (true) ou un seul (false).
      * @return object|array|false Retourne un objet, un tableau d'objets ou false en cas d'erreur.
      */
-    public function execute($fetchall) {
+    public function execute($para, $fetchall) {
         try {
-            $this->sth->execute();
+            $this->sth->execute($para);
             if ($fetchall) {
-                return $this->sth->fetchall(PDO::FETCH_OBJ);
+                return $this->sth->fetchAll(PDO::FETCH_OBJ);
             } else {
                 return $this->sth->fetch(PDO::FETCH_OBJ);
             }
-            
         } catch (PDOException $e) {
             return false;
         }

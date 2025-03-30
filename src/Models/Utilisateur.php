@@ -9,13 +9,15 @@ class Utilisateur extends Database {
     
     public function update($data) {}
     
-    public function get($select, $where) {
-        $sql = $select . "FROM utilisateur " . $where;
-        Database::connect();
+    public function get($selectList, $where, $var) {
+        $sql = "SELECT " . implode(", ", $selectList) . " FROM utilisateur WHERE " . $where . " = :var";
+
+        $this->connect();
         $this->sth = $this->dbh->prepare($sql);
-        $result = Database::execute(false);
-        Database::close();
-        return $result;
+        $result = $this->execute(['var' => $var], false);
+        $this->close();
+        
+        return $result ?: [];
     }
     
     public function getAll() {}
