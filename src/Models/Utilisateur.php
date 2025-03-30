@@ -11,7 +11,7 @@ class Utilisateur extends Database {
     
     public function get($selectList, $where, $var) {
         $sql = "SELECT " . implode(", ", $selectList) . " FROM utilisateur WHERE " . $where . " = :var";
-
+ 
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);
         $result = $this->execute(['var' => $var], false);

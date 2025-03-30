@@ -12,6 +12,7 @@ $twig = new \Twig\Environment($loader, [
 
 $auth = new ControllerAuthentification();
 $auth->isLog();
+
 $uri = $_SERVER['REQUEST_URI'];
 $uri = explode('?', $uri)[0];
 $uri = str_replace('/index.php', '', $uri);
@@ -38,6 +39,5 @@ switch ($uri) {
         break;
     default:
         echo '404 Not Found <br>';
-        $auth->getRight();
         break;
 }

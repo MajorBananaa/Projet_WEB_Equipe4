@@ -33,9 +33,9 @@ class Database {
     }
 
     /**
-     * Exécute une requête SQL et retourne le résultat.
+     * Exécute une requête SQL avec des paramètres et retourne le résultat.
      *
-     * @param string $sql La requête SQL à exécuter.
+     * @param array|null $para Tableau des paramètres à lier à la requête, ou null si aucun.
      * @param bool $fetchall Indique si tous les résultats doivent être retournés (true) ou un seul (false).
      * @return object|array|false Retourne un objet, un tableau d'objets ou false en cas d'erreur.
      */
