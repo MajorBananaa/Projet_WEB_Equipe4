@@ -58,7 +58,7 @@ class ControllerPage {
     }
 
     public function showDashboardStudent() {
-        // Show student dashboard
+        echo $this->templateEngine->render('dashboard.html.twig');
     }
 
     public function showDashboardPilote() {

@@ -16,7 +16,6 @@ class Utilisateur extends Database {
         $this->sth = $this->dbh->prepare($sql);
         $result = $this->execute(['var' => $var], false);
         $this->close();
-        
         return $result ?: [];
     }
     

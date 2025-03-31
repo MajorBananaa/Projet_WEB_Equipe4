@@ -40,8 +40,15 @@ switch ($uri) {
         $controller->showSearchOffer();
         break;
     case '/login':
-        header("Location: /");
-        exit();
+        if (isset($_SESSION['user_id'])) {
+            header("Location: /");
+            exit();
+        }
+        $controller->showLogin();
+        break;
+    case '/dashboard':
+        $controller->showDashboardStudent();
+        break;
     default:
         echo '404 Not Found <br>';
         $test = new Offer();
