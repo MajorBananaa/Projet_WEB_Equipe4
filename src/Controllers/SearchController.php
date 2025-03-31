@@ -6,6 +6,10 @@ use App\Models\Offer;
 class SearchController{
     public function searchOffer() {
         $dbOffer = new Offer();
-        return $dbOffer->getAll();
+        $recherche = "";
+        if (isset($_GET['search-bar'])) {
+            $recherche = $_GET['search-bar'];
+        }
+        return $dbOffer->getAll($recherche);
     }
 }

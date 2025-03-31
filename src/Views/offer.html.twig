@@ -5,17 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Offres</title>
-    <link rel="stylesheet" href="../assets/0.css">
-    <link rel="stylesheet" href="../assets/search.css">
+    <link rel="stylesheet" href="/assets/0.css">
+    <link rel="stylesheet" href="/assets/search.css">
+    <link rel="stylesheet" href="/assets/overlay.css">
+
     <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
 </head>
 
 <body>
     {% include 'header.twig' %}
+    
+    <div id="popup-overlay">
+        <div class="popup-content">
+            <h2>Déposez votre candidature</h2>
+            <p class="subtitle">Nous sommes ravis que vous souhaitiez nous rejoindre.</p>
+            <form id="application-form">
+                <div class="form-group">
+                    <label for="cv">CV (PDF)</label>
+                    <input type="file" id="cv" name="cv" accept=".pdf" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="motivation">Lettre de motivation</label>
+                    <textarea id="motivation" name="motivation" rows="5" placeholder="Exprimez votre motivation..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Envoyer ma candidature</button>
+            </form>
+            <a href="javascript:void(0)" onclick="togglePopup()" class="popup-exit">×</a>
+        </div>
+    </div>
 
     <main class="bloc-page">
-        <!-- Section des filtres -->
-        <aside class="bloc-filters">
+        <form class="bloc-filters">
             <h2>Filtres</h2>
 
             <h3>Type de contrat</h3>
@@ -49,21 +71,19 @@
                 <option value="bac+2">Bac +2</option>
                 <option value="bac+5">Bac +5</option>
             </select>
-        </aside>
+        </form>
 
         <section class="bloc-search">
-            <!-- Barre de recherche -->
-            <div class="bloc-search-bar">
-                <input type="text" placeholder="Rechercher un stage ou une entreprise">
-            </div>
+            <form method="get" class="bloc-search-bar">
+                <input type="text" placeholder="Rechercher un stage" name="search-bar" value="{{ search }}">
+            </form>
 
-            <!-- Section des résultats -->
             <div class="bloc-result">
                 {% for offre in offres %}
                 <div class="offre">
                     <div class="offre-header">
                         <h2>{{ offre.titre }}</h2>
-                        <button class="postuler-btn">Postuler</button>
+                        <button class="postuler-btn" onclick="togglePopup()">Postuler</button>
                     </div>
                     <div class="offre-details">
                         <p><strong>Entreprise :</strong> {{ offre.nom }}</p>
@@ -79,27 +99,28 @@
                 {% endfor %}
             </div>
 
-            <!-- Pagination avec boutons -->
-            <div class="bloc-pagination">
-                <!-- Bouton Précédent -->
+            <!-- Pagination avec un seul formulaire -->
+            <form method="get" class="bloc-pagination">
+                <input type="hidden" name="search-bar" value="{{ search }}">
+
                 {% if pageActuelle > 1 %}
-                    <button onclick="window.location.href='?page={{ pageActuelle - 1 }}'">Précédent</button>
+                    <button type="submit" name="page" value="{{ pageActuelle - 1 }}">Précédent</button>
+                {% endif %}
+
+                {% if pageActuelle < totalPages %}
+                    <button type="submit" name="page" value="{{ pageActuelle + 1 }}">Suivant</button>
                 {% endif %}
 
                 <span>
                     <p>Page {{ pageActuelle }} sur {{ totalPages }}</p>
                 </span>
+            </form>
 
-                <!-- Bouton Suivant -->
-                {% if pageActuelle < totalPages %}
-                    <button onclick="window.location.href='?page={{ pageActuelle + 1 }}'">Suivant</button>
-                {% endif %}
-            </div>
         </section>
     </main>
 
-    <!-- Footer -->
     {% include 'footer.twig' %}
+    <script src="../../scripts/popup.js"></script>
 </body>
 
 </html>
