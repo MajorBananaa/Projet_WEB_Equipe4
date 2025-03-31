@@ -46,35 +46,6 @@ class ControllerAuthentification{
     }
 
     /**
-     * Vérifie si l'utilisateur est connecté et redirige si nécessaire.
-     * Gère également la connexion et la déconnexion via requêtes POST.
-     *
-     * @return void
-     */
-    public function isLog(){
-        if (!isset($_SESSION['user_id']) && $_SERVER['REQUEST_URI'] !== '/login') {
-            header("Location: /login");
-            exit();
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (!isset($_SESSION['user_id'])) {
-                if ($this->login()) {
-                    header("Location: /");
-                    exit();
-                } else {
-                    header("Location: /login");
-                    exit();
-                }
-            } elseif (isset($_POST['action']) && $_POST['action'] === "logout") {
-                $this->logout();
-                header("Location: /login");
-                exit();
-            }
-        }
-    }
-
-    /**
      * Récupère les permissions de l'utilisateur connecté.
      *
      * @return array Retourne un tableau associatif des droits de l'utilisateur.
