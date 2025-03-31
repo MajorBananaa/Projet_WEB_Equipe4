@@ -44,7 +44,7 @@ switch ($uri) {
             header("Location: /");
             exit();
         }
-        $controller->showLogin();
+        $controller->showLogin($auth);
         break;
     case '/dashboard':
         $controller->showDashboardStudent();
