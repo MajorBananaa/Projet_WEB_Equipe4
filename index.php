@@ -35,6 +35,9 @@ switch ($uri) {
         }
         $controller->showLogin();
         break;
+    case '/dashboard':
+        $controller->showDashboardStudent();
+        break;
     default:
         echo '404 Not Found <br>';
         break;
