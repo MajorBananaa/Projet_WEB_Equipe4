@@ -1,9 +1,22 @@
 <?php 
 namespace App\Controllers;
+use App\Models\Candidature;
 use App\Models\Offer;
 
 class SearchController {
     public function searchOffer() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST["motivation"]) && isset($_FILES["cv"]) && isset($_POST["offer_id"])) {
+                $check_file = new UploadService();
+                $check_file->handleUpload($_FILES["cv"]);
+                $pathFile = $check_file->pathFile($_FILES["cv"]);
+
+                $candidature = new Candidature();
+                $candidature->add([$_POST["offer_id"], $_SESSION["user_id"], $pathFile, $_POST["motivation"]]);
+                $_POST = [];
+            }
+        }
+        
         $dbOffer = new Offer();
         
         $filters = [
@@ -15,6 +28,6 @@ class SearchController {
             'niveau_etude' => $_GET['niveau_etude'] ?? ''
         ];
         
-        return $dbOffer->getAll($filters);
+        return $dbOffer->getAll($filters) ?: [];
     }
 }

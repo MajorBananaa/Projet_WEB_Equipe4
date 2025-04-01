@@ -11,7 +11,7 @@ class Offer extends Database {
 
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);
-        $result = $this->execute([$id], null);
+        $result = $this->execute([$id]);
         $this->close();
 
     }

@@ -15,26 +15,29 @@
 <body>
     {% include 'header.twig' %}
     
-    <div id="popup-overlay">
-        <div class="popup-content">
-            <h2>Déposez votre candidature</h2>
-            <p class="subtitle">Nous sommes ravis que vous souhaitiez nous rejoindre.</p>
-            <form id="application-form" method="post">
-                <div class="form-group">
-                    <label for="cv">CV (PDF)</label>
-                    <input type="file" id="cv" name="cv" accept=".pdf" required>
-                </div>
+    {% if droits['Postuler à une offre'] %}
+        <div id="popup-overlay">
+            <div class="popup-content">
+                <h2>Déposez votre candidature</h2>
+                <p class="subtitle">Nous sommes ravis que vous souhaitiez nous rejoindre.</p>
+                <form id="application-form" method="post" enctype="multipart/form-data" action="">
+                    <div class="form-group">
+                        <label for="cv">CV (PDF)</label>
+                        <input type="file" id="cv" name="cv" accept=".pdf" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="motivation">Lettre de motivation</label>
-                    <textarea id="motivation" name="motivation" rows="5" placeholder="Exprimez votre motivation..." required></textarea>
-                </div>
-                <input type="hidden" id="offer-id" name="offer_id">
-                <button type="submit" class="submit-btn">Envoyer ma candidature</button>
-            </form>
-            <a href="javascript:void(0)" onclick="togglePopup()" class="popup-exit">×</a>
+                    <div class="form-group">
+                        <label for="motivation">Lettre de motivation</label>
+                        <textarea id="motivation" name="motivation" rows="5" placeholder="Exprimez votre motivation..." required></textarea>
+                    </div>
+
+                    <input type="hidden" id="offer-id" name="offer_id">
+                    <button type="submit" class="submit-btn">Envoyer ma candidature</button>
+                </form>
+                <a href="javascript:void(0)" onclick="togglePopup()" class="popup-exit">×</a>
+            </div>
         </div>
-    </div>
+    {% endif %}
     <form method="get">
         <main class="bloc-page">
             <aside class="bloc-filters">
@@ -101,7 +104,7 @@
                                     <button id="supprimer-btn">Supprimer</button>
                                 {% endif %}
                                 {% if droits['Postuler à une offre'] %}
-                                    <button class="postuler-btn" type="button" onclick="togglePopup({{ offre.id }})">Postuler</button>
+                                    <button class="postuler-btn" type="button" onclick="togglePopup({{ offre.id_offres }})">Postuler</button>
                                 {% endif %}
                                 
                             </div>

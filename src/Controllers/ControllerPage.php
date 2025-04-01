@@ -1,8 +1,5 @@
 <?php 
 namespace App\Controllers;
-
-use App\Models\Database;
-
 class ControllerPage {
 
     private $templateEngine = null;
@@ -18,7 +15,7 @@ class ControllerPage {
     public function showSearchOffer($rights_user) {
         $search = new SearchController();
         $varSearch = $search->searchOffer();
-    
+
         $offresParPage = 10;
         $totalOffres = count($varSearch);
         $totalPages = max(1, ceil($totalOffres / $offresParPage));
@@ -26,7 +23,8 @@ class ControllerPage {
         $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $pageActuelle = max(1, min($pageActuelle, $totalPages));
         $offresPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
-    
+        
+        
         echo $this->templateEngine->render('offer.html.twig', [
             'offres' => $offresPage,
             'pageActuelle' => $pageActuelle,

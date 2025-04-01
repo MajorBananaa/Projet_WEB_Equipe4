@@ -55,7 +55,15 @@ switch ($uri) {
         break;
     default:
         echo '404 Not Found <br>';
-        $test = new Offer();
-        print_r($test->getAll(""));
+        $dbOffer = new Offer();
+        $filters = [
+            'search' => $_GET['search-bar'] ?? '',
+            'contrats' => $_GET['contrat'] ?? [],
+            'salaire' => $_GET['salaire'] ?? null,
+            'teletravail' => $_GET['teletravail'] ?? '',
+            'duree' => $_GET['duree'] ?? '',
+            'niveau_etude' => $_GET['niveau_etude'] ?? ''
+        ];
+        print_r($dbOffer->getAll($filters));
         break;
 }
