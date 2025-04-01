@@ -3,27 +3,23 @@ function togglePopup(id) {
   popup.classList.toggle("open");
 
   document.getElementById("offer-id").value = id;
-  console.log("Popup toggled, offer_id set to:", id);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("application-form");
+function togglePopupModif(id) {
+  const popup = document.getElementById("popup-overlay-modif");
+  popup.classList.toggle("open");
 
-  if (form) {
-      form.addEventListener("submit", function (e) {
-          e.preventDefault();
+  document.getElementById("offer-id").value = id;
+}
 
-          const offerId = document.getElementById("offer-id").value;
-          if (!offerId) {
-              alert("Erreur : l'ID de l'offre est manquant !");
-              return;
-          }
+function togglePopupAdd() {
+  const popup = document.getElementById("popup-overlay-add");
+  popup.classList.toggle("open");
+}
 
-          console.log("CV:", form.cv.files[0]);
-          console.log("Lettre de motivation:", form.motivation.value);
-          console.log("Offer ID:", offerId);
+function togglePopupSupr(id) {
+  const popup = document.getElementById("popup-overlay-supr");
+  popup.classList.toggle("open");
 
-          form.submit();
-      });
-  }
-});
+  document.getElementById("offer-id-supr").value = id;
+};
