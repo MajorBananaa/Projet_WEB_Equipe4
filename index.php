@@ -31,12 +31,16 @@ if (!isset($_SESSION['user_id']) && $uri != "/login") {
     exit();
 }
 
+if (isset($_SESSION['user_id'])) {
+    $rights_user = $auth->getRight();
+}
+
 switch ($uri) {
     case '/':
         $controller->welcomePage();
         break;
     case '/offer':
-        $controller->showSearchOffer();
+        $controller->showSearchOffer($rights_user);
         break;
     case '/login':
         if (isset($_SESSION['user_id'])) {

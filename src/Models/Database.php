@@ -39,7 +39,7 @@ class Database {
      * @param bool $fetchall Indique si tous les résultats doivent être retournés (true) ou un seul (false) ou si (null) alors il ne revoit rien.
      * @return object|array|false Retourne un objet, un tableau d'objets ou false en cas d'erreur.
      */
-    public function execute($para, $fetchall) {
+    public function execute($para, $fetchall = null) {
         try {
             $this->sth->execute($para);
             if ($fetchall) {

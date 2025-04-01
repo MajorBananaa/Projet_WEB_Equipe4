@@ -1,16 +1,25 @@
-function togglePopup() {
-    const popup = document.getElementById("popup-overlay");
-    popup.classList.toggle("open");
-  }
-  
-  document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("application-form");
-  
-    if (form) {
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        alert("Candidature envoyée !");
-        togglePopup();
-      });
-    }
-  });
+function togglePopup(id) {
+  const popup = document.getElementById("popup-overlay");
+  popup.classList.toggle("open");
+
+  document.getElementById("offer-id").value = id;
+}
+
+function togglePopupModif(id) {
+  const popup = document.getElementById("popup-overlay-modif");
+  popup.classList.toggle("open");
+
+  document.getElementById("offer-id-upd").value = id;
+}
+
+function togglePopupAdd() {
+  const popup = document.getElementById("popup-overlay-add");
+  popup.classList.toggle("open");
+}
+
+function togglePopupSupr(id) {
+  const popup = document.getElementById("popup-overlay-supr");
+  popup.classList.toggle("open");
+
+  document.getElementById("offer-id-supr").value = id;
+};

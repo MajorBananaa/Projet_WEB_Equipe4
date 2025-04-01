@@ -1,147 +1,3 @@
-/* Bouton principal */
-.main-button {
-    margin: 100px auto;
-    display: block;
-    padding: 14px 30px;
-    font-size: 18px;
-    background-color: #2c3e50;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.main-button:hover {
-    background-color: #1a242f;
-}
-
-/* Overlay */
-#popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(30, 30, 30, 0.6);
-    backdrop-filter: blur(6px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-    z-index: 9999;
-}
-
-#popup-overlay.open {
-    opacity: 1;
-    pointer-events: all;
-}
-
-/* Popup content */
-.popup-content {
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 18px;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-    position: relative;
-    animation: fadeInUp 0.4s ease;
-}
-
-@keyframes fadeInUp {
-    from {
-        transform: translateY(30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.popup-content h2 {
-    margin-top: 0;
-    font-size: 24px;
-    color: #2c3e50;
-}
-
-.subtitle {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 24px;
-}
-
-/* Formulaire */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="file"],
-textarea {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 15px;
-    box-sizing: border-box;
-    transition: border 0.3s ease;
-}
-
-input:focus,
-textarea:focus {
-    border-color: #3498db;
-    outline: none;
-}
-
-/* Bouton envoyer */
-.submit-btn {
-    padding: 14px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.submit-btn:hover {
-    background-color: #2980b9;
-}
-
-/* Fermer */
-.popup-exit {
-    position: absolute;
-    top: 16px;
-    right: 20px;
-    font-size: 28px;
-    text-decoration: none;
-    color: #888;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.popup-exit:hover {
-    color: #e74c3c;
-}
-/* Base */
 body {
     font-family: 'Segoe UI', Roboto, sans-serif;
     margin: 0;
@@ -186,6 +42,72 @@ body {
 }
 
 #popup-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#popup-overlay-modif {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 9999;
+}
+
+#popup-overlay-modif.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#popup-overlay-add {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 9999;
+}
+
+#popup-overlay-add.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#popup-overlay-supr {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 9999;
+}
+
+#popup-overlay-supr.open {
     opacity: 1;
     pointer-events: all;
 }
@@ -292,4 +214,26 @@ textarea:focus {
 
 .popup-exit:hover {
     color: #e74c3c;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Supprime les flèches par défaut sur certains navigateurs */
+.form-group input[type="number"]::-webkit-outer-spin-button,
+.form-group input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

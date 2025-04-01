@@ -230,6 +230,46 @@ main {
   color: #e9e1d0;
 }
 
+#modifier-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+#modifier-btn:hover {
+    background-color: #0056b3;
+}
+
+#supprimer-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+#supprimer-btn:hover {
+    background-color: #a71d2a;
+}
+
+.offre-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.offre-buttons {
+  display: flex;
+  gap: 10px;
+}
+
 /* responsive */
 @media screen and (max-width: 768px) {
   main {
@@ -255,4 +295,5 @@ main {
     flex-direction: column;
     gap: 10px;
   }
+
 }
