@@ -44,8 +44,30 @@ class ControllerPage {
     
     
 
-    public function showSearchEntreprise() {
-        // Show search entreprise page
+    public function showSearchEntreprise($rights_user) {
+        $search = new SearchController();
+        $varSearch = $search->searchOffer();
+    
+        $offresParPage = 10;
+        $totalOffres = count($varSearch);
+        $totalPages = max(1, ceil($totalOffres / $offresParPage));
+    
+        $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $pageActuelle = max(1, min($pageActuelle, $totalPages));
+        $offresPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
+    
+        echo $this->templateEngine->render('company.html.twig', [
+            'offres' => $offresPage,
+            'pageActuelle' => $pageActuelle,
+            'totalPages' => $totalPages,
+            'search' => $_GET['search-bar'] ?? '',
+            'contrats' => $_GET['contrat'] ?? [],
+            'salaire' => $_GET['salaire'] ?? 0,
+            'teletravail' => $_GET['teletravail'] ?? '',
+            'duree' => $_GET['duree'] ?? '',
+            'niveau_etude' => $_GET['niveau_etude'] ?? '',
+            'droits' => $rights_user
+        ]);
     }
 
     public function showSearchStudent() {
