@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entreprises</title>
+    <link rel="stylesheet" href="/assets/0.css">
+    <link rel="stylesheet" href="/assets/search.css">
+    <link rel="stylesheet" href="/assets/overlay.css">
+
+    <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
+</head>
+
+<body>
+    {% include 'header.twig' %}
+    
+    <div id="popup-overlay">
+        <div class="popup-content">
+            <h2>Déposez votre candidature</h2>
+            <p class="subtitle">Nous sommes ravis que vous souhaitiez nous rejoindre.</p>
+            <form id="application-form">
+                <div class="form-group">
+                    <label for="cv">CV (PDF)</label>
+                    <input type="file" id="cv" name="cv" accept=".pdf" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="motivation">Lettre de motivation</label>
+                    <textarea id="motivation" name="motivation" rows="5" placeholder="Exprimez votre motivation..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Envoyer ma candidature</button>
+            </form>
+            <a href="javascript:void(0)" onclick="togglePopup()" class="popup-exit">×</a>
+        </div>
+    </div>
+
+    <main class="bloc-page">
+        <form class="bloc-filters">
+            <h2>Filtres</h2>
+
+            <h3>Type de contrat</h3>
+            <label><input type="checkbox" value="stage"> Stage</label>
+            <label><input type="checkbox" value="cdd"> CDD</label>
+            <label><input type="checkbox" value="cdi"> CDI</label>
+            <label><input type="checkbox" value="alternance"> Alternance</label>
+
+            <h3>Salaire</h3>
+            <div class="salaire-container">
+                <label class="salaire-label">Min :</label>
+                <input type="range" min="0" max="10000" value="0" class="salaire-range" id="salaireRange">
+                <span class="salaire-valeur" id="salaireValeur">0 €</span>
+            </div>
+
+            <h3>Télétravail</h3>
+            <label><input type="checkbox" value="remote"> Télétravail possible</label>
+
+            <h3>Durée du stage</h3>
+            <select name="duree">
+                <option value="">-- Sélectionner --</option>
+                <option value="1">1 mois</option>
+                <option value="3">3 mois</option>
+                <option value="6">6 mois</option>
+            </select>
+
+            <h3>Niveau d'étude</h3>
+            <select name="Niveau d'étude">
+                <option value="">-- Sélectionner --</option>
+                <option value="Bac">Bac</option>
+                <option value="bac+2">Bac +2</option>
+                <option value="bac+5">Bac +5</option>
+            </select>
+        </form>
+
+        <section class="bloc-search">
+            <form method="get" class="bloc-search-bar">
+                <input type="text" placeholder="Rechercher un stage" name="search-bar" value="{{ search }}">
+            </form>
+
+            <div class="bloc-result">
+                {% for offre in offres %}
+                <div class="offre">
+                    <div class="offre-header">
+                        <h2>{{ offre.titre }}</h2>
+                        <button class="postuler-btn" onclick="togglePopup()">Postuler</button>
+                    </div>
+                    <div class="offre-details">
+                        <p><strong>Entreprise :</strong> {{ offre.nom }}</p>
+                        <p><strong>Description :</strong> {{ offre.description }}</p>
+                        <p><strong>Contrat :</strong> {{ offre.type_contrat }}</p>
+                        <p><strong>Salaire :</strong> {{ offre.salaire }} €/mois</p>
+                        <p><strong>Télétravail :</strong> {{ offre.teletravail == 1 ? 'Oui' : 'Non' }}</p>
+                        <p><strong>Durée :</strong> {{ offre.duree }} mois</p>
+                        <p><strong>Niveau d'études :</strong> {{ offre.niveau_etude }}</p>
+                        <p><strong>Secteur :</strong> {{ offre.secteur }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- Pagination avec un seul formulaire -->
+            <form method="get" class="bloc-pagination">
+                <input type="hidden" name="search-bar" value="{{ search }}">
+
+                {% if pageActuelle > 1 %}
+                    <button type="submit" name="page" value="{{ pageActuelle - 1 }}">Précédent</button>
+                {% endif %}
+
+                {% if pageActuelle < totalPages %}
+                    <button type="submit" name="page" value="{{ pageActuelle + 1 }}">Suivant</button>
+                {% endif %}
+
+                <span>
+                    <p>Page {{ pageActuelle }} sur {{ totalPages }}</p>
+                </span>
+            </form>
+
+        </section>
+    </main>
+
+    {% include 'footer.twig' %}
+    <script src="../../scripts/popup.js"></script>
+</body>
+
+</html>

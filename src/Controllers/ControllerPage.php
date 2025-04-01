@@ -22,7 +22,45 @@ class ControllerPage {
     }
 
     public function showSearchEntreprise() {
-        // Show search entreprise page
+        $search = new SearchController();
+        $varSearch = $search->searchOffer();
+    
+        $offresParPage = 10;
+        $totalOffres = count($varSearch);
+        $totalPages = max(1, ceil($totalOffres / $offresParPage));
+    
+        $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $pageActuelle = max(1, min($pageActuelle, $totalPages));
+        $offresPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
+    
+        echo $this->templateEngine->render('company.html.twig', [
+            'offres' => $offresPage,
+            'pageActuelle' => $pageActuelle,
+            'totalPages' => $totalPages,
+            'search' => $_GET['search-bar'] ?? ''
+        ]);
+    }
+
+
+
+    public function showSearchOffer() {
+        $search = new SearchController();
+        $varSearch = $search->searchOffer();
+    
+        $offresParPage = 10;
+        $totalOffres = count($varSearch);
+        $totalPages = max(1, ceil($totalOffres / $offresParPage));
+    
+        $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $pageActuelle = max(1, min($pageActuelle, $totalPages));
+        $offresPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
+    
+        echo $this->templateEngine->render('offer.html.twig', [
+            'offres' => $offresPage,
+            'pageActuelle' => $pageActuelle,
+            'totalPages' => $totalPages,
+            'search' => $_GET['search-bar'] ?? ''
+        ]);
     }
 
     public function showSearchStudent() {

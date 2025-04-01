@@ -1,269 +1,300 @@
-/* Structure globale du main */
-main {
+body {
+    background: linear-gradient(to bottom, #fdf6ee 0%, #f5f0e6 40%, #f1ede3 100%);
+    font-family: 'Inter', sans-serif;
+    color: #1E1E1E;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+  
+  main {
     margin-top: 90px;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    padding: 20px;
-    height: calc(100vh - 85px);
+    padding: 40px;
     box-sizing: border-box;
-}
-
-/* Bloc principal */
-.bloc-page {
+  }
+  
+  /* page */
+  .bloc-page {
     display: flex;
-    flex-direction: row;
-    gap: 20px;
-    flex-wrap: wrap;
+    gap: 40px;
     width: 100%;
-}
-
-/* Bloc des filtres - Style simple et efficace */
-.bloc-filters {
-    background-color: #ffffff;
-    padding: 20px;
-    border: 1px solid #ccc;
-    flex: 0 1 auto;
+  }
+  
+  /* bloc filtres avec effet footer*/
+  .bloc-filters {
+    background: linear-gradient(to right, #010010d8, #292d00);
+    color: #fff;
+    padding: 30px;
+    border-radius: 40px;
     min-width: 280px;
-    box-sizing: border-box;
-    border-radius: 8px;
-    align-self: flex-start;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.bloc-filters h3 {
-    color: #333;
-    font-size: 1.2em;
-    font-weight: bold;
-    border-bottom: 2px solid #f4c542;
-    padding-bottom: 5px;
-}
-
-.bloc-filters .filter-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.bloc-filters label {
-    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    height: fit-content;
+  }
+  
+  .bloc-filters h2 {
+    margin-top: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    position: relative;
+  }
+  
+  .bloc-filters h3 {
+    color: #f9ecd6;
+    border-bottom: 2px solid #f9ecd6;
+    padding-bottom: 6px;
+    margin-top: 24px;
+    position: relative;
+  }
+  
+  .bloc-filters label {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 1em;
-    color: #444;
-}
-
-.bloc-filters input[type="checkbox"] {
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    display: inline-block;
-    position: relative;
+    color: #fefefe;
+    margin: 8px 0;
+  }
+  
+  .bloc-filters input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #000000;
     cursor: pointer;
-}
-
-.bloc-filters input[type="checkbox"]:checked {
-    background-color: #f4c542;
-    border-color: #f4c542;
-}
-
-.bloc-filters input[type="checkbox"]:checked::after {
-    content: '\2713';
-    font-size: 14px;
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: bold;
-}
-
-.bloc-filters select, .bloc-filters input[type="range"] {
+  }
+  
+  .bloc-filters select,
+  .bloc-filters input[type="range"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    background: #fff;
-}
-
-.bloc-filters select:focus, .bloc-filters input:focus {
-    border-color: #f4c542;
-    outline: none;
-    box-shadow: 0 0 5px rgba(244, 197, 66, 0.3);
-}
-
-/* Bloc de recherche */
-.bloc-search {
-    background-color: #ffffff;
-    flex: 3 1 70%;
-    min-width: 300px;
+    border: none;
+    border-radius: 10px;
+    background-color: #3b3b3b;
+    color: #fff;
+    font-size: 0.95rem;
+    margin-top: 4px;
+  }
+  
+  .bloc-filters input[type="range"]::-webkit-slider-thumb {
+    background: #fdd835;
+  }
+  
+  /* bloc principal */
+  .bloc-search {
+    background-color: #f9ecd6;
+    flex: 1;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* barre de recherche */
+  .bloc-search-bar input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 1rem;
+    background: #fdfdfd;
+  }
+  
+  /* résultats - encadré scrollable avec place pour footer */
+  .bloc-result {
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
-    border-radius: 8px;
-    padding: 20px;
-    box-sizing: border-box;
-    height: 100%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Style de la barre de recherche */
-.bloc-search-bar {
-    background-color: #f1f1f1;
-    margin-bottom: 20px;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-.bloc-search-bar input {
-    width: 100%;
-    padding: 12px;
-    font-size: 1em;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    outline: none;
-}
-
-/* Section des résultats */
-.bloc-result {
-    background-color: #fdfdfd;
-    margin: 20px 0;
-    padding: 15px;
-    flex: 1;
-    min-height: 200px;
     gap: 20px;
-    overflow-y: auto;
+  }
+  
+  /* carte offre */
+  .offre {
+    background-color: #fefaf3;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.2s ease;
+  }
+  
+  .offre:hover {
+    transform: scale(1.01);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* en-tête carte */
+  .offre-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .offre h2 {
+    font-size: 1.2rem;
+    color: #1e1e1e;
+    margin: 0;
+  }
+  
+  .page-actuelle{
+    align-content: center ;
+  }
+  
+  /* bouton postuler */
+  .postuler-btn {
+    padding: 10px 20px;
+    background-color: #fdd835;
+    color: #1E1E1E;
+    font-weight: 600;
+    border: none;
     border-radius: 8px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Pagination */
-.bloc-pagination {
-    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .postuler-btn:hover {
+    background-color: #e6be2b;
+    transform: scale(1.03);
+  }
+  
+  .offre-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.95rem;
+    color: #444;
+  }
+  
+  /* pagination */
+  .bloc-pagination {
+    margin-top: 30px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.bloc-pagination button {
-    padding: 10px 20px;
-    background-color: #f4c542;
+    gap: 16px;
+  }
+  
+  .bloc-pagination button {
+    padding: 10px 24px;
+    background-color: #2e2a26;
+    color: #fff;
     border: none;
-    color: white;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.bloc-pagination button:hover {
-    background-color: #e0b236;
-}
-
-.offre {
-    background-color: #fff;
-    padding: 12px;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 12px;
-    font-size: 0.9rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 5px;
-    min-height: 80px;
-}
-
-.offre-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.offre h2 {
-    font-size: 1.1rem;
-    color: #333;
-    flex: 2;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.postuler-btn {
-    padding: 6px 12px;
-    background-color: #FBE315;
-    color: #000;
-    font-size: 0.9rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s;
-    flex-shrink: 0;
-}
-
-.postuler-btn:hover {
-    background-color: #e6c800;
-}
-
-.offre-details {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    font-size: 0.85rem;
-    color: #555;
-}
-
-.salaire-container {
+    font-weight: 500;
+    transition: background-color 0.3s;
+  }
+  
+  .bloc-pagination button:hover {
+    background-color: #3e3934;
+  }
+  
+  /* salaire */
+  .salaire-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     width: 100%;
-}
-
-.salaire-label {
-    font-size: 0.9rem;
-    color: #333;
-    white-space: nowrap;
-}
-
-.salaire-range {
+    color: #e9e1d0;
+  }
+  
+  .salaire-label {
+    font-size: 0.95rem;
+    color: #e9e1d0;
+  }
+  
+  .salaire-range {
     flex: 1;
     -webkit-appearance: none;
     appearance: none;
-    width: 100%;
     height: 6px;
-    background: #ddd;
-    border-radius: 3px;
-    outline: none;
+    background: #5e5147;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background 0.3s;
-}
-
-.salaire-range::-webkit-slider-thumb {
+  }
+  
+  .salaire-range::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 12px;
-    height: 12px;
-    background: #FBE315;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     cursor: pointer;
-}
-
-.salaire-range:hover {
-    background: #ccc;
-}
-
-.salaire-valeur {
-    font-size: 0.9rem;
+    border: none;
+    transition: background 0.2s ease;
+  }
+  
+  .salaire-valeur {
+    font-size: 0.95rem;
     font-weight: bold;
-    color: #000;
-}
-
+    color: #e9e1d0;
+  }
+  
+  #modifier-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+  }
+  
+  #modifier-btn:hover {
+      background-color: #0056b3;
+  }
+  
+  #supprimer-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.3s;
+  }
+  
+  #supprimer-btn:hover {
+      background-color: #a71d2a;
+  }
+  
+  .offre-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .offre-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* responsive */
+  @media screen and (max-width: 768px) {
+    main {
+      flex-direction: column;
+      padding: 20px;
+    }
+  
+    .bloc-page {
+      flex-direction: column;
+    }
+  
+    .bloc-filters {
+      width: 100%;
+      border-radius: 24px;
+    }
+  
+    .bloc-search {
+      width: 100%;
+      padding: 24px;
+    }
+  
+    .bloc-pagination {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+  }
+  
