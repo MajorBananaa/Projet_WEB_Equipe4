@@ -1,19 +1,28 @@
 <?php 
-namespace App\Controllers;
-
+namespace App\Models;
+use PDO;
+use PDOException;
 class Database {
 
     public $dbh = null;
     public $sth = null;
 
     public function __construct() {
-        $this->dbh = null;
+        $this->dbh = $this->connect();
         $this->sth = null;
         
     }
 
     public function connect() {
-        $this->dbh = new PDO('mysql:host=localhost;dbname=WS7', 'root');
+        try{
+            $this->dbh = new PDO('mysql:host=localhost;dbname=projet_web_equipe4', 'root');
+            echo "connection réussi ! :) ";
+            return $this->dbh;
+        }catch (PDOException $e) {
+            echo "connexion failed";
+            return false;
+        }
+
     }
 
     public function close() {
@@ -21,13 +30,12 @@ class Database {
         $this->sth = null;
     }
 
-    public function execute($sql) {
-        $request = $dbh->prepare($sql);
+    public function execute($sql, $params = []) {
         try {
-            $request->execute();
-            $result = $request->fetch(PDO::FETCH_OBJ);
-            return $result;
-        } catch (PDOException $e){
+            $request = $this->dbh->prepare($sql);
+            $request->execute($params);
+            return $request->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
             return false;
         }
     }

@@ -4,7 +4,7 @@
  * It handles the routing and dispatches requests to the appropriate controller methods.
  */
 
-require "vendor/autoload.php";
+require_once "vendor/autoload.php";
 
 use App\Controllers\ControllerPage;
 
@@ -32,6 +32,6 @@ switch ($uri) {
         $controller->loginPage();
         break;
     default:
-        echo '404 Not Found';
+        $controller->showProfilEntreprise(1);
         break;
 }

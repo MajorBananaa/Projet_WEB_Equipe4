@@ -1,11 +1,13 @@
 <?php 
 namespace App\Controllers;
 
-use App\Models\Database;
+use App\Controllers\ProfilController;
+use App\Models\Localisation;
 
 class ControllerPage {
 
     private $templateEngine = null;
+
 
     public function __construct($templateEngine) {
         $this->templateEngine = $templateEngine;
@@ -31,11 +33,16 @@ class ControllerPage {
         // Show search pilote page
     }
 
-    public function showProfilStudent() {
-        // Show student profile page
+    public function showProfilStudent($id) {
+        $profil = new ProfilController($id);
+        $resultat = $profil->getProfilStudent();
+        echo $this->templateEngine->render('student-profil.html.twig', ['student' => $resultat['student'][0], 'place' => $resultat['place'][0]]);
     }
 
-    public function showProfilEntreprise() {
+    public function showProfilEntreprise($id) {
+        $company = new ProfilController($id);
+        $resultat = $company->getProfilEntreprise();
+        echo $this->templateEngine->render('entreprise-profil.html.twig', ['entreprise' => $resultat['entreprise'][0], 'offers' => $resultat['offers'], 'place' => $resultat['place'][0], 'secteur' => $resultat['secteur'][0]]);
         // Show entreprise profile page
     }
 
