@@ -66,6 +66,9 @@ class ControllerPage {
 
     public function showSearchStudent() {
         // Show search student page
+        echo $this->templateEngine->render('Search-student.html.twig', [
+
+        ]);
     }
 
     public function showSearchPilote() {
