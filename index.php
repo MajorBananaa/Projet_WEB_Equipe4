@@ -5,7 +5,6 @@ require "vendor/autoload.php";
 use App\Controllers\ControllerPage;
 use App\Controllers\SearchController;
 use App\Controllers\ControllerAuthentification;
-use App\Models\Offer;
 
 $loader = new \Twig\Loader\FilesystemLoader('src/Views');
 $twig = new \Twig\Environment($loader, [
@@ -51,7 +50,5 @@ switch ($uri) {
         break;
     default:
         echo '404 Not Found <br>';
-        $test = new Offer();
-        print_r($test->getAll(""));
         break;
 }
