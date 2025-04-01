@@ -219,7 +219,7 @@ form .far{
 form input{
     width: 100%;
     background: transparent;
-    color: #ccc;
+    color: #1f1f1f;
     border: 0;
     outline: none;
 }

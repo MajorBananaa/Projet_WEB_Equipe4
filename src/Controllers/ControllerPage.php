@@ -16,8 +16,26 @@ class ControllerPage {
     }
 
     public function showSearchOffer() {
-        echo $this->templateEngine->render('offer.html.twig');
+        $search = new SearchController();
+        $varSearch = $search->searchOffer();
+    
+        $offresParPage = 10;
+        $totalOffres = count($varSearch);
+        $totalPages = max(1, ceil($totalOffres / $offresParPage));
+    
+        $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $pageActuelle = max(1, min($pageActuelle, $totalPages));
+        $offresPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
+    
+        echo $this->templateEngine->render('offer.html.twig', [
+            'offres' => $offresPage,
+            'pageActuelle' => $pageActuelle,
+            'totalPages' => $totalPages,
+            'search' => $_GET['search-bar'] ?? ''
+        ]);
     }
+    
+    
 
     public function showSearchEntreprise() {
         // Show search entreprise page
@@ -63,7 +81,18 @@ class ControllerPage {
         echo $this->templateEngine->render('a-propos.html.twig');
     }
 
-    public function showLogin() {
+    public function showLogin($auth) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!isset($_SESSION['user_id'])) {
+                if ($auth->login()) {
+                    header("Location: /");
+                    exit();
+                } else {
+                    header("Location: /login");
+                    exit();
+                }
+            }
+        }
         echo $this->templateEngine->render('login.html.twig');
     }
 }
