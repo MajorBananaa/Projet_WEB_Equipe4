@@ -17,20 +17,31 @@
     
     <div id="popup-overlay">
         <div class="popup-content">
-            <h2>Déposez votre candidature</h2>
+            <h2>Modifier l'entreprise</h2>
             <p class="subtitle">Nous sommes ravis que vous souhaitiez nous rejoindre.</p>
             <form id="application-form" method="post">
                 <div class="form-group">
-                    <label for="cv">CV (PDF)</label>
-                    <input type="file" id="cv" name="cv" accept=".pdf" required>
+                    <label for="id_entreprise">id_entreprise</label>
+                    <input type="text" id="id_entreprise" name="id_entreprise">
+                </div>
+                <div class="form-group">
+                    <label for="nom">nom</label>
+                    <input type="text" id="nom" name="nom">
+                </div>
+                <div class="form-group">
+                    <label for="description">description</label>
+                    <input type="text" id="description" name="description">
+                </div>
+                <div class="form-group">
+                    <label for="mail">mail</label>
+                    <input type="text" id="mail" name="mail">
+                </div>
+                <div class="form-group">
+                    <label for="id_localisation">id_localisation</label>
+                    <input type="text" id="id_localisation" name="id_localisation">
                 </div>
 
-                <div class="form-group">
-                    <label for="motivation">Lettre de motivation</label>
-                    <textarea id="motivation" name="motivation" rows="5" placeholder="Exprimez votre motivation..." required></textarea>
-                </div>
-                <input type="hidden" id="offer-id" name="offer_id">
-                <button type="submit" class="submit-btn">Envoyer ma candidature</button>
+                <button type="submit" class="submit-btn">Finaliser la modification</button>
             </form>
             <a href="javascript:void(0)" onclick="togglePopup()" class="popup-exit">×</a>
         </div>
@@ -41,41 +52,32 @@
                 <h2>Filtres</h2>
 
                 <!-- Type de contrat -->
-                <h3>Type de contrat</h3>
-                <label><input type="checkbox" name="contrat[]" value="stage" {% if 'stage' in contrats %}checked{% endif %}> Stage</label>
-                <label><input type="checkbox" name="contrat[]" value="cdd" {% if 'cdd' in contrats %}checked{% endif %}> CDD</label>
-                <label><input type="checkbox" name="contrat[]" value="cdi" {% if 'cdi' in contrats %}checked{% endif %}> CDI</label>
-                <label><input type="checkbox" name="contrat[]" value="alternance" {% if 'alternance' in contrats %}checked{% endif %}> Alternance</label>
+                <h3>Secteur d'activité</h3>
+                    <select name="secteur">
+                        <option value="">-- Sélectionner --</option>
+                        <option value="Informatique" {% if secteur == 'Informatique' %}selected{% endif %}>Informatique</option>
+                        <option value="Sante" {% if secteur == 'Sante' %}selected{% endif %}>Santé</option>
+                        <option value="Agroalimentaire" {% if secteur == 'Agroalimentaire' %}selected{% endif %}>Agroalimentaire</option>
+                        <option value="Marketing" {% if secteur == 'Marketing' %}selected{% endif %}>Marketing</option>
+                        <option value="Finance" {% if secteur == 'Finance' %}selected{% endif %}>Finance</option>
+                        <option value="Transport" {% if secteur == 'Transport' %}selected{% endif %}>Transport</option>
+                        <option value="Armée" {% if secteur == 'Armée' %}selected{% endif %}>Armée</option>
+                        <option value="Énergie" {% if secteur == 'Énergie' %}selected{% endif %}>Énergie</option>
+                        <option value="Éducation" {% if secteur == 'Éducation' %}selected{% endif %}>Éducation</option>
+                        <option value="Tourisme" {% if secteur == 'Tourisme' %}selected{% endif %}>Tourisme</option>
+                        <option value="BTP" {% if secteur == 'BTP' %}selected{% endif %}>BTP</option>
+                        <option value="Télécoms" {% if secteur == 'Télécoms' %}selected{% endif %}>Télécoms</option>
+                        <option value="Assurance" {% if secteur == 'Assurance' %}selected{% endif %}>Assurance</option>
+                        <option value="Aéronautique" {% if secteur == 'Aéronautique' %}selected{% endif %}>Aéronautique</option>
+                        <option value="Automobile" {% if secteur == 'Automobile' %}selected{% endif %}>Automobile</option>
+                        <option value="Banque" {% if secteur == 'Banque' %}selected{% endif %}>Banque</option>
+                        <option value="Immobilier" {% if secteur == 'Immobilier' %}selected{% endif %}>Immobilier</option>
+                        <option value="Événementiel" {% if secteur == 'Événementiel' %}selected{% endif %}>Événementiel</option>
+                        <option value="Mode" {% if secteur == 'Mode' %}selected{% endif %}>Mode</option>
+                        <option value="Logistique" {% if secteur == 'Logistique' %}selected{% endif %}>Logistique</option>
+                    </select>
 
-                <!-- Salaire -->
-                <h3>Salaire</h3>
-                <div class="salaire-container">
-                    <label class="salaire-label">Min :</label>
-                    <input type="range" name="salaire" min="0" max="10000" value="{{ salaire }}" class="salaire-range">
-                    <span class="salaire-valeur">{{ salaire }} €</span>
-                </div>
 
-                <!-- Télétravail -->
-                <h3>Télétravail</h3>
-                <label><input type="checkbox" name="teletravail" value="oui" {% if teletravail == 'oui' %}checked{% endif %}> Télétravail possible</label>
-
-                <!-- Durée du stage -->
-                <h3>Durée du stage</h3>
-                <select name="duree">
-                    <option value="">-- Sélectionner --</option>
-                    <option value="1" {% if duree == '1' %}selected{% endif %}>1 mois</option>
-                    <option value="3" {% if duree == '3' %}selected{% endif %}>3 mois</option>
-                    <option value="6" {% if duree == '6' %}selected{% endif %}>6 mois</option>
-                </select>
-
-                <!-- Niveau d'étude -->
-                <h3>Niveau d'étude</h3>
-                <select name="niveau_etude">
-                    <option value="">-- Sélectionner --</option>
-                    <option value="Bac" {% if niveau_etude == 'Bac' %}selected{% endif %}>Bac</option>
-                    <option value="bac+2" {% if niveau_etude == 'bac+2' %}selected{% endif %}>Bac +2</option>
-                    <option value="bac+5" {% if niveau_etude == 'bac+5' %}selected{% endif %}>Bac +5</option>
-                </select>
                 
                 <div class="bloc-pagination">
                     <button type="submit">Appliquer</button>
@@ -94,14 +96,21 @@
                         <div class="offre-header">
                             <h2>{{ entreprise.nom }}</h2>
                             <div class="offre-buttons">
-
+                                {% if droits['Modifier une offre'] %}
+                                    <button id="modifier-btn">Modifier</button>
+                                {% endif %}
+                                {% if droits['Supprimer une offre'] %}
+                                    <button id="supprimer-btn">Supprimer</button>
+                                {% endif %}
+                                {% if droits['Postuler à une offre'] %}
+                                    <button class="postuler-btn" type="button" onclick="togglePopup({{ offre.id }})">Postuler</button>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="offre-details">
                             <p><strong>Secteur :</strong> {{ secteur.secteur }}</p>
                             <p><strong>Contact :</strong> {{ entreprise.mail }}</p>
                             <p><strong>Localisation :</strong> {{ place.ville }}</p>
-                            
                         </div>
                     </div>
                     {% endfor %}

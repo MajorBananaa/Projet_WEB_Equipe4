@@ -45,6 +45,7 @@ class ControllerPage {
     
 
     public function showSearchEntreprise($rights_user) {
+        /*
         $search = new SearchController();
         $varSearch = $search->searchCompany();
     
@@ -55,15 +56,12 @@ class ControllerPage {
         $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $pageActuelle = max(1, min($pageActuelle, $totalPages));
         $offresPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
+*/
 
-/*
         echo $this->templateEngine->render('company.html.twig', [
-            'entreprises' => $varSearch,
-            'pageActuelle' => $pageActuelle,
-            'totalPages' => $totalPages,
-            'droits' => $rights_user
+
         ]);
-        */
+        
     }
 
     public function showSearchStudent() {
@@ -77,7 +75,10 @@ class ControllerPage {
     public function showProfilStudent($id) {
         $profil = new ProfilController($id);
         $resultat = $profil->getProfilStudent();
-        echo $this->templateEngine->render('student-profil.html.twig', ['student' => $resultat['student'][0], 'place' => $resultat['place'][0]]);
+        echo $this->templateEngine->render('student-profil.html.twig', [
+            'student' => $resultat['student'][0],
+            'place' => $resultat['place'][0]
+        ]);
     }
 
     public function showProfilEntreprise($id) {
