@@ -15,7 +15,7 @@ class ControllerPage {
         echo $this->templateEngine->render('index.html.twig');
     }
 
-    public function showSearchOffer() {
+    public function showSearchOffer($rights_user) {
         $search = new SearchController();
         $varSearch = $search->searchOffer();
     
@@ -31,8 +31,15 @@ class ControllerPage {
             'offres' => $offresPage,
             'pageActuelle' => $pageActuelle,
             'totalPages' => $totalPages,
-            'search' => $_GET['search-bar'] ?? ''
+            'search' => $_GET['search-bar'] ?? '',
+            'contrats' => $_GET['contrat'] ?? [],
+            'salaire' => $_GET['salaire'] ?? 0,
+            'teletravail' => $_GET['teletravail'] ?? '',
+            'duree' => $_GET['duree'] ?? '',
+            'niveau_etude' => $_GET['niveau_etude'] ?? '',
+            'droits' => $rights_user
         ]);
+        
     }
     
     
