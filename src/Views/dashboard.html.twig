@@ -81,7 +81,7 @@
                                         <circle id="circle1" cx="38" cy="38" r="36"></circle>
                                     </svg>
                                     <div class="percentage">
-                                        <p>51</p>
+                                        <p>{{nb_candidature}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                         <circle id="circle2" cx="38" cy="38" r="36"></circle>
                                     </svg>
                                     <div class="percentage">
-                                        <p>12</p>
+                                        <p>{{nb_candidature_recentes}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                                         <circle id="circle3" cx="38" cy="38" r="36"></circle>
                                     </svg>
                                     <div class="percentage">
-                                        <p>15</p>
+                                        <p>{{nb_evals}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -145,51 +145,32 @@
 
                     <table>
                         <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Offre</th>
-                                <th>Entreprise</th>
-                                <th>Lieu</th>
-                                <th>Statut</th>
-                                <th>Date d'envoi</th>
+                             <tr>
+                                 <th>Id</th>
+                                 <th>Offre</th>
+                                 <th>Entreprise</th>
+                                     <th>Lieu</th>
+                                 <th>Date d'envoi</th> 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>12</td>
-                                <td>Pc</td>
-                                <td>rgerrg</td>
-                                <td>Doit</td>
-                                <td class="text-fuscha">Non paye</td>
-                                <td>Jours restants</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>Pc</td>
-                                <td>rgerrg</td>
-                                <td>Doit</td>
-                                <td class="text-fuscha">Non paye</td>
-                                <td>Jours restants</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>Pc</td>
-                                <td>rgerrg</td>
-                                <td>Doit</td>
-                                <td class="text-fuscha">Non paye</td>
-                                <td>Jours restants</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>Pc</td>
-                                <td>rgerrg</td>
-                                <td>Doit</td>
-                                <td class="text-fuscha">Non paye</td>
-                                <td>Jours restants</td>
-                            </tr>
+                            {% for candidatures in candidature %}
+                                <tr>
+                                    <td>{{ candidatures.id_postuler }}</td>
+                                    <td>{{ candidatures.offre_titre }}</td>
+                                    <td>{{ candidatures.entreprise }}</td>
+                                    <td>{{ candidatures.lieu }}</td>
+                                    <td>{{ candidatures.date_candidature|date("d/m/Y") }}</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">Aucune candidature envoyée.</td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </section>
+
             </div>
             <div class="extrabar">
                 <header class="header-right">
@@ -218,32 +199,17 @@
                 <div class="recent-updates">
                     <h2>Wish-list</h2>
                     <div class="updates-container">
-                        <div class="update">
-                            <div class="profile-image">
-                                <img src="images/" alt="" width="100%"> <!--Rajouter une image-->
+                        {% for wishlists in wishlist %}
+                            <div class="update">
+                                <div class="message">
+                                    <p><strong>Offre : </strong>{{ wishlists.nom_offre }}</p><br>
+                                    <p><strong>Salaire proposé : </strong>{{ wishlists.salaire }}$</p>
+                                </div>
                             </div>
-                            <div class="message">
-                                <p><strong>Arthur</strong>Lorem ipsum dolor sit amet consectetur.</p>
-                            </div>
-                        </div>
-                        <div class="update">
-                            <div class="profile-image">
-                                <img src="images/" alt="" width="100%"> <!--Rajouter une image-->
-                            </div>
-                            <div class="message">
-                                <p><strong>Arthur</strong>Lorem ipsum dolor sit amet consectetur.</p>
-                            </div>
-                        </div>
-                        <div class="update">
-                            <div class="profile-image">
-                                <img src="images/" alt="" width="100%"> <!--Rajouter une image-->
-                            </div>
-                            <div class="message">
-                                <p><strong>Arthur</strong>Lorem ipsum dolor sit amet consectetur.</p>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
+
 
         </div>
 

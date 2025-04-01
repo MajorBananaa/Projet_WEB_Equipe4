@@ -40,7 +40,19 @@ class ControllerPage {
     }
 
     public function showDashboardStudent() {
-        echo $this->templateEngine->render('dashboard.html.twig');
+        $candidat_stat = new DashboardController();
+        $nb_candidat = $candidat_stat->searchDashboard();
+        $nb_candidat_recentes = $candidat_stat->searchDashboardCandRecentes();
+        $nb_candidat_evals = $candidat_stat->searchDashboardEval();
+        $candidature_send = $candidat_stat->searchDashboardCandSend();
+        $wish_list = $candidat_stat->searchDashboardWishList();
+        echo $this->templateEngine->render('dashboard.html.twig', [
+            'nb_candidature' => $nb_candidat->nb_cand,
+            'nb_candidature_recentes' => $nb_candidat_recentes->nb_cand_recentes,
+            'nb_evals' =>$nb_candidat_evals->nb_eval,
+            'candidature' =>$candidature_send,
+            'wishlist' =>$wish_list
+        ]);
     }
 
     public function showDashboardPilote() {

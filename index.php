@@ -4,6 +4,8 @@ require "vendor/autoload.php";
 
 use App\Controllers\ControllerPage;
 use App\Controllers\ControllerAuthentification;
+use App\Models\Statistique;
+use App\Models\Candidature;
 
 $loader = new \Twig\Loader\FilesystemLoader('src/Views');
 $twig = new \Twig\Environment($loader, [
@@ -40,5 +42,8 @@ switch ($uri) {
         break;
     default:
         echo '404 Not Found <br>';
+        $test = new Candidature();
+        $test2 = $test->get(20);
+        print_r($test2);
         break;
 }
