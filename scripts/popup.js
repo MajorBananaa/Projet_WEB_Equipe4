@@ -9,7 +9,7 @@ function togglePopupModif(id) {
   const popup = document.getElementById("popup-overlay-modif");
   popup.classList.toggle("open");
 
-  document.getElementById("offer-id").value = id;
+  document.getElementById("offer-id-upd").value = id;
 }
 
 function togglePopupAdd() {

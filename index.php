@@ -56,14 +56,18 @@ switch ($uri) {
     default:
         echo '404 Not Found <br>';
         $dbOffer = new Offer();
-        $filters = [
-            'search' => $_GET['search-bar'] ?? '',
-            'contrats' => $_GET['contrat'] ?? [],
-            'salaire' => $_GET['salaire'] ?? null,
-            'teletravail' => $_GET['teletravail'] ?? '',
-            'duree' => $_GET['duree'] ?? '',
-            'niveau_etude' => $_GET['niveau_etude'] ?? ''
+        $offre = [
+            'titre' => 'Développeur Web',
+            'description' => "Développement d'une plateforme web.",
+            'salaire' => 35000,
+            'teletravail' => 1,
+            'duree' => 180,
+            'id_etude' => 2,
+            'id_contrat' => 5,
+            'id_secteur' => 3,
+            'id_entreprise' => 1
         ];
-        print_r($dbOffer->getAll($filters));
+        
+        print_r($dbOffer->add($offre));
         break;
 }

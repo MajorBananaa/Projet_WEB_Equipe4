@@ -7,7 +7,6 @@ class SearchController {
     public function searchOffer() {
         $dbOffer = new Offer();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            //print_r($_POST["remove"]);
             if (isset($_POST["motivation"]) && isset($_FILES["cv"]) && isset($_POST["offer_id"])) {
                 $check_file = new UploadService();
                 
@@ -19,6 +18,33 @@ class SearchController {
                 }
             } elseif (isset($_POST["offer_id-supr"]) && isset($_POST["remove"])) {
                 $dbOffer->remove($_POST["offer_id-supr"]);
+            } elseif (isset($_POST["add"])) {
+                $offre = [
+                    'titre' => $_POST['titre'] ?? 'Titre par défaut',
+                    'description' => $_POST['description'] ?? 'Description par défaut',
+                    'salaire' => $_POST['salaire'] ?? 0,
+                    'teletravail' => $_POST['teletravail'] ?? 0,
+                    'duree' => $_POST['duree'] ?? 0,
+                    'id_etude' => $_POST['id_etude'] ?? 0,
+                    'id_contact' => $_POST['id_contact'] ?? 0,
+                    'id_secteur' => $_POST['id_secteur'] ?? 0,
+                    'id_entreprise' => $_POST['id_entreprise'] ?? 0
+                ];
+
+                $dbOffer->add($offre);
+            } elseif (isset($_POST["update"])) {
+                
+                $offre = [
+                    'id_offres' => $_POST['offer_id-upd'],
+                    'description' => $_POST['description'] ?? 'Description par défaut',
+                    'salaire' => $_POST['salaire'] ?? 0,
+                    'teletravail' => $_POST['teletravail'] ?? 0,
+                    'duree' => $_POST['duree'] ?? 0,
+                    'id_etude' => $_POST['id_etude'] ?? 0,
+                    'id_contrat' => $_POST['id_contrat'] ?? 0,
+                    'id_secteur' => $_POST['id_secteur'] ?? 0
+                ];
+                $dbOffer->update($offre);
             }
             $_POST = [];
         }

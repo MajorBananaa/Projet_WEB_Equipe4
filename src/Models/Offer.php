@@ -4,7 +4,17 @@ namespace App\Models;
 use App\Models\Database;
 
 class Offer extends Database {
-    public function add($data) {}
+    public function add($data) {
+        $sql = "INSERT INTO Offre (titre, description, date_publication, salaire, teletravail, duree, id_etude, id_contact, id_secteur, id_entreprise) 
+            VALUES (:titre, :description, NOW(), :salaire, :teletravail, :duree, :id_etude, :id_contact, :id_secteur, :id_entreprise)";
+    
+        $this->connect();
+        $this->sth = $this->dbh->prepare($sql);
+        $result = $this->execute($data);
+        $this->close();
+
+        return $result;
+    }
     
     public function remove($id) {
         $sql = "DELETE FROM offre WHERE id_offres = ?;".
@@ -16,7 +26,22 @@ class Offer extends Database {
 
     }
     
-    public function update($data) {}
+    public function update($data) {
+        $sql = "UPDATE Offre 
+            SET description = :description, 
+                salaire = :salaire, 
+                teletravail = :teletravail, 
+                duree = :duree, 
+                id_etude = :id_etude, 
+                id_contrat = :id_contrat, 
+                id_secteur = :id_secteur
+            WHERE id_offres = :id_offres";
+
+        $this->connect();
+        $this->sth = $this->dbh->prepare($sql);
+        $result = $this->execute($data);
+        $this->close();
+    }
     
     public function get($id) {}
     
