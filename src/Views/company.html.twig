@@ -89,32 +89,19 @@
                 </div>
 
                 <div class="bloc-result">
-                    {% for offre in offres %}
+                    {% for entreprise in entreprises %}
                     <div class="offre">
                         <div class="offre-header">
-                            <h2>{{ offre.titre }}</h2>
+                            <h2>{{ entreprise.nom }}</h2>
                             <div class="offre-buttons">
-                                {% if droits['Modifier une offre'] %}
-                                    <button id="modifier-btn">Modifier</button>
-                                {% endif %}
-                                {% if droits['Supprimer une offre'] %}
-                                    <button id="supprimer-btn">Supprimer</button>
-                                {% endif %}
-                                {% if droits['Postuler à une offre'] %}
-                                    <button class="postuler-btn" type="button" onclick="togglePopup({{ offre.id }})">Postuler</button>
-                                {% endif %}
-                                
+
                             </div>
                         </div>
                         <div class="offre-details">
-                            <p><strong>Entreprise :</strong> {{ offre.nom }}</p>
-                            <p><strong>Description :</strong> {{ offre.description }}</p>
-                            <p><strong>Contrat :</strong> {{ offre.type_contrat }}</p>
-                            <p><strong>Salaire :</strong> {{ offre.salaire }} €/mois</p>
-                            <p><strong>Télétravail :</strong> {{ offre.teletravail == 1 ? 'Oui' : 'Non' }}</p>
-                            <p><strong>Durée :</strong> {{ offre.duree }} mois</p>
-                            <p><strong>Niveau d'études :</strong> {{ offre.niveau_etude }}</p>
-                            <p><strong>Secteur :</strong> {{ offre.secteur }}</p>
+                            <p><strong>Secteur :</strong> {{ secteur.secteur }}</p>
+                            <p><strong>Contact :</strong> {{ entreprise.mail }}</p>
+                            <p><strong>Localisation :</strong> {{ place.ville }}</p>
+                            
                         </div>
                     </div>
                     {% endfor %}

@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entreprises</title>
-    <link rel="stylesheet" href="assets/base.css">
-    <link rel="stylesheet" href="assets/search.css">
-    <link rel="stylesheet" href="assets/entreprise.css">
+    <title>Search - StageFinder</title>
+    <link rel="stylesheet" href="assets/0.css">
+    <link rel="stylesheet" href="assets/company.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Single+Line&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
@@ -22,20 +21,20 @@
         <div class="main-entreprise">
             <div class="header-entreprise">
                 <div class="header-img">
-                    <img src="images/Logo-Renault.png" alt="">
+                    <img src="{{entreprise.chemin_profil_entreprise}}" alt="">
                 </div>
                 <div class="name-entreprise">
-                    <h2>Renault Group</h2>
+                    <h2>{{entreprise.nom}}</h2>
                 </div>
             </div>
             <div class="type-entreprise">
                 <div class="part part1">
                     <div class="type-logo">
-                        <i class="fa-solid fa-building"></i>
+                        <i class="fa-solid fa-envelope"></i>
                     </div>
                     <div class="type-text">
-                        <p class="type-title">Type d'entreprise</p>
-                        <p class="type-response">Type d'entreprise</p>
+                        <p class="type-title">Contact</p>
+                        <p class="type-response">{{entreprise.mail}}</p>
                     </div>
 
                 </div>
@@ -46,7 +45,7 @@
                     </div>
                     <div class="type-text">
                         <p class="type-title">Secteur d'activité</p>
-                        <p class="type-response">Automobile</p>
+                        <p class="type-response">{{secteur.secteur}}</p>
                     </div>
                 </div>
 
@@ -55,63 +54,38 @@
                         <i class="fa-solid fa-location-dot"></i>
                     </div>
                     <div class="type-text">
-                        <p class="type-title">Localisaation</p>
-                        <p class="type-response">Paris</p>
+                        <p class="type-title">Localisation</p>
+                        <p class="type-response">{{place.ville}}</p>
                     </div>
                 </div>
             </div>
+
+
+
             <div class="description-entreprise">
-                <p>Fondée avec une passion inébranlable pour la performance et l'innovation, Titan Motors s'est imposée comme un acteur incontournable de l'industrie automobile. Alliant design audacieux, technologie de pointe et engagement écologique, notre entreprise redéfinit chaque jour les standards de la mobilité.
-                    Un Savoir-Faire Unique
-                    Nos véhicules sont le fruit d’une ingénierie de précision, où chaque détail est pensé pour offrir une expérience de conduite exceptionnelle. Que ce soit pour les citadins en quête de praticité, les aventuriers avides de puissance, ou les passionnés de véhicules électriques, Titan Motors propose une gamme adaptée à chaque besoin.
-                    Innovation & Durabilité
-                    Nous investissons massivement dans les technologies vertes, avec des modèles hybrides et 100% électriques qui allient performance et respect de l’environnement. Grâce à l’intelligence artificielle embarquée, nos véhicules offrent des solutions de conduite autonome, garantissant sécurité et confort.
-                </p>
+                <p>{{entreprise.description}}</p>
             </div>
+
+
+
             <div class="offre-entreprise">
                 <h2>Offre récente de l'entreprise</h2>
-                <div class="item" data-category="cat2">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>CDD BAC+3 / Contrôle qualité (F/H)</h4>
-                        <p>CDD - Cléon</p>
+                {% for offre in offers %}
+                <div class="offre">
+                    <div class="offre-header">
+                        <h2>{{offre.titre}}</h2>
+                        <button class="postuler-btn">Postuler</button>
+                    </div>
+                    <div class="offre-details">
+                        <p><strong>Entreprise :</strong> {{entreprise.nom}}</p>
+                        <p><strong>Contrat :</strong> {{offre.contrat_nom}}</p>
+                        <p><strong>Durée :</strong> {{offre.duree}}</p>
+                        <p><strong>Salaire :</strong> {{offre.salaire}}</p>
+                        <p><strong>Télétravail :</strong> {{ offre.teletravail ? 'Oui' : 'Non' }}</p>
+                        <p><strong>Taille :</strong> Moyenne</p>
                     </div>
                 </div>
-                <div class="item" data-category="cat1">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>Stage BAC+5 / DATA Analyste (F/H)</h4>
-                        <p>Stage 6 mois - Cléon</p>
-                    </div>
-                </div>
-                <div class="item" data-category="cat2">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>CDD BAC+3 / Contrôle qualité (F/H)</h4>
-                        <p>CDD - Cléon</p>
-                    </div>
-                </div>
-                <div class="item" data-category="cat1">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>Stage BAC+5 / DATA Analyste (F/H)</h4>
-                        <p>Stage 6 mois - Cléon</p>
-                    </div>
-                </div>
-                <div class="item" data-category="cat2">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>CDD BAC+3 / Contrôle qualité (F/H)</h4>
-                        <p>CDD - Cléon</p>
-                    </div>
-                </div>
-                <div class="item" data-category="cat1">
-                    <img src="images/Logo-Renault.png" alt="Renault">
-                    <div>
-                        <h4>Stage BAC+5 / DATA Analyste (F/H)</h4>
-                        <p>Stage 6 mois - Cléon</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
 
