@@ -19,20 +19,12 @@ class ControllerPage {
     public function showSearchOffer() {
         $search = new SearchController();
         $varSearch = $search->searchOffer();
-
-        $offresParPage = 10;
-        $totalOffres = count($varSearch);
-        $totalPages = max(1, ceil($totalOffres / $offresParPage));
-    
-        $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $pageActuelle = max(1, min($pageActuelle, $totalPages));
-        $offresPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
-        
+        $pagination = $search->paginate($varSearch);
         
         echo $this->templateEngine->render('offer.html.twig', [
-            'offres' => $offresPage,
-            'pageActuelle' => $pageActuelle,
-            'totalPages' => $totalPages,
+            'offres' => $pagination['data'],
+            'pageActuelle' => $pagination['currentPage'],
+            'totalPages' => $pagination['totalPages'],
             'search' => $_GET['search-bar'] ?? '',
             'contrats' => $_GET['contrat'] ?? [],
             'salaire' => $_GET['salaire'] ?? 0,
@@ -41,30 +33,19 @@ class ControllerPage {
             'niveau_etude' => $_GET['niveau_etude'] ?? '',
             'droits' => $this->right
         ]);
-        
     }
-    
-    
 
     public function showSearchEntreprise() {
-        
         $search = new SearchController();
         $varSearch = $search->searchCompany();
-    
-        $offresParPage = 10;
-        $totalOffres = count($varSearch);
-        $totalPages = max(1, ceil($totalOffres / $offresParPage));
-    
-        $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $pageActuelle = max(1, min($pageActuelle, $totalPages));
-        $entreprisePage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
-
+        $pagination = $search->paginate($varSearch);
+        
         echo $this->templateEngine->render('company.html.twig', [
-            'entreprises' => $entreprisePage,
-            'pageActuelle' => $pageActuelle,
-            'totalPages' => $totalPages,
+            'entreprises' => $pagination['data'],
+            'pageActuelle' => $pagination['currentPage'],
+            'totalPages' => $pagination['totalPages'],
             'search' => $_GET['search-bar'] ?? '',
-            'secteur' => $_GET["secteur"] ?? '',
+            'secteur' => $_GET['secteur'] ?? '',
             'droits' => $this->right
         ]);
     }
@@ -72,23 +53,17 @@ class ControllerPage {
     public function showSearchStudent() {
         $search = new SearchController();
         $varSearch = $search->searchStudent();
-    
-        $offresParPage = 10;
-        $totalOffres = count($varSearch);
-        $totalPages = max(1, ceil($totalOffres / $offresParPage));
-    
-        $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $pageActuelle = max(1, min($pageActuelle, $totalPages));
-        $studentPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
-
+        $pagination = $search->paginate($varSearch);
+        
         echo $this->templateEngine->render('search-student.html.twig', [
-            'students' => $studentPage,
-            'pageActuelle' => $pageActuelle,
-            'totalPages' => $totalPages,
+            'students' => $pagination['data'],
+            'pageActuelle' => $pagination['currentPage'],
+            'totalPages' => $pagination['totalPages'],
             'search' => $_GET['search-bar'] ?? '',
             'droits' => $this->right
         ]);
     }
+
 
     public function showSearchPilote() {
         // Show search pilote page
@@ -121,7 +96,7 @@ class ControllerPage {
         $candidature_send = $candidat_stat->searchDashboardCandSend();
         $wish_list = $candidat_stat->searchDashboardWishList();
         echo $this->templateEngine->render('dashboard.html.twig', [
-            'nb_candidature' => $nb_candidat,
+            'nb_candidature' => $nb_candidat->nb_cand,
             'nb_candidature_recentes' => $nb_candidat_recentes->nb_cand_recentes,
             'nb_evals' =>$nb_candidat_evals->nb_eval,
             'candidature' =>$candidature_send,

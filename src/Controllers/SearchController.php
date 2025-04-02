@@ -6,6 +6,19 @@ use App\Models\Entreprise;
 use App\Models\Utilisateur;
 
 class SearchController {
+    public function paginate($data, $perPage = 10) {
+        $totalItems = count($data);
+        $totalPages = max(1, ceil($totalItems / $perPage));
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $currentPage = max(1, min($currentPage, $totalPages));
+        $pagedData = array_slice($data, ($currentPage - 1) * $perPage, $perPage);
+        
+        return [
+            'data' => $pagedData,
+            'currentPage' => $currentPage,
+            'totalPages' => $totalPages
+        ];
+    }
     public function searchOffer() {
         $dbOffer = new Offer();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

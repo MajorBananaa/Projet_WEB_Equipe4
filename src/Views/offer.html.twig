@@ -1,284 +1,165 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offres</title>
-    <link rel="stylesheet" href="/assets/0.css">
-    <link rel="stylesheet" href="/assets/search.css">
-    <link rel="stylesheet" href="/assets/overlay.css">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Offres</title>
+		<link rel="stylesheet" href="/assets/0.css">
+		<link rel="stylesheet" href="/assets/search.css">
+		<link rel="stylesheet" href="/assets/overlay.css">
 
-    <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
-</head>
+		<link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
+	</head>
 
-<body>
-    {% include 'header.twig' %}
-    
-    {% if droits['Postuler à une offre'] %}
-        <div id="popup-overlay">
-            <div class="popup-content">
-                <h2>Déposez votre candidature</h2>
-                <p class="subtitle">Nous sommes ravis que vous souhaitiez nous rejoindre.</p>
-                <form id="application-form" method="post" enctype="multipart/form-data" action="">
-                    <div class="form-group">
-                        <label for="cv">CV (PDF)</label>
-                        <input type="file" id="cv" name="cv" accept=".pdf" required>
-                    </div>
+	<body>
+		{% include 'header.twig' %}
 
-                    <div class="form-group">
-                        <label for="motivation">Lettre de motivation</label>
-                        <textarea id="motivation" name="motivation" rows="5" placeholder="Exprimez votre motivation..." required></textarea>
-                    </div>
+		{% if droits['Postuler à une offre'] %}
+			{% include 'popup-postuler-offre.twig' %}
+		{% endif %}
 
-                    <input type="hidden" id="offer-id" name="offer_id">
-                    <button type="submit" class="submit-btn">Envoyer ma candidature</button>
-                </form>
-                <a href="javascript:void(0)" onclick="togglePopup()" class="popup-exit">×</a>
-            </div>
-        </div>
-    {% endif %}
+		{% if droits['Supprimer une offre'] %}
+			{% include 'popup-supr-offre.twig' %}
+		{% endif %}
 
-    {% if droits['Supprimer une offre'] %}
-        <div id="popup-overlay-supr">
-            <div class="popup-content">
-                <h2>Etes-vous sûr de vouloir supprimer l'offre</h2>
-                <form id="application-form2" method="post" enctype="multipart/form-data" action="">
-                    <input type="hidden" id="offer-id-supr" name="offer_id-supr">
-                    <input type="hidden" id="remove" name="remove" value="1">
-                    <button type="submit" class="supprimer-btn">Oui</button>
-                </form>
-                <a href="javascript:void(0)" onclick="togglePopupSupr()" class="popup-exit">×</a>
-            </div>
-        </div>
-    {% endif %}
+		{% if droits['Modifier une offre'] %}
+			{% include 'popup-upd-offre.twig' %}
+		{% endif %}
 
-    {% if droits['Modifier une offre'] %}
-    <div id="popup-overlay-modif">
-        <div class="popup-content">
-            <h2>Modifier une offre</h2>
-            <form id="modif-offre-form3" method="post" enctype="multipart/form-data">
+		{% if droits['Créer une offre'] %}
+			{% include 'popup-add-offre.twig' %}
+		{% endif %}
 
-                <input type="hidden" id="offer-id-upd" name="offer_id-upd">
+		<form method="get">
+			<main class="bloc-page">
+				<aside class="bloc-filters">
+					<h2>Filtres</h2>
 
+					<h3>Type de contrat</h3>
+					<label><input type="checkbox" name="contrat[]" value="stage" {% if 'stage' in contrats %} checked {% endif %}>
+						Stage</label>
+					<label><input type="checkbox" name="contrat[]" value="cdd" {% if 'cdd' in contrats %} checked {% endif %}>
+						CDD</label>
+					<label><input type="checkbox" name="contrat[]" value="cdi" {% if 'cdi' in contrats %} checked {% endif %}>
+						CDI</label>
+					<label><input type="checkbox" name="contrat[]" value="alternance" {% if 'alternance' in contrats %} checked {% endif %}>
+						Alternance</label>
 
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" rows="3" required></textarea>
-                </div>
+					<h3>Salaire</h3>
+					<div class="salaire-container">
+						<label class="salaire-label">Min :</label>
+						<input type="range" name="salaire" min="0" max="10000" value="{{ salaire }}" class="salaire-range">
+						<span class="salaire-valeur">{{ salaire }}
+							€</span>
+					</div>
 
-                <div class="form-group">
-                    <label for="salaire">Salaire</label>
-                    <input type="number" id="salaire" name="salaire" required>
-                </div>
+					<h3>Télétravail</h3>
+					<label><input type="checkbox" name="teletravail" value="oui" {% if teletravail == 'oui' %} checked {% endif %}>
+						Télétravail possible</label>
 
-                <div class="form-group">
-                    <label for="teletravail">Télétravail</label>
-                    <select id="teletravail" name="teletravail" required>
-                        <option value="1">Oui</option>
-                        <option value="0">Non</option>
-                    </select>
-                </div>
+					<h3>Durée du stage</h3>
+					<select name="duree">
+						<option value="">-- Sélectionner --</option>
+						<option value="1" {% if duree == '1' %} selected {% endif %}>1 mois</option>
+						<option value="3" {% if duree == '3' %} selected {% endif %}>3 mois</option>
+						<option value="6" {% if duree == '6' %} selected {% endif %}>6 mois</option>
+					</select>
 
-                <div class="form-group">
-                    <label for="duree">Durée (en mois)</label>
-                    <input type="number" id="duree" name="duree" required>
-                </div>
+					<h3>Niveau d'étude</h3>
+					<select name="niveau_etude">
+						<option value="">-- Sélectionner --</option>
+						<option value="Bac" {% if niveau_etude == 'Bac' %} selected {% endif %}>Bac</option>
+						<option value="bac+2" {% if niveau_etude == 'bac+2' %} selected {% endif %}>Bac +2</option>
+						<option value="bac+5" {% if niveau_etude == 'bac+5' %} selected {% endif %}>Bac +5</option>
+					</select>
 
-                <div class="form-group">
-                    <label for="id_etude">ID Étude</label>
-                    <input type="number" id="id_etude" name="id_etude" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="id_contrat">ID Contact</label>
-                    <input type="number" id="id_contrat" name="id_contrat" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="id_secteur">ID Secteur</label>
-                    <input type="number" id="id_secteur" name="id_secteur" required>
-                </div>
-
-                <input type="hidden" id="update" name="update" value="1">
-
-                <button type="submit" class="submit-btn">Modifier l'offre</button>
-            </form>
-            <a href="javascript:void(0)" onclick="togglePopupModif()" class="popup-exit">×</a>
-        </div>
-    </div>
-    {% endif %}
-
-    {% if droits['Créer une offre'] %}
-    <div id="popup-overlay-add">
-        <div class="popup-content">
-            <h2>Ajouter une offre</h2>
-            <form id="offre-form" method="post" enctype="multipart/form-data" action="">
-
-                <div class="form-group">
-                    <label for="titre">Titre de l'offre</label>
-                    <input type="text" id="titre" name="titre" placeholder="Titre de l'offre" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" rows="3" placeholder="Description de l'offre" required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="salaire">Salaire</label>
-                    <input type="number" id="salaire" name="salaire" placeholder="Salaire en euros" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="teletravail">Télétravail</label>
-                    <select id="teletravail" name="teletravail" required>
-                        <option value="1">Oui</option>
-                        <option value="0">Non</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="duree">Durée (en mois)</label>
-                    <input type="number" id="duree" name="duree" placeholder="Durée en mois" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="id_etude">ID Étude</label>
-                    <input type="number" id="id_etude" name="id_etude" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="id_contact">ID Contact</label>
-                    <input type="number" id="id_contact" name="id_contact" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="id_secteur">ID Secteur</label>
-                    <input type="number" id="id_secteur" name="id_secteur" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="id_entreprise">ID Entreprise</label>
-                    <input type="number" id="id_entreprise" name="id_entreprise" required>
-                </div>
-
-                <input type="hidden" id="add" name="add" value="1">
-
-                <button type="submit" class="submit-btn">Ajouter l'offre</button>
-            </form>
-            <a href="javascript:void(0)" onclick="togglePopupAdd()" class="popup-exit">×</a>
-        </div>
-    </div>
-    {% endif %}
-
-    <form method="get">
-        <main class="bloc-page">
-            <aside class="bloc-filters">
-                <h2>Filtres</h2>
-
-                <!-- Type de contrat -->
-                <h3>Type de contrat</h3>
-                <label><input type="checkbox" name="contrat[]" value="stage" {% if 'stage' in contrats %}checked{% endif %}> Stage</label>
-                <label><input type="checkbox" name="contrat[]" value="cdd" {% if 'cdd' in contrats %}checked{% endif %}> CDD</label>
-                <label><input type="checkbox" name="contrat[]" value="cdi" {% if 'cdi' in contrats %}checked{% endif %}> CDI</label>
-                <label><input type="checkbox" name="contrat[]" value="alternance" {% if 'alternance' in contrats %}checked{% endif %}> Alternance</label>
-
-                <!-- Salaire -->
-                <h3>Salaire</h3>
-                <div class="salaire-container">
-                    <label class="salaire-label">Min :</label>
-                    <input type="range" name="salaire" min="0" max="10000" value="{{ salaire }}" class="salaire-range">
-                    <span class="salaire-valeur">{{ salaire }} €</span>
-                </div>
-
-                <!-- Télétravail -->
-                <h3>Télétravail</h3>
-                <label><input type="checkbox" name="teletravail" value="oui" {% if teletravail == 'oui' %}checked{% endif %}> Télétravail possible</label>
-
-                <!-- Durée du stage -->
-                <h3>Durée du stage</h3>
-                <select name="duree">
-                    <option value="">-- Sélectionner --</option>
-                    <option value="1" {% if duree == '1' %}selected{% endif %}>1 mois</option>
-                    <option value="3" {% if duree == '3' %}selected{% endif %}>3 mois</option>
-                    <option value="6" {% if duree == '6' %}selected{% endif %}>6 mois</option>
-                </select>
-
-                <!-- Niveau d'étude -->
-                <h3>Niveau d'étude</h3>
-                <select name="niveau_etude">
-                    <option value="">-- Sélectionner --</option>
-                    <option value="Bac" {% if niveau_etude == 'Bac' %}selected{% endif %}>Bac</option>
-                    <option value="bac+2" {% if niveau_etude == 'bac+2' %}selected{% endif %}>Bac +2</option>
-                    <option value="bac+5" {% if niveau_etude == 'bac+5' %}selected{% endif %}>Bac +5</option>
-                </select>
-                
-                <div class="bloc-pagination">
-                    <button type="submit">Appliquer</button>
-                </div>
-            </aside>
+					<div class="bloc-pagination">
+						<button type="submit">Appliquer</button>
+					</div>
+				</aside>
 
 
-            <section class="bloc-search">
-                <div class="bloc-search-bar">
-                    <input type="text" placeholder="Rechercher un stage" name="search-bar" value="{{ search }}">
-                </div>
+				<section class="bloc-search">
+					<div class="bloc-search-bar">
+						<input type="text" placeholder="Rechercher un stage" name="search-bar" value="{{ search }}">
+					</div>
 
-                <div class="bloc-result">
-                {% if droits['Créer une offre'] %}
-                    <button class="postuler-btn" type="button" onclick="togglePopupAdd()">Ajouter une offre</button>
-                {% endif %}
-                    {% for offre in offres %}
-                    <div class="offre">
-                        <div class="offre-header">
-                            <h2>{{ offre.titre }}</h2>
-                            <div class="offre-buttons">
-                                {% if droits['Modifier une offre'] %}
-                                    <button id="modifier-btn" type="button" onclick="togglePopupModif({{ offre.id_offres }})">Modifier</button>
-                                {% endif %}
-                                {% if droits['Supprimer une offre'] %}
-                                    <button id="supprimer-btn" type="button" onclick="togglePopupSupr({{ offre.id_offres }})">Supprimer</button>
-                                {% endif %}
-                                {% if droits['Postuler à une offre'] %}
-                                    <button class="postuler-btn" type="button" onclick="togglePopup({{ offre.id_offres }})">Postuler</button>
-                                {% endif %}
-                                
-                            </div>
-                        </div>
-                        <div class="offre-details">
-                            <p><strong>Entreprise :</strong> {{ offre.nom }}</p>
-                            <p><strong>Description :</strong> {{ offre.description }}</p>
-                            <p><strong>Contrat :</strong> {{ offre.type_contrat }}</p>
-                            <p><strong>Salaire :</strong> {{ offre.salaire }} €/mois</p>
-                            <p><strong>Télétravail :</strong> {{ offre.teletravail == 1 ? 'Oui' : 'Non' }}</p>
-                            <p><strong>Durée :</strong> {{ offre.duree }} mois</p>
-                            <p><strong>Niveau d'études :</strong> {{ offre.niveau_etude }}</p>
-                            <p><strong>Secteur :</strong> {{ offre.secteur }}</p>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                <!-- Pagination avec un seul formulaire -->
-                <div class="bloc-pagination">
-                    {% if pageActuelle > 1 %}
-                        <button type="submit" name="page" value="{{ pageActuelle - 1 }}">Précédent</button>
-                    {% endif %}
+					<div class="bloc-result">
+						{% if droits['Créer une offre'] %}
+							<button class="postuler-btn" type="button" onclick="togglePopupAdd()">Ajouter une offre</button>
+						{% endif %}
+						{% for offre in offres %}
+							<div class="offre">
+								<div class="offre-header">
+									<h2>{{ offre.titre }}</h2>
+									<div class="offre-buttons">
+										{% if droits['Modifier une offre'] %}
+											<button id="modifier-btn" type="button" onclick="togglePopupModif({{ offre.id_offres }})">Modifier</button>
+										{% endif %}
+										{% if droits['Supprimer une offre'] %}
+											<button id="supprimer-btn" type="button" onclick="togglePopupSupr({{ offre.id_offres }})">Supprimer</button>
+										{% endif %}
+										{% if droits['Postuler à une offre'] %}
+											<button class="postuler-btn" type="button" onclick="togglePopup({{ offre.id_offres }})">Postuler</button>
+										{% endif %}
 
-                    <span>
-                        <p>Page {{ pageActuelle }} sur {{ totalPages }}</p>
-                    </span>
+									</div>
+								</div>
+								<div class="offre-details">
+									<p>
+										<strong>Entreprise :</strong>
+										{{ offre.nom }}</p>
+									<p>
+										<strong>Description :</strong>
+										{{ offre.description }}</p>
+									<p>
+										<strong>Contrat :</strong>
+										{{ offre.type_contrat }}</p>
+									<p>
+										<strong>Salaire :</strong>
+										{{ offre.salaire }}
+										€/mois</p>
+									<p>
+										<strong>Télétravail :</strong>
+										{{ offre.teletravail == 1 ? 'Oui' : 'Non' }}</p>
+									<p>
+										<strong>Durée :</strong>
+										{{ offre.duree }}
+										mois</p>
+									<p>
+										<strong>Niveau d'études :</strong>
+										{{ offre.niveau_etude }}</p>
+									<p>
+										<strong>Secteur :</strong>
+										{{ offre.secteur }}</p>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
 
-                    {% if pageActuelle < totalPages %}
-                        <button type="submit" name="page" value="{{ pageActuelle + 1 }}">Suivant</button>
-                    {% endif %}
-                </div>
-            </section>
-        </main>
-    </form>
+					<div class="bloc-pagination">
+						{% if pageActuelle > 1 %}
+							<button type="submit" name="page" value="{{ pageActuelle - 1 }}">Précédent</button>
+						{% endif %}
 
-    {% include 'footer.twig' %}
-    <script src="../../scripts/popup.js"></script>
-</body>
+						<span>
+							<p>Page
+								{{ pageActuelle }}
+								sur
+								{{ totalPages }}</p>
+						</span>
+
+						{% if pageActuelle < totalPages %}
+							<button type="submit" name="page" value="{{ pageActuelle + 1 }}">Suivant</button>
+						{% endif %}
+					</div>
+				</section>
+			</main>
+		</form>
+
+		{% include 'footer.twig' %}
+		 <script src="../../scripts/popup.js"></script>
+	</body>
 
 </html>

@@ -1,0 +1,27 @@
+<div id="popup-overlay">
+    <div class="popup-content">
+
+        <h2>Déposez votre candidature</h2>
+        <p class="subtitle">Nous sommes ravis que vous souhaitiez nous rejoindre.</p>
+
+        <form id="application-form" method="post" enctype="multipart/form-data" action="">
+
+            <div class="form-group">
+                <label for="cv">CV (PDF)</label>
+                <input type="file" id="cv" name="cv" accept=".pdf" required>
+            </div>
+
+            <div class="form-group">
+                <label for="motivation">Lettre de motivation</label>
+                <textarea id="motivation" name="motivation" rows="5" placeholder="Exprimez votre motivation..." required></textarea>
+            </div>
+
+            <input type="hidden" id="offer-id" name="offer_id">
+            <button type="submit" class="submit-btn">Envoyer ma candidature</button>
+
+        </form>
+
+        <a href="javascript:void(0)" onclick="togglePopup()" class="popup-exit">×</a>
+    
+    </div>
+</div>
