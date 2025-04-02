@@ -3,9 +3,7 @@ session_start();
 require "vendor/autoload.php";
 
 use App\Controllers\ControllerPage;
-use App\Controllers\SearchController;
 use App\Controllers\ControllerAuthentification;
-use App\Models\Wishlist;
 
 $loader = new \Twig\Loader\FilesystemLoader('src/Views');
 $twig = new \Twig\Environment($loader, [
@@ -19,9 +17,9 @@ if (isset($_GET['uri'])) {
     $uri = '/';
 }
 
-$controller = new ControllerPage($twig);
-$auth = new ControllerAuthentification();
 
+$auth = new ControllerAuthentification();
+$controller = new ControllerPage($twig);
 //Redirection login si non connecté
 if (!isset($_SESSION['user_id']) && $uri != "/login") {
     $controller->showLogin($auth);
@@ -34,7 +32,9 @@ if (!isset($_SESSION['user_id']) && $uri != "/login") {
 
 if (isset($_SESSION['user_id'])) {
     $rights_user = $auth->getRight();
+    $controller->right = $rights_user;
 }
+
 
 switch ($uri) {
     case '/':
@@ -43,6 +43,12 @@ switch ($uri) {
     case '/offer':
         $controller->showSearchOffer($rights_user);
         break;
+    case '/company':
+        $controller->showSearchEntreprise($rights_user);
+        break;
+    case '/profil-company':
+        $controller->showProfilEntreprise();
+        break;
     case '/login':
         if (isset($_SESSION['user_id'])) {
             header("Location: /");
@@ -50,16 +56,10 @@ switch ($uri) {
         }
         $controller->showLogin($auth);
         break;
-    case '/company':
-        $controller->showSearchEntreprise($rights_user);
-        break;
     case '/dashboard':
         $controller->showDashboardStudent();
         break;
     default:
         echo '404 Not Found <br>';
-        $wishlis = new Wishlist();
-        $wishall = $wishlis->getAll("20");
-        print_r($wishall);
         break;
 }

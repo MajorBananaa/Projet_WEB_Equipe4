@@ -5,8 +5,12 @@
     <ul class="navlist">
         <li><a href="/offer">Offres</a></li>
         <li><a href="/company">Entreprises</a></li>
-        <li><a href="">Trouver un étudiant</a></li>
-        <li><a href="">Trouver un pilote</a></li>
+        {% if droits['Rechercher un compte étudiant']%}
+            <li><a href="">Trouver un étudiant</a></li>
+        {% endif %}
+        {% if droits['Rechercher un compte pilote']%}
+            <li><a href="">Trouver un pilote</a></li>
+        {% endif %}
         <li><a href="/dashboard">Dashboard</a></li>
     </ul>
 

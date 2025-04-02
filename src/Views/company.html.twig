@@ -15,10 +15,10 @@
 <body>
     {% include 'header.twig' %}
     
-    <div id="popup-overlay">
+    {% if droits['Modifier une offre'] %}
+    <div id="popup-overlay-modif">
         <div class="popup-content">
             <h2>Modifier l'entreprise</h2>
-            <p class="subtitle">Nous sommes ravis que vous souhaitiez nous rejoindre.</p>
             <form id="application-form" method="post">
                 <div class="form-group">
                     <label for="id_entreprise">id_entreprise</label>
@@ -41,11 +41,15 @@
                     <input type="text" id="id_localisation" name="id_localisation">
                 </div>
 
+                <input type="hidden" id="id-etiquette" name="id-etiquette">
+                <input type="hidden" id="update" name="update" value="1">
+
                 <button type="submit" class="submit-btn">Finaliser la modification</button>
             </form>
-            <a href="javascript:void(0)" onclick="togglePopup()" class="popup-exit">×</a>
+            <a href="javascript:void(0)" onclick="togglePopupModif()" class="popup-exit">×</a>
         </div>
     </div>
+    {% endif %}
     <form method="get">
         <main class="bloc-page">
             <aside class="bloc-filters">
@@ -53,7 +57,7 @@
 
                 <!-- Type de contrat -->
                 <h3>Secteur d'activité</h3>
-                    <select name="secteur">
+                    <select name="secteur" value="{{secteur}}">
                         <option value="">-- Sélectionner --</option>
                         <option value="Informatique" {% if secteur == 'Informatique' %}selected{% endif %}>Informatique</option>
                         <option value="Sante" {% if secteur == 'Sante' %}selected{% endif %}>Santé</option>
@@ -96,21 +100,19 @@
                         <div class="offre-header">
                             <h2>{{ entreprise.nom }}</h2>
                             <div class="offre-buttons">
-                                {% if droits['Modifier une offre'] %}
+                                {% if droits['Modifier une entreprise'] %}
                                     <button id="modifier-btn">Modifier</button>
                                 {% endif %}
-                                {% if droits['Supprimer une offre'] %}
+                                {% if droits['Supprimer une entreprise'] %}
                                     <button id="supprimer-btn">Supprimer</button>
                                 {% endif %}
-                                {% if droits['Postuler à une offre'] %}
-                                    <button class="postuler-btn" type="button" onclick="togglePopup({{ offre.id }})">Postuler</button>
-                                {% endif %}
+                                <button class="postuler-btn" type="button" <button onclick="window.location.href='/profil-company?id_entreprise= {{ entreprise.id_entreprise }}'">Voir profil entreprise</button>
                             </div>
                         </div>
                         <div class="offre-details">
-                            <p><strong>Secteur :</strong> {{ secteur.secteur }}</p>
+                            <p><strong>Secteur :</strong> {{ entreprise.secteur }}</p>
                             <p><strong>Contact :</strong> {{ entreprise.mail }}</p>
-                            <p><strong>Localisation :</strong> {{ place.ville }}</p>
+                            <p><strong>Localisation :</strong> {{ entreprise.ville }}</p>
                         </div>
                     </div>
                     {% endfor %}

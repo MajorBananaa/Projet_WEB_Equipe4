@@ -5,13 +5,14 @@ use App\Models\Wishlist;
 class ControllerPage {
 
     private $templateEngine = null;
+    public $right = null;
 
     public function __construct($templateEngine) {
         $this->templateEngine = $templateEngine;
     }
 
     public function welcomePage() {
-        echo $this->templateEngine->render('index.html.twig');
+        echo $this->templateEngine->render('index.html.twig',['session' => $_SESSION, 'droits' => $this->right]);
     }
 
     public function showSearchOffer($rights_user) {
@@ -48,7 +49,7 @@ class ControllerPage {
     
 
     public function showSearchEntreprise($rights_user) {
-        /*
+        
         $search = new SearchController();
         $varSearch = $search->searchCompany();
     
@@ -58,11 +59,15 @@ class ControllerPage {
     
         $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $pageActuelle = max(1, min($pageActuelle, $totalPages));
-        $offresPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
-*/
+        $entreprisePage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
 
         echo $this->templateEngine->render('company.html.twig', [
-
+            'entreprises' => $entreprisePage,
+            'pageActuelle' => $pageActuelle,
+            'totalPages' => $totalPages,
+            'search' => $_GET['search-bar'] ?? '',
+            'secteur' => $_GET["secteur"] ?? '',
+            'droits' => $rights_user
         ]);
         
     }
@@ -79,16 +84,19 @@ class ControllerPage {
         $profil = new ProfilController($id);
         $resultat = $profil->getProfilStudent();
         echo $this->templateEngine->render('student-profil.html.twig', [
-            'student' => $resultat['student'][0],
-            'place' => $resultat['place'][0]
+            'entreprise' => $resultat
         ]);
     }
 
-    public function showProfilEntreprise($id) {
-        $company = new ProfilController($id);
-        $resultat = $company->getProfilEntreprise();
-        echo $this->templateEngine->render('entreprise-profil.html.twig', ['entreprise' => $resultat['entreprise'][0], 'offers' => $resultat['offers'], 'place' => $resultat['place'][0], 'secteur' => $resultat['secteur'][0]]);
-        // Show entreprise profile page
+    public function showProfilEntreprise() {
+        if (isset($_GET["id_entreprise"])){
+            $company = new ProfilController($_GET["id_entreprise"]);
+            $resultat = $company->getProfilEntreprise();
+            echo $this->templateEngine->render('entreprise-profil.html.twig', ['entreprise' => $resultat]);
+        } else {
+            echo "Entreprise not found";
+        }
+        
     }
 
     public function showDashboardStudent() {
@@ -99,7 +107,7 @@ class ControllerPage {
         $candidature_send = $candidat_stat->searchDashboardCandSend();
         $wish_list = $candidat_stat->searchDashboardWishList();
         echo $this->templateEngine->render('dashboard.html.twig', [
-            'nb_candidature' => $nb_candidat->nb_cand,
+            'nb_candidature' => $nb_candidat,
             'nb_candidature_recentes' => $nb_candidat_recentes->nb_cand_recentes,
             'nb_evals' =>$nb_candidat_evals->nb_eval,
             'candidature' =>$candidature_send,

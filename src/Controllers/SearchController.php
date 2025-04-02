@@ -9,7 +9,6 @@ use App\Models\Secteur;
 use App\Models\Contrat;
 use App\Models\Wishlist;
 
-
 class SearchController {
     public function searchOffer() {
         $dbOffer = new Offer();
@@ -82,24 +81,12 @@ class SearchController {
     }
 
     public function searchCompany() {
-
-
         $company = new Entreprise();
-        $entreprise = $company->getAll();
-
-
-        $lieu = new Localisation();
-        $place = $lieu->get($entreprise[0]->id_localisation);
-
-
-        $sector = new Secteur();
-        $secteur = $sector->get($entreprise[0]->id_secteur);
-        
-
-        return [
-            'entreprise' => $entreprise,
-            'place' => $place,
-            'secteur' => $secteur
+        $filters = [
+            'search' => $_GET['search-bar'] ?? '',
+            'secteur' => $_GET['secteur'] ?? "",
         ];
+
+        return $company->getAll($filters) ?: [];
     }
 }
