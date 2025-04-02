@@ -7,60 +7,13 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
         <link rel="stylesheet" href="assets/dashboard.css">
         <link rel="stylesheet" href="assets/dashboard-responsive.css">
+        <link rel="stylesheet" href="/assets/0.css">
         <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
     </head>
-    
+    <!-- header -->
+    {% include 'header.twig' %}
     <body>
         <div class="dashboard-container">
-            <div class="main-sidebar">
-                <div class="aside-header">
-                    <div class="close" id="closeSidebar">
-                        <span class="material-icons-sharp">
-                            close
-                        </span>  
-                    </div>
-                </div>
-                <div class="sidebar">
-                    <ul class="list-items">
-                        <li class="items">
-                            <a href="/">
-                                <span class="material-icons-sharp">
-                                    dashboard
-                                </span>
-                                <span>Accueil</span>
-                            </a>
-                        </li>
-                        </li><li class="items">
-                            <a href="search.html">
-                                <span class="material-icons-sharp">
-                                    dashboard
-                                </span>
-                                <span>Trouver un job</span>
-                            </a>
-                        </li><li class="items">
-                            <a href="search.html">
-                                <span class="material-icons-sharp">
-                                    dashboard
-                                </span>
-                                <span>Trouver une entreprise</span>
-                            </a>
-                        </li><li class="items">
-                            <a href="guide-utilisation.html">
-                                <span class="material-icons-sharp">
-                                    dashboard
-                                </span>
-                                <span>Guide d'utilisation</span>
-                            </a>
-                        </li><li class="items">
-                            <a href="contact.html">
-                                <span class="material-icons-sharp">
-                                    dashboard
-                                </span>
-                                <span>Contact</span>
-                            </a>
-                    </ul>
-                </div>
-            </div>
             <div class="main-container">
 
                 <!--------CARD-->
@@ -173,28 +126,6 @@
 
             </div>
             <div class="extrabar">
-                <header class="header-right">
-                    <button class="toggle-menu-btn" id="openSidebar">
-                        <span class="material-icons-sharp">menu</span>
-                    </button>
-
-                    <div class="toggle-theme">
-                        <span class="material-icons-sharp active">
-                            light_mode
-                        </span>
-                        <span class="material-icons-sharp">dark_mode</span>
-                    </div>
-
-                    <div class="profile">
-                        <div class="profile-info">
-                            <p>Salut,</p>
-                            <strong>étudiant</strong>
-                        </div>
-                        <div class="profile-image">
-                            <img src="#" alt="" width="100%"> <!---Image à rajouter-->
-                        </div>
-                    </div>
-                </header>
 
                 <div class="recent-updates">
                     <h2>Wish-list</h2>
