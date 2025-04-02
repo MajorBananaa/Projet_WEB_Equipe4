@@ -23,3 +23,17 @@ function togglePopupSupr(id) {
 
   document.getElementById("id-supr").value = id;
 };
+
+function togglePopupAddWish(id) {
+  const popup = document.getElementById("popup-overlay-add-wish");
+  popup.classList.toggle("open");
+
+  document.getElementById("offer-id-addWish").value = id;
+}
+function togglePopupSuprWish(id) {
+  const popup = document.getElementById("popup-overlay-supr-wish");
+  popup.classList.toggle("open");
+
+  document.getElementById("offer-id-suprWish").value = id;
+}
+

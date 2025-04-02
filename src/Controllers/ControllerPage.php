@@ -1,5 +1,7 @@
 <?php 
 namespace App\Controllers;
+
+use App\Models\Wishlist; 
 class ControllerPage {
 
     private $templateEngine = null;
@@ -21,6 +23,9 @@ class ControllerPage {
         $varSearch = $search->searchOffer();
         $pagination = $search->paginate($varSearch);
         
+        $dbWish = new Wishlist();
+        $wishOffers = $dbWish->getAll($_SESSION["user_id"]);
+        
         echo $this->templateEngine->render('offer.html.twig', [
             'offres' => $pagination['data'],
             'pageActuelle' => $pagination['currentPage'],
@@ -32,6 +37,7 @@ class ControllerPage {
             'duree' => $_GET['duree'] ?? '',
             'niveau_etude' => $_GET['niveau_etude'] ?? '',
             'droits' => $this->right
+            'wishlist' => $wishOffers
         ]);
     }
 

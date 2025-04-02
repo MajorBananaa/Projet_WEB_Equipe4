@@ -4,7 +4,6 @@ require "vendor/autoload.php";
 
 use App\Controllers\ControllerPage;
 use App\Controllers\ControllerAuthentification;
-use App\Models\Utilisateur;
 
 $loader = new \Twig\Loader\FilesystemLoader('src/Views');
 $twig = new \Twig\Environment($loader, [
@@ -20,8 +19,8 @@ if (isset($_GET['uri'])) {
 
 
 $auth = new ControllerAuthentification();
-
 $controller = new ControllerPage($twig);
+
 //Redirection login si non connecté
 if (!isset($_SESSION['user_id']) && $uri != "/login") {
     $controller->showLogin($auth);
@@ -68,8 +67,5 @@ switch ($uri) {
         break;
     default:
         echo '404 Not Found <br>';
-        $user = new Utilisateur();
-        $filters['search'] = "rog";
-        print_r($user->getAll($filters));
         break;
 }
