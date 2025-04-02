@@ -20,6 +20,7 @@ if (isset($_GET['uri'])) {
 
 
 $auth = new ControllerAuthentification();
+
 $controller = new ControllerPage($twig);
 //Redirection login si non connecté
 if (!isset($_SESSION['user_id']) && $uri != "/login") {
@@ -32,8 +33,7 @@ if (!isset($_SESSION['user_id']) && $uri != "/login") {
 }
 
 if (isset($_SESSION['user_id'])) {
-    $rights_user = $auth->getRight();
-    $controller->right = $rights_user;
+    $controller->set($auth->getRight());
 }
 
 
@@ -42,10 +42,16 @@ switch ($uri) {
         $controller->welcomePage();
         break;
     case '/offer':
-        $controller->showSearchOffer($rights_user);
+        $controller->showSearchOffer();
         break;
     case '/company':
-        $controller->showSearchEntreprise($rights_user);
+        $controller->showSearchEntreprise();
+        break;
+    case '/student':
+        $controller->showSearchStudent();
+        break;
+    case '/pilote':
+        $controller->showSearchPilote();
         break;
     case '/profil-company':
         $controller->showProfilEntreprise();

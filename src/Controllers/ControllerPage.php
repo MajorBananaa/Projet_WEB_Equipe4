@@ -9,11 +9,14 @@ class ControllerPage {
         $this->templateEngine = $templateEngine;
     }
 
+    public function set($rights_user) : void {
+        $this->right = $rights_user;
+    }
     public function welcomePage() {
         echo $this->templateEngine->render('index.html.twig',['session' => $_SESSION, 'droits' => $this->right]);
     }
 
-    public function showSearchOffer($rights_user) {
+    public function showSearchOffer() {
         $search = new SearchController();
         $varSearch = $search->searchOffer();
 
@@ -36,14 +39,14 @@ class ControllerPage {
             'teletravail' => $_GET['teletravail'] ?? '',
             'duree' => $_GET['duree'] ?? '',
             'niveau_etude' => $_GET['niveau_etude'] ?? '',
-            'droits' => $rights_user
+            'droits' => $this->right
         ]);
         
     }
     
     
 
-    public function showSearchEntreprise($rights_user) {
+    public function showSearchEntreprise() {
         
         $search = new SearchController();
         $varSearch = $search->searchCompany();
@@ -62,7 +65,7 @@ class ControllerPage {
             'totalPages' => $totalPages,
             'search' => $_GET['search-bar'] ?? '',
             'secteur' => $_GET["secteur"] ?? '',
-            'droits' => $rights_user
+            'droits' => $this->right
         ]);
         
     }
