@@ -4,7 +4,6 @@ require "vendor/autoload.php";
 
 use App\Controllers\ControllerPage;
 use App\Controllers\ControllerAuthentification;
-use App\Models\Entreprise;
 
 $loader = new \Twig\Loader\FilesystemLoader('src/Views');
 $twig = new \Twig\Environment($loader, [
