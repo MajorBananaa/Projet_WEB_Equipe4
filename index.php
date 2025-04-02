@@ -3,8 +3,8 @@ session_start();
 require "vendor/autoload.php";
 
 use App\Controllers\ControllerPage;
-use App\Controllers\SearchController;
 use App\Controllers\ControllerAuthentification;
+use App\Models\Entreprise;
 
 $loader = new \Twig\Loader\FilesystemLoader('src/Views');
 $twig = new \Twig\Environment($loader, [
@@ -57,5 +57,9 @@ switch ($uri) {
         break;
     default:
         echo '404 Not Found <br>';
+
+        $new = new Entreprise();
+        $test = $new->getAll();
+        print_r($test);
         break;
 }
