@@ -8,23 +8,10 @@ class ControllerPage {
         $this->templateEngine = $templateEngine;
     }
 
-    
-    /**
-     * Affiche la page 'index.html.twig'
-     *
-     * 
-     */
     public function welcomePage() {
         echo $this->templateEngine->render('index.html.twig');
     }
 
-
-    
-    /**
-     * affiche la page 'offer.html.twig' avec toutes les variables nécéssaire
-     *(contrat, offres, teletravail etc..)
-     * avec un conteur de page pour l'affichage des offres de l'entreprise
-     */
     public function showSearchOffer($rights_user) {
         $search = new SearchController();
         $varSearch = $search->searchOffer();
@@ -53,14 +40,10 @@ class ControllerPage {
         
     }
     
-    /**
-     * affiche la page 'company.html.twig' avec toutes les variables nécéssaire
-     *(contrat, offres, teletravail etc..)
-     * avec un conteur de page pour l'affichage des offres de l'entreprise
-     */
+    
 
     public function showSearchEntreprise($rights_user) {
-        /*
+        
         $search = new SearchController();
         $varSearch = $search->searchCompany();
     
@@ -70,11 +53,15 @@ class ControllerPage {
     
         $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $pageActuelle = max(1, min($pageActuelle, $totalPages));
-        $offresPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
-*/
+        $entreprisePage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
 
         echo $this->templateEngine->render('company.html.twig', [
-
+            'entreprises' => $entreprisePage,
+            'pageActuelle' => $pageActuelle,
+            'totalPages' => $totalPages,
+            'search' => $_GET['search-bar'] ?? '',
+            'secteur' => $_GET["secteur"] ?? '',
+            'droits' => $rights_user
         ]);
         
     }
@@ -96,15 +83,10 @@ class ControllerPage {
         ]);
     }
 
-    public function showProfilEntreprise() {
-        if (isset($_GET['identreprise'])){
-            $company = new ProfilController($_GET['identreprise']);
-            $resultat = $company->getProfilEntreprise();
-            echo $this->templateEngine->render('entreprise-profil.html.twig', ['entreprise' => $resultat[0], 'offres' => $resultat[1]]);
-        } else{
-            echo '404 Not Found <br>';
-
-        }
+    public function showProfilEntreprise($id) {
+        $company = new ProfilController($id);
+        $resultat = $company->getProfilEntreprise();
+        echo $this->templateEngine->render('entreprise-profil.html.twig', ['entreprise' => $resultat['entreprise'][0], 'offers' => $resultat['offers'], 'place' => $resultat['place'][0], 'secteur' => $resultat['secteur'][0]]);
     }
 
     public function showDashboardStudent() {
