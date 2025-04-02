@@ -21,10 +21,10 @@
         <div class="main-entreprise">
             <div class="header-entreprise">
                 <div class="header-img">
-                    <img src="{{entreprise.chemin_profil_entreprise}}" alt="">
+                    <img src="../../images/cesi-logo.png" alt="">
                 </div>
                 <div class="name-entreprise">
-                    <h2>{{entreprise.nom}}</h2>
+                    <h2>nom entreprise</h2>
                 </div>
             </div>
             <div class="type-entreprise">
@@ -34,7 +34,7 @@
                     </div>
                     <div class="type-text">
                         <p class="type-title">Contact</p>
-                        <p class="type-response">{{entreprise.mail}}</p>
+                        <p class="type-response">cesi@email</p>
                     </div>
 
                 </div>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="type-text">
                         <p class="type-title">Secteur d'activité</p>
-                        <p class="type-response">{{secteur.secteur}}</p>
+                        <p class="type-response">scolaire</p>
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
                     </div>
                     <div class="type-text">
                         <p class="type-title">Localisation</p>
-                        <p class="type-response">{{place.ville}}</p>
+                        <p class="type-response">rouen</p>
                     </div>
                 </div>
             </div>
@@ -63,29 +63,28 @@
 
 
             <div class="description-entreprise">
-                <p>{{entreprise.description}}</p>
+                <p>je suis une école</p>
             </div>
 
 
 
             <div class="offre-entreprise">
                 <h2>Offre récente de l'entreprise</h2>
-                {% for offre in offers %}
+                
                 <div class="offre">
                     <div class="offre-header">
-                        <h2>{{offre.titre}}</h2>
+                        <h2>stage devops bac+2</h2>
                         <button class="postuler-btn">Postuler</button>
                     </div>
                     <div class="offre-details">
-                        <p><strong>Entreprise :</strong> {{entreprise.nom}}</p>
-                        <p><strong>Contrat :</strong> {{offre.contrat_nom}}</p>
-                        <p><strong>Durée :</strong> {{offre.duree}}</p>
-                        <p><strong>Salaire :</strong> {{offre.salaire}}</p>
-                        <p><strong>Télétravail :</strong> {{ offre.teletravail ? 'Oui' : 'Non' }}</p>
-                        <p><strong>Taille :</strong> Moyenne</p>
+                        <p><strong>Entreprise :</strong> cesi</p>
+                        <p><strong>Contrat :</strong> stage</p>
+                        <p><strong>Durée :</strong> 4 mois</p>
+                        <p><strong>Salaire :</strong> 695</p>
+                        <p><strong>Télétravail :</strong> non</p>
                     </div>
                 </div>
-                {% endfor %}
+
             </div>
         </div>
 
