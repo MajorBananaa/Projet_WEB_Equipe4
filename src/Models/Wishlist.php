@@ -4,7 +4,9 @@ namespace App\Models;
 use App\Models\Database;
 
 class Wishlist extends Database {
-    public function add($data) {}
+    public function add($data) {
+        
+    }
     
     public function remove($id) {}
     

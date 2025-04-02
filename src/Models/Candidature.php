@@ -19,7 +19,7 @@ class Candidature extends Database {
     public function update($data) {}
     
     public function get($id) {
-        $sql = "SELECT t1.id_postuler, t1.date_candidature, t1.chemin_cv, t1.chemin_lettre_motivation,
+        $sql = "SELECT t1.id_postuler, t1.date_candidature, t1.chemin_cv, t1.lettre_motivation,
                     t2.titre AS offre_titre, t3.nom AS utilisateur_nom
                 FROM candidature t1
                 JOIN offre t2 ON t1.id_offres = t2.id_offres
@@ -36,7 +36,7 @@ class Candidature extends Database {
     }
     
     public function getAll() {
-        $sql = "SELECT t1.id_postuler, t1.date_candidature, t1.chemin_cv, t1.chemin_lettre_motivation,
+        $sql = "SELECT t1.id_postuler, t1.date_candidature, t1.chemin_cv, t1.lettre_motivation,
                        t2.titre AS offre_titre, t3.nom AS utilisateur_nom
                 FROM candidature t1
                 JOIN offre t2 ON t1.id_offres = t2.id_offres

@@ -10,14 +10,17 @@ class Entreprise extends Database {
     
     public function update($data) {}
     
-    public function get($id) {
-        $sql = "SELECT * FROM entreprise WHERE id_entreprise = :id'";
-        
+    public function get($var) {
+        $sql = "SELECT t1.id_entreprise, t1.nom, t1.description, t1.mail, t1.chemin_profil_entreprise, t2.ville, t3.secteur 
+        FROM entreprise t1
+        JOIN localisation t2 ON t1.id_localisation = t2.id_localisation
+        JOIN secteur t3 on t1.id_secteur  = t3.id_secteur
+        WHERE id_entreprise = :var";
+ 
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);
-        $result = $this->execute(["id" => $id], false);
+        $result = $this->execute(['var' => $var], false);
         $this->close();
-        
         return $result ?: [];
     }
     
