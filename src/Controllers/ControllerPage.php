@@ -3,6 +3,7 @@ namespace App\Controllers;
 class ControllerPage {
 
     private $templateEngine = null;
+    public $right = null;
 
     public function __construct($templateEngine) {
         $this->templateEngine = $templateEngine;
@@ -15,7 +16,7 @@ class ControllerPage {
      * 
      */
     public function welcomePage() {
-        echo $this->templateEngine->render('index.html.twig');
+        echo $this->templateEngine->render('index.html.twig',['session' => $_SESSION, 'droits' => $this->right]);
     }
 
 
