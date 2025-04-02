@@ -11,73 +11,80 @@ class ControllerPage {
         $this->templateEngine = $templateEngine;
     }
 
+    public function set($rights_user) : void {
+        $this->right = $rights_user;
+    }
     public function welcomePage() {
         echo $this->templateEngine->render('index.html.twig',['session' => $_SESSION, 'droits' => $this->right]);
     }
 
-    public function showSearchOffer($rights_user) {
+    public function showSearchOffer() {
         $search = new SearchController();
         $varSearch = $search->searchOffer();
+        $pagination = $search->paginate($varSearch);
         
         $dbWish = new Wishlist();
         $wishOffers = $dbWish->getAll($_SESSION["user_id"]);
         
-        $offresParPage = 10;
-        $totalOffres = count($varSearch);
-        $totalPages = max(1, ceil($totalOffres / $offresParPage));
-    
-        $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $pageActuelle = max(1, min($pageActuelle, $totalPages));
-        $offresPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
-        
         echo $this->templateEngine->render('offer.html.twig', [
-            'offres' => $offresPage,
-            'pageActuelle' => $pageActuelle,
-            'totalPages' => $totalPages,
+            'offres' => $pagination['data'],
+            'pageActuelle' => $pagination['currentPage'],
+            'totalPages' => $pagination['totalPages'],
             'search' => $_GET['search-bar'] ?? '',
             'contrats' => $_GET['contrat'] ?? [],
             'salaire' => $_GET['salaire'] ?? 0,
             'teletravail' => $_GET['teletravail'] ?? '',
             'duree' => $_GET['duree'] ?? '',
             'niveau_etude' => $_GET['niveau_etude'] ?? '',
-            'droits' => $rights_user,
+            'droits' => $this->right
             'wishlist' => $wishOffers
         ]);
-        
     }
-    
-    
 
-    public function showSearchEntreprise($rights_user) {
-        
+    public function showSearchEntreprise() {
         $search = new SearchController();
         $varSearch = $search->searchCompany();
-    
-        $offresParPage = 10;
-        $totalOffres = count($varSearch);
-        $totalPages = max(1, ceil($totalOffres / $offresParPage));
-    
-        $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $pageActuelle = max(1, min($pageActuelle, $totalPages));
-        $entreprisePage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
-
-        echo $this->templateEngine->render('company.html.twig', [
-            'entreprises' => $entreprisePage,
-            'pageActuelle' => $pageActuelle,
-            'totalPages' => $totalPages,
-            'search' => $_GET['search-bar'] ?? '',
-            'secteur' => $_GET["secteur"] ?? '',
-            'droits' => $rights_user
-        ]);
+        $pagination = $search->paginate($varSearch);
         
+        echo $this->templateEngine->render('company.html.twig', [
+            'entreprises' => $pagination['data'],
+            'pageActuelle' => $pagination['currentPage'],
+            'totalPages' => $pagination['totalPages'],
+            'search' => $_GET['search-bar'] ?? '',
+            'secteur' => $_GET['secteur'] ?? '',
+            'droits' => $this->right
+        ]);
     }
 
     public function showSearchStudent() {
-        // Show search student page
+        $search = new SearchController();
+        $varSearch = $search->searchUser(id_role: 3);
+        $pagination = $search->paginate($varSearch);
+        
+        echo $this->templateEngine->render('search-user.html.twig', [
+            'users' => $pagination['data'],
+            'user_name' => "étudiant",
+            'pageActuelle' => $pagination['currentPage'],
+            'totalPages' => $pagination['totalPages'],
+            'search' => $_GET['search-bar'] ?? '',
+            'droits' => $this->right
+        ]);
     }
 
+
     public function showSearchPilote() {
-        // Show search pilote page
+        $search = new SearchController();
+        $varSearch = $search->searchUser(id_role: 2);
+        $pagination = $search->paginate($varSearch);
+        
+        echo $this->templateEngine->render('search-user.html.twig', [
+            'users' => $pagination['data'],
+            'user_name' => "pilote",
+            'pageActuelle' => $pagination['currentPage'],
+            'totalPages' => $pagination['totalPages'],
+            'search' => $_GET['search-bar'] ?? '',
+            'droits' => $this->right
+        ]);
     }
 
     public function showProfilStudent($id) {

@@ -21,8 +21,8 @@ function togglePopupSupr(id) {
   const popup = document.getElementById("popup-overlay-supr");
   popup.classList.toggle("open");
 
-  document.getElementById("offer-id-supr").value = id;
-}
+  document.getElementById("id-supr").value = id;
+};
 
 function togglePopupAddWish(id) {
   const popup = document.getElementById("popup-overlay-add-wish");
@@ -36,3 +36,4 @@ function togglePopupSuprWish(id) {
 
   document.getElementById("offer-id-suprWish").value = id;
 }
+

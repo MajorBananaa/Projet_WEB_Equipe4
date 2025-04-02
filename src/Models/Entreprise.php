@@ -6,7 +6,14 @@ use App\Models\Database;
 class Entreprise extends Database {
     public function add($data) {}
     
-    public function remove($id) {}
+    public function remove($id) {
+        $sql = "DELETE FROM entreprise WHERE id_entreprise = ?;".
+
+        $this->connect();
+        $this->sth = $this->dbh->prepare($sql);
+        $result = $this->execute([$id]);
+        $this->close();
+    }
     
     public function update($data) {}
     

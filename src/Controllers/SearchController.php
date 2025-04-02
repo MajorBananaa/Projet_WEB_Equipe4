@@ -3,13 +3,23 @@ namespace App\Controllers;
 use App\Models\Candidature;
 use App\Models\Offer;
 use App\Models\Entreprise;
-use App\Models\Etudiant;
-use App\Models\Localisation;
-use App\Models\Secteur;
-use App\Models\Contrat;
+use App\Models\Utilisateur;
 use App\Models\Wishlist;
 
 class SearchController {
+    public function paginate($data, $perPage = 10) {
+        $totalItems = count($data);
+        $totalPages = max(1, ceil($totalItems / $perPage));
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $currentPage = max(1, min($currentPage, $totalPages));
+        $pagedData = array_slice($data, ($currentPage - 1) * $perPage, $perPage);
+        
+        return [
+            'data' => $pagedData,
+            'currentPage' => $currentPage,
+            'totalPages' => $totalPages
+        ];
+    }
     public function searchOffer() {
         $dbOffer = new Offer();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,8 +32,8 @@ class SearchController {
                     $candidature = new Candidature();
                     $candidature->add([$_POST["offer_id"], $_SESSION["user_id"], $pathFile, $_POST["motivation"]]);
                 }
-            } elseif (isset($_POST["offer_id-supr"]) && isset($_POST["remove"])) {
-                $dbOffer->remove($_POST["offer_id-supr"]);
+            } elseif (isset($_POST["id-supr"]) && isset($_POST["remove"])) {
+                $dbOffer->remove($_POST["id-supr"]);
             } elseif (isset($_POST["add"])) {
                 $offre = [
                     'titre' => $_POST['titre'] ?? 'Titre par défaut',
@@ -82,11 +92,37 @@ class SearchController {
 
     public function searchCompany() {
         $company = new Entreprise();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if  (isset($_POST["id-supr"]) && isset($_POST["remove"])) {
+                $company->remove($_POST["id-supr"]);
+            }
+            $_POST = [];
+        }
+
         $filters = [
             'search' => $_GET['search-bar'] ?? '',
             'secteur' => $_GET['secteur'] ?? "",
         ];
 
         return $company->getAll($filters) ?: [];
+    }
+
+    public function searchUser($id_role) {
+        $user = new Utilisateur();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if  (isset($_POST["id-supr"]) && isset($_POST["remove"])) {
+                $user->remove($_POST["id-supr"]);
+            }
+            $_POST = [];
+        }
+
+        $filters = [
+            'id_role' => $id_role,
+            'search' => $_GET['search-bar'] ?? '',
+        ];
+
+        return $user->getAll($filters) ?: [];
     }
 }
