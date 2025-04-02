@@ -67,11 +67,27 @@ class ControllerPage {
             'secteur' => $_GET["secteur"] ?? '',
             'droits' => $this->right
         ]);
-        
     }
 
     public function showSearchStudent() {
-        // Show search student page
+        $search = new SearchController();
+        $varSearch = $search->searchStudent();
+    
+        $offresParPage = 10;
+        $totalOffres = count($varSearch);
+        $totalPages = max(1, ceil($totalOffres / $offresParPage));
+    
+        $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $pageActuelle = max(1, min($pageActuelle, $totalPages));
+        $studentPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
+
+        echo $this->templateEngine->render('search-student.html.twig', [
+            'students' => $studentPage,
+            'pageActuelle' => $pageActuelle,
+            'totalPages' => $totalPages,
+            'search' => $_GET['search-bar'] ?? '',
+            'droits' => $this->right
+        ]);
     }
 
     public function showSearchPilote() {

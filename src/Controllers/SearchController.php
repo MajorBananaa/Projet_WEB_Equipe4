@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Models\Candidature;
 use App\Models\Offer;
 use App\Models\Entreprise;
+use App\Models\Utilisateur;
 
 class SearchController {
     public function searchOffer() {
@@ -72,5 +73,15 @@ class SearchController {
         ];
 
         return $company->getAll($filters) ?: [];
+    }
+
+    public function searchStudent() {
+        $user = new Utilisateur();
+        $filters = [
+            'id_role' => 3,
+            'search' => $_GET['search-bar'] ?? '',
+        ];
+
+        return $user->getAll($filters) ?: [];
     }
 }

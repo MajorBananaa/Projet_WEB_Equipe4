@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etudiant</title>
+    <link rel="stylesheet" href="/assets/0.css">
+    <link rel="stylesheet" href="/assets/search.css">
+    <link rel="stylesheet" href="/assets/overlay.css">
+
+    <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
+</head>
+
+<body>
+    {% include 'header.twig' %}
+    
+    <div id="popup-overlay">
+        <div class="popup-content">
+            <h2>Modifier l'étudiant</h2>
+            <p class="subtitle">Nous sommes ravis que vous souhaitiez nous rejoindre.</p>
+            <form id="application-form" method="post">
+                <div class="form-group">
+                    <label for="id_utilisateur">id_utilisateur</label>
+                    <input type="text" id="id_utilisateur" name="id_utilisateur">
+                </div>
+                <div class="form-group">
+                    <label for="nom">nom</label>
+                    <input type="text" id="nom" name="nom">
+                </div>
+                <div class="form-group">
+                    <label for="prenom">prenom</label>
+                    <input type="text" id="prenom" name="prenom">
+                </div>
+                <div class="form-group">
+                    <label for="description">description</label>
+                    <input type="text" id="description" name="description">
+                </div>
+                <div class="form-group">
+                    <label for="email">email</label>
+                    <input type="text" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="telephone">telephone</label>
+                    <input type="text" id="telephone" name="telephone">
+                </div>
+                <div class="form-group">
+                    <label for="mots_de_passe">mots_de_passe</label>
+                    <input type="text" id="mots_de_passe" name="mots_de_passe">
+                </div>
+                <div class="form-group">
+                    <label for="email">chemin_profil_picture</label>
+                    <input type="text" id="chemin_profil_picture" name="chemin_profil_picture">
+                </div>
+
+                <button type="submit" class="submit-btn">Finaliser la modification</button>
+            </form>
+            <a href="javascript:void(0)" onclick="togglePopup()" class="popup-exit">×</a>
+        </div>
+    </div>
+    <form method="get">
+        <main class="bloc-page">
+
+            <section class="bloc-search">
+                <div class="bloc-search-bar">
+                    <input type="text" placeholder="Rechercher un stage" name="search-bar" value="{{ search }}">
+                </div>
+                
+                <div class="bloc-result">
+                <button class="postuler-btn" type="button" onclick="togglePopupAdd()">Ajouter un élève</button>
+                    {% for student in students %}
+                    <div class="offre">
+                        <div class="offre-header">
+                            <h2>{{ student.nom }} {{ student.prenom }}</h2>
+                            <div class="offre-buttons">
+                                <button id="modifier-btn">Modifier</button>
+                                <button id="supprimer-btn">Supprimer</button>
+                                <button class="postuler-btn" type="button" onclick="togglePopup({{ offre.id }})">Postuler</button>
+                            </div>
+                        </div>
+                        <div class="offre-details">
+                            <p><strong>Mail :</strong> {{ student.email }}</p>
+                            <p><strong>Telephone :</strong> {{ student.telephone }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="bloc-pagination">
+                    {% if pageActuelle > 1 %}
+                        <button type="submit" name="page" value="{{ pageActuelle - 1 }}">Précédent</button>
+                    {% endif %}
+
+                    <span>
+                        <p>Page {{ pageActuelle }} sur {{ totalPages }}</p>
+                    </span>
+
+                    {% if pageActuelle < totalPages %}
+                        <button type="submit" name="page" value="{{ pageActuelle + 1 }}">Suivant</button>
+                    {% endif %}
+                </div>
+            </section>
+        </main>
+    </form>
+
+    {% include 'footer.twig' %}
+    <script src="../../scripts/popup.js"></script>
+</body>
+
+</html>

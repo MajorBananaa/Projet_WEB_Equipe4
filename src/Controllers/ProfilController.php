@@ -4,9 +4,9 @@ namespace App\Controllers;
 use App\Models\Etudiant;
 use App\Models\Localisation;
 use App\Models\Entreprise;
-use App\Models\Offre;
 use App\Models\Secteur;
 use App\Models\Contrat;
+use App\Models\Utilisateur;
 
 
 
@@ -20,7 +20,7 @@ class ProfilController {
     }
 
     public function getProfilStudent() {
-        $etudiant = new Etudiant();
+        $etudiant = new Utilisateur();
         $student = $etudiant->get($this->id);
         $lieu = new Localisation();
         $place = $lieu->get($student[0]->id_localisation);
