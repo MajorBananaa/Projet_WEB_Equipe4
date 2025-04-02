@@ -42,15 +42,15 @@ switch ($uri) {
     case '/offer':
         $controller->showSearchOffer($rights_user);
         break;
+    case '/entreprise':
+        $controller->showSearchEntreprise($rights_user);
+        break;
     case '/login':
         if (isset($_SESSION['user_id'])) {
             header("Location: /");
             exit();
         }
         $controller->showLogin($auth);
-        break;
-    case '/company':
-        $controller->showSearchEntreprise($rights_user);
         break;
     case '/dashboard':
         $controller->showDashboardStudent();
