@@ -3,8 +3,8 @@ session_start();
 require "vendor/autoload.php";
 
 use App\Controllers\ControllerPage;
-use App\Controllers\SearchController;
 use App\Controllers\ControllerAuthentification;
+use App\Models\Entreprise;
 
 $loader = new \Twig\Loader\FilesystemLoader('src/Views');
 $twig = new \Twig\Environment($loader, [
@@ -44,6 +44,9 @@ switch ($uri) {
     case '/offer':
         $controller->showSearchOffer($rights_user);
         break;
+    case '/entreprise':
+        $controller->showSearchEntreprise($rights_user);
+        break;
     case '/login':
         if (isset($_SESSION['user_id'])) {
             header("Location: /");
@@ -51,17 +54,10 @@ switch ($uri) {
         }
         $controller->showLogin($auth);
         break;
-    case '/company':
-        $controller->showSearchEntreprise($rights_user);
-        break;
     case '/dashboard':
         $controller->showDashboardStudent();
         break;
     default:
-        //echo '404 Not Found <br>';
-        //break;
-        $controller->showProfilEntreprise();
-        
+        echo '404 Not Found <br>';
         break;
 }
-

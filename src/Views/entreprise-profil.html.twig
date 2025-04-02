@@ -45,7 +45,7 @@
                     </div>
                     <div class="type-text">
                         <p class="type-title">Secteur d'activité</p>
-                        <p class="type-response">{{entreprise.secteur}}</p>
+                        <p class="type-response">{{secteur.secteur}}</p>
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
                     </div>
                     <div class="type-text">
                         <p class="type-title">Localisation</p>
-                        <p class="type-response">{{entreprise.ville}}</p>
+                        <p class="type-response">{{place.ville}}</p>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
 
             <div class="offre-entreprise">
                 <h2>Offre récente de l'entreprise</h2>
-                {% for offre in offres %}
+                {% for offre in offers %}
                 <div class="offre">
                     <div class="offre-header">
                         <h2>{{offre.titre}}</h2>
