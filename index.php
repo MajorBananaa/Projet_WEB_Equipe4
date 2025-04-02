@@ -56,6 +56,9 @@ switch ($uri) {
         $controller->showDashboardStudent();
         break;
     default:
-        echo '404 Not Found <br>';
+        //echo '404 Not Found <br>';
+        //break;
+        $controller->showProfilEntreprise(25);
         break;
 }
+
