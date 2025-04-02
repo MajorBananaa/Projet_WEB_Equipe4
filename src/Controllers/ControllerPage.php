@@ -36,7 +36,7 @@ class ControllerPage {
             'teletravail' => $_GET['teletravail'] ?? '',
             'duree' => $_GET['duree'] ?? '',
             'niveau_etude' => $_GET['niveau_etude'] ?? '',
-            'droits' => $this->right
+            'droits' => $this->right,
             'wishlist' => $wishOffers
         ]);
     }
