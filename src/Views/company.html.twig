@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entreprises</title>
+    <link rel="stylesheet" href="/assets/0.css">
+    <link rel="stylesheet" href="/assets/search.css">
+    <link rel="stylesheet" href="/assets/overlay.css">
+
+    <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
+</head>
+
+<body>
+    {% include 'header.twig' %}
+    
+    <div id="popup-overlay">
+        <div class="popup-content">
+            <h2>Modifier l'entreprise</h2>
+            <p class="subtitle">Nous sommes ravis que vous souhaitiez nous rejoindre.</p>
+            <form id="application-form" method="post">
+                <div class="form-group">
+                    <label for="id_entreprise">id_entreprise</label>
+                    <input type="text" id="id_entreprise" name="id_entreprise">
+                </div>
+                <div class="form-group">
+                    <label for="nom">nom</label>
+                    <input type="text" id="nom" name="nom">
+                </div>
+                <div class="form-group">
+                    <label for="description">description</label>
+                    <input type="text" id="description" name="description">
+                </div>
+                <div class="form-group">
+                    <label for="mail">mail</label>
+                    <input type="text" id="mail" name="mail">
+                </div>
+                <div class="form-group">
+                    <label for="id_localisation">id_localisation</label>
+                    <input type="text" id="id_localisation" name="id_localisation">
+                </div>
+
+                <button type="submit" class="submit-btn">Finaliser la modification</button>
+            </form>
+            <a href="javascript:void(0)" onclick="togglePopup()" class="popup-exit">×</a>
+        </div>
+    </div>
+    <form method="get">
+        <main class="bloc-page">
+            <aside class="bloc-filters">
+                <h2>Filtres</h2>
+
+                <!-- Type de contrat -->
+                <h3>Secteur d'activité</h3>
+                    <select name="secteur">
+                        <option value="">-- Sélectionner --</option>
+                        <option value="Informatique" {% if secteur == 'Informatique' %}selected{% endif %}>Informatique</option>
+                        <option value="Sante" {% if secteur == 'Sante' %}selected{% endif %}>Santé</option>
+                        <option value="Agroalimentaire" {% if secteur == 'Agroalimentaire' %}selected{% endif %}>Agroalimentaire</option>
+                        <option value="Marketing" {% if secteur == 'Marketing' %}selected{% endif %}>Marketing</option>
+                        <option value="Finance" {% if secteur == 'Finance' %}selected{% endif %}>Finance</option>
+                        <option value="Transport" {% if secteur == 'Transport' %}selected{% endif %}>Transport</option>
+                        <option value="Armée" {% if secteur == 'Armée' %}selected{% endif %}>Armée</option>
+                        <option value="Énergie" {% if secteur == 'Énergie' %}selected{% endif %}>Énergie</option>
+                        <option value="Éducation" {% if secteur == 'Éducation' %}selected{% endif %}>Éducation</option>
+                        <option value="Tourisme" {% if secteur == 'Tourisme' %}selected{% endif %}>Tourisme</option>
+                        <option value="BTP" {% if secteur == 'BTP' %}selected{% endif %}>BTP</option>
+                        <option value="Télécoms" {% if secteur == 'Télécoms' %}selected{% endif %}>Télécoms</option>
+                        <option value="Assurance" {% if secteur == 'Assurance' %}selected{% endif %}>Assurance</option>
+                        <option value="Aéronautique" {% if secteur == 'Aéronautique' %}selected{% endif %}>Aéronautique</option>
+                        <option value="Automobile" {% if secteur == 'Automobile' %}selected{% endif %}>Automobile</option>
+                        <option value="Banque" {% if secteur == 'Banque' %}selected{% endif %}>Banque</option>
+                        <option value="Immobilier" {% if secteur == 'Immobilier' %}selected{% endif %}>Immobilier</option>
+                        <option value="Événementiel" {% if secteur == 'Événementiel' %}selected{% endif %}>Événementiel</option>
+                        <option value="Mode" {% if secteur == 'Mode' %}selected{% endif %}>Mode</option>
+                        <option value="Logistique" {% if secteur == 'Logistique' %}selected{% endif %}>Logistique</option>
+                    </select>
+
+
+                
+                <div class="bloc-pagination">
+                    <button type="submit">Appliquer</button>
+                </div>
+            </aside>
+
+
+            <section class="bloc-search">
+                <div class="bloc-search-bar">
+                    <input type="text" placeholder="Rechercher un stage" name="search-bar" value="{{ search }}">
+                </div>
+
+                <div class="bloc-result">
+                    {% for entreprise in entreprises %}
+                    <div class="offre">
+                        <div class="offre-header">
+                            <h2>{{ entreprise.nom }}</h2>
+                            <div class="offre-buttons">
+                                {% if droits['Modifier une offre'] %}
+                                    <button id="modifier-btn">Modifier</button>
+                                {% endif %}
+                                {% if droits['Supprimer une offre'] %}
+                                    <button id="supprimer-btn">Supprimer</button>
+                                {% endif %}
+                                {% if droits['Postuler à une offre'] %}
+                                    <button class="postuler-btn" type="button" onclick="togglePopup({{ offre.id }})">Postuler</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="offre-details">
+                            <p><strong>Secteur :</strong> {{ secteur.secteur }}</p>
+                            <p><strong>Contact :</strong> {{ entreprise.mail }}</p>
+                            <p><strong>Localisation :</strong> {{ place.ville }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- Pagination avec un seul formulaire -->
+                <div class="bloc-pagination">
+                    {% if pageActuelle > 1 %}
+                        <button type="submit" name="page" value="{{ pageActuelle - 1 }}">Précédent</button>
+                    {% endif %}
+
+                    <span>
+                        <p>Page {{ pageActuelle }} sur {{ totalPages }}</p>
+                    </span>
+
+                    {% if pageActuelle < totalPages %}
+                        <button type="submit" name="page" value="{{ pageActuelle + 1 }}">Suivant</button>
+                    {% endif %}
+                </div>
+            </section>
+        </main>
+    </form>
+
+    {% include 'footer.twig' %}
+    <script src="../../scripts/popup.js"></script>
+</body>
+
+</html>

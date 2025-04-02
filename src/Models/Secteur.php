@@ -3,7 +3,7 @@ namespace App\Models;
 
 use App\Models\Database;
 
-class Entreprise extends Database {
+class Secteur extends Database {
     public function add($data) {}
     
     public function remove($id) {}
@@ -11,7 +11,8 @@ class Entreprise extends Database {
     public function update($data) {}
     
     public function get($id) {
-        $sql = "SELECT * FROM entreprise WHERE id_entreprise = :id'";
+
+        $sql = "SELECT * FROM secteur WHERE id_secteur = :id'";
         
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);
@@ -22,14 +23,8 @@ class Entreprise extends Database {
     }
     
     public function getAll() {
-        $sql = "SELECT * FROM entreprise";
-        
-        $this->connect();
-        $this->sth = $this->dbh->prepare($sql);
-        $result = $this->execute(null, true);
-        $this->close();
-        
-        return $result ?: [];
+        $r = $this->execute('SELECT * FROM secteur');
+        return $r;
     }
 }
 

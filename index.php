@@ -49,6 +49,9 @@ switch ($uri) {
         }
         $controller->showLogin($auth);
         break;
+    case '/company':
+        $controller->showSearchEntreprise($rights_user);
+        break;
     case '/dashboard':
         $controller->showDashboardStudent();
         break;
