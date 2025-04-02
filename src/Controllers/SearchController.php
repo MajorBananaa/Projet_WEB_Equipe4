@@ -7,6 +7,7 @@ use App\Models\Etudiant;
 use App\Models\Localisation;
 use App\Models\Secteur;
 use App\Models\Contrat;
+use App\Models\Wishlist;
 
 
 class SearchController {
@@ -51,7 +52,14 @@ class SearchController {
                     'id_secteur' => $_POST['id_secteur'] ?? 0
                 ];
                 $dbOffer->update($offre);
-            }
+            } elseif (isset($_POST['offer_id-suprWish'])) {
+                $dbwish = new Wishlist();
+                $dbwish->removeWish([$_SESSION["user_id"], $_POST['offer_id-suprWish']]);
+            } elseif (isset($_POST['offer_id-addWish'])) {
+                $dbwishs = new Wishlist();
+                $dbwishs->addWish([$_SESSION["user_id"], $_POST['offer_id-addWish']]);
+            }   
+
             $_POST = [];
         }
         
@@ -67,6 +75,10 @@ class SearchController {
         ];
         
         return $dbOffer->getAll($filters) ?: [];
+        return [
+            'offers'   => $offers ?: [],
+            'wishlist' => $wishOffers
+        ];
     }
 
     public function searchCompany() {

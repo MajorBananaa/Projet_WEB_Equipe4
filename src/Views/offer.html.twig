@@ -171,7 +171,32 @@
         </div>
     </div>
     {% endif %}
-
+    {% if droits['Ajouter une offre à la wish-list'] %}
+        <div id="popup-overlay-add-wish">
+            <div class="popup-content">
+                <h2>Etes-vous sûr de vouloir ajouter cette offre à votre Wish-list</h2>
+                <form id="application-form2" method="post" enctype="multipart/form-data" action="">
+                    <input type="hidden" id="offer-id-addWish" name="offer_id-addWish">
+                    <input type="hidden" id="add_wish" name="add_wish" value="1">
+                    <button type="submit" class="supprimer-btn">Oui</button>
+                </form>
+                <a href="javascript:void(0)" onclick="togglePopupAddWish()" class="popup-exit">×</a>
+            </div>
+        </div>
+    {% endif %}
+    {% if droits['Retirer une offre à la wish-list'] %}
+        <div id="popup-overlay-supr-wish">
+            <div class="popup-content">
+                <h2>Etes-vous sûr de vouloir supprimer cette offre de votre Wish-list</h2>
+                <form id="application-form2" method="post" enctype="multipart/form-data" action="">
+                    <input type="hidden" id="offer-id-suprWish" name="offer_id-suprWish">
+                    <input type="hidden" id="supr_wish" name="supr_wish" value="1">
+                    <button type="submit" class="supprimer-btn">Oui</button>
+                </form>
+                <a href="javascript:void(0)" onclick="togglePopupSuprWish()" class="popup-exit">×</a>
+            </div>
+        </div>
+    {% endif %}
     <form method="get">
         <main class="bloc-page">
             <aside class="bloc-filters">
@@ -234,6 +259,35 @@
                         <div class="offre-header">
                             <h2>{{ offre.titre }}</h2>
                             <div class="offre-buttons">
+                                {# On vérifie si l'offre est déjà dans la wishlist #}
+                                {% set in_wishlist = false %}
+
+                                {# On filtre la wishlist pour voir si l'offre y apparaît #}
+                                {% if wishlist is defined and wishlist is not empty %}
+                                    {% set matches = wishlist|filter(item => item.id_offres == offre.id_offres) %}
+                                    {% if matches|length > 0 %}
+                                        {% set in_wishlist = true %}
+                                    {% endif %}
+                                {% endif %}
+
+                                {# Si l'offre est dans la wishlist #}
+                                {% if in_wishlist %}
+                                    {% if droits['Retirer une offre à la wish-list'] %}
+                                        <button id="supr-wish-btn" type="button" onclick="togglePopupSuprWish({{ offre.id_offres }})">
+                                            Supprimer de votre Wish-List
+                                        </button>
+                                    {% endif %}
+                                {# Sinon, elle n'y est pas => on affiche "Ajouter" #}
+                                {% else %}
+                                    {% if droits['Ajouter une offre à la wish-list'] %}
+                                        <button id="add-wish-btn" type="button" onclick="togglePopupAddWish({{ offre.id_offres }})">
+                                            Ajouter à votre Wish-List
+                                        </button>
+                                    {% endif %}
+                                {% endif %}
+
+
+
                                 {% if droits['Modifier une offre'] %}
                                     <button id="modifier-btn" type="button" onclick="togglePopupModif({{ offre.id_offres }})">Modifier</button>
                                 {% endif %}

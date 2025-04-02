@@ -1,5 +1,7 @@
 <?php 
 namespace App\Controllers;
+
+use App\Models\Wishlist; 
 class ControllerPage {
 
     private $templateEngine = null;
@@ -15,7 +17,10 @@ class ControllerPage {
     public function showSearchOffer($rights_user) {
         $search = new SearchController();
         $varSearch = $search->searchOffer();
-
+        
+        $dbWish = new Wishlist();
+        $wishOffers = $dbWish->getAll($_SESSION["user_id"]);
+        
         $offresParPage = 10;
         $totalOffres = count($varSearch);
         $totalPages = max(1, ceil($totalOffres / $offresParPage));
@@ -23,7 +28,6 @@ class ControllerPage {
         $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $pageActuelle = max(1, min($pageActuelle, $totalPages));
         $offresPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
-        
         
         echo $this->templateEngine->render('offer.html.twig', [
             'offres' => $offresPage,
@@ -35,7 +39,8 @@ class ControllerPage {
             'teletravail' => $_GET['teletravail'] ?? '',
             'duree' => $_GET['duree'] ?? '',
             'niveau_etude' => $_GET['niveau_etude'] ?? '',
-            'droits' => $rights_user
+            'droits' => $rights_user,
+            'wishlist' => $wishOffers
         ]);
         
     }
