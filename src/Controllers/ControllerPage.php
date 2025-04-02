@@ -52,11 +52,12 @@ class ControllerPage {
 
     public function showSearchStudent() {
         $search = new SearchController();
-        $varSearch = $search->searchStudent();
+        $varSearch = $search->searchUser(id_role: 3);
         $pagination = $search->paginate($varSearch);
         
-        echo $this->templateEngine->render('search-student.html.twig', [
-            'students' => $pagination['data'],
+        echo $this->templateEngine->render('search-user.html.twig', [
+            'users' => $pagination['data'],
+            'user_name' => "étudiant",
             'pageActuelle' => $pagination['currentPage'],
             'totalPages' => $pagination['totalPages'],
             'search' => $_GET['search-bar'] ?? '',
@@ -66,7 +67,18 @@ class ControllerPage {
 
 
     public function showSearchPilote() {
-        // Show search pilote page
+        $search = new SearchController();
+        $varSearch = $search->searchUser(id_role: 2);
+        $pagination = $search->paginate($varSearch);
+        
+        echo $this->templateEngine->render('search-user.html.twig', [
+            'users' => $pagination['data'],
+            'user_name' => "pilote",
+            'pageActuelle' => $pagination['currentPage'],
+            'totalPages' => $pagination['totalPages'],
+            'search' => $_GET['search-bar'] ?? '',
+            'droits' => $this->right
+        ]);
     }
 
     public function showProfilStudent($id) {

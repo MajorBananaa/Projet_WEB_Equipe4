@@ -5,7 +5,14 @@ use App\Models\Database;
 class Utilisateur extends Database {
     public function add($data) {}
     
-    public function remove($id) {}
+    public function remove($id) {
+        $sql = "DELETE FROM utilisateur WHERE id_utilisateur = ?;".
+
+        $this->connect();
+        $this->sth = $this->dbh->prepare($sql);
+        $result = $this->execute([$id]);
+        $this->close();
+    }
     
     public function update($data) {}
     

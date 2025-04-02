@@ -21,5 +21,5 @@ function togglePopupSupr(id) {
   const popup = document.getElementById("popup-overlay-supr");
   popup.classList.toggle("open");
 
-  document.getElementById("offer-id-supr").value = id;
+  document.getElementById("id-supr").value = id;
 };

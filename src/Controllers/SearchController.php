@@ -31,8 +31,8 @@ class SearchController {
                     $candidature = new Candidature();
                     $candidature->add([$_POST["offer_id"], $_SESSION["user_id"], $pathFile, $_POST["motivation"]]);
                 }
-            } elseif (isset($_POST["offer_id-supr"]) && isset($_POST["remove"])) {
-                $dbOffer->remove($_POST["offer_id-supr"]);
+            } elseif (isset($_POST["id-supr"]) && isset($_POST["remove"])) {
+                $dbOffer->remove($_POST["id-supr"]);
             } elseif (isset($_POST["add"])) {
                 $offre = [
                     'titre' => $_POST['titre'] ?? 'Titre par défaut',
@@ -80,6 +80,14 @@ class SearchController {
 
     public function searchCompany() {
         $company = new Entreprise();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if  (isset($_POST["id-supr"]) && isset($_POST["remove"])) {
+                $company->remove($_POST["id-supr"]);
+            }
+            $_POST = [];
+        }
+
         $filters = [
             'search' => $_GET['search-bar'] ?? '',
             'secteur' => $_GET['secteur'] ?? "",
@@ -88,10 +96,18 @@ class SearchController {
         return $company->getAll($filters) ?: [];
     }
 
-    public function searchStudent() {
+    public function searchUser($id_role) {
         $user = new Utilisateur();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if  (isset($_POST["id-supr"]) && isset($_POST["remove"])) {
+                $user->remove($_POST["id-supr"]);
+            }
+            $_POST = [];
+        }
+
         $filters = [
-            'id_role' => 3,
+            'id_role' => $id_role,
             'search' => $_GET['search-bar'] ?? '',
         ];
 

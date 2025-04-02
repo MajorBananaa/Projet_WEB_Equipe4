@@ -23,7 +23,6 @@ class Offer extends Database {
         $this->sth = $this->dbh->prepare($sql);
         $result = $this->execute([$id]);
         $this->close();
-
     }
     
     public function update($data) {
