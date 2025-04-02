@@ -4,15 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentions légales</title>
-    <link rel="stylesheet" href="assets/base.css">
-    <link rel="stylesheet" href="assets/sous-page-footer.css">
     <link href="https://fonts.googleapis.com/css2?family=Single+Line&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
+
+    <title>Mentions légales</title>
+    <link rel="stylesheet" href="/assets/0.css">
+    <link rel="stylesheet" href="/assets/sous-page-footer.css">
 </head>
 
 <body>
-    {% include 'header.twig' %}
+    <!--header -->
+
 
     <main class="footer-sous-page">
         <h1> Mentions légales </h1>
@@ -52,8 +54,51 @@
             </article>
         </section>
     </main>
+
     <!--footer -->
-    {% include 'footer.twig' %}
+    <footer class="ft">
+        <div class ="row">
+            <div class ="col">
+                <img src="\images\Logo_cesi_2022.png" class="logo">
+                <p>Web4All est une entreprise spécialisée dans le développement de solutions web innovantes.</p>
+                <p>Nous concevons des plateformes sur mesure pour répondre aux besoins de nos clients.</p>
+            </div>
+            <div class ="col">
+                <h3>Bureau <div class="underline"><span></span></div></h3>
+                <p>80 avenue Edmund Halley</p>
+                <p>St-Étienne-du-Rouvray</p>
+                <p>Seine-Maritime, France</p>
+                <p class="email-id">contact@cesistagefinder.com</p>
+                <h4>+33 2 32 00 00 00</h4>
+            </div>
+            <div class ="col">
+                <h3>Liens<div class="underline"><span></span></div></h3>
+                <ul>
+                    <li><a href="/src\Views\a-propos.html"> A propos </a></li>
+                    <li><a href="/src\Views\contact.html"> Contact </a></li>
+                    <li><a href="/src\Views\mentions-legales.html"> Mentions légales </a></li>
+                    <li><a href="/src\Views\politique-de-confidentialite.html"> Politique de confidentialité </a></li>
+                </ul>
+            </div>
+            <div class ="col">
+                <h3>Newsletter<div class="underline"><span></span></div></h3>
+                <form>
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type ="email" placeholder="  Entrer votre adresse email" required>
+                    <button type ="submit"><i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+                <div class="social-icons">
+                    <i class="fa-brands fa-facebook-f"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <i class="fa-brands fa-pinterest"></i>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        <p class="copyright"> Copyright © Cesi Stagefinder 2025 - Site de recherche de stage </p>
+    </footer>
 </body>
 
 </html>

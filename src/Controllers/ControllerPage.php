@@ -41,7 +41,6 @@ class ControllerPage {
     }
     
     
-
     public function showSearchEntreprise($rights_user) {
         /*
         $search = new SearchController();
