@@ -96,10 +96,15 @@ class ControllerPage {
         ]);
     }
 
-    public function showProfilEntreprise($id) {
-        $company = new ProfilController($id);
-        $resultat = $company->getProfilEntreprise();
-        echo $this->templateEngine->render('entreprise-profil.html.twig', ['entreprise' => $resultat[0], 'offres' => $resultat[1]]);
+    public function showProfilEntreprise() {
+        if (isset($_GET['identreprise'])){
+            $company = new ProfilController($_GET['identreprise']);
+            $resultat = $company->getProfilEntreprise();
+            echo $this->templateEngine->render('entreprise-profil.html.twig', ['entreprise' => $resultat[0], 'offres' => $resultat[1]]);
+        } else{
+            echo '404 Not Found <br>';
+
+        }
     }
 
     public function showDashboardStudent() {
