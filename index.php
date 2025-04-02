@@ -18,9 +18,9 @@ if (isset($_GET['uri'])) {
     $uri = '/';
 }
 
-$controller = new ControllerPage($twig);
-$auth = new ControllerAuthentification();
 
+$auth = new ControllerAuthentification();
+$controller = new ControllerPage($twig);
 //Redirection login si non connecté
 if (!isset($_SESSION['user_id']) && $uri != "/login") {
     $controller->showLogin($auth);
@@ -33,7 +33,9 @@ if (!isset($_SESSION['user_id']) && $uri != "/login") {
 
 if (isset($_SESSION['user_id'])) {
     $rights_user = $auth->getRight();
+    $controller->right = $rights_user;
 }
+
 
 switch ($uri) {
     case '/':
@@ -57,9 +59,5 @@ switch ($uri) {
         break;
     default:
         echo '404 Not Found <br>';
-
-        $new = new Entreprise();
-        $test = $new->getAll();
-        print_r($test);
         break;
 }
