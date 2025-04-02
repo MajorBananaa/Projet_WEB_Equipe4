@@ -61,7 +61,8 @@ switch ($uri) {
         echo '404 Not Found <br>';
         $test = new Offer();
         print_r($test->getAll(""));
-        break;*/
-        $controller->showSearchStudent();
+        break;
+*/
+        $controller->showSearchEntreprise($rights_user);
         break;
 }

@@ -45,10 +45,12 @@ class ControllerPage {
     
 
     public function showSearchEntreprise($rights_user) {
-        /*
+        
         $search = new SearchController();
         $varSearch = $search->searchCompany();
     
+
+
         $offresParPage = 10;
         $totalOffres = count($varSearch);
         $totalPages = max(1, ceil($totalOffres / $offresParPage));
@@ -56,10 +58,11 @@ class ControllerPage {
         $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $pageActuelle = max(1, min($pageActuelle, $totalPages));
         $offresPage = array_slice($varSearch, ($pageActuelle - 1) * $offresParPage, $offresParPage);
-*/
-
+        
         echo $this->templateEngine->render('company.html.twig', [
-
+            'entreprise' => $entreprise,
+            'place' => $place,
+            'secteur' => $secteur
         ]);
         
     }

@@ -94,6 +94,9 @@
                         <div class="offre-header">
                             <h2>{{ offre.titre }}</h2>
                             <div class="offre-buttons">
+                                <form method="post">
+                                    <button id="modifier-btn">👍</button>
+                                </form>
                                 {% if droits['Modifier une offre'] %}
                                     <button id="modifier-btn">Modifier</button>
                                 {% endif %}
@@ -139,6 +142,7 @@
 
     {% include 'footer.twig' %}
     <script src="../../scripts/popup.js"></script>
+    <script src="../../scripts/evaluation.js"></script>
 </body>
 
 </html>

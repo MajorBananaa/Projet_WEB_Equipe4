@@ -30,10 +30,8 @@ class SearchController {
         $company = new Entreprise();
         $entreprise = $company->getAll();
 
-
         $lieu = new Localisation();
         $place = $lieu->get($entreprise[0]->id_localisation);
-
 
         $sector = new Secteur();
         $secteur = $sector->get($entreprise[0]->id_secteur);
