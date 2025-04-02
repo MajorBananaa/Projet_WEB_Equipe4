@@ -84,10 +84,6 @@ class SearchController {
         ];
         
         return $dbOffer->getAll($filters) ?: [];
-        return [
-            'offers'   => $offers ?: [],
-            'wishlist' => $wishOffers
-        ];
     }
 
     public function searchCompany() {
