@@ -106,7 +106,7 @@
                                 {% if droits['Supprimer une entreprise'] %}
                                     <button id="supprimer-btn">Supprimer</button>
                                 {% endif %}
-                                <button class="postuler-btn" type="button" <button onclick="window.location.href='/entreprise?entreprise_name={{ offre.id }}'">Voir profil entreprise</button>
+                                <button class="postuler-btn" type="button" <button onclick="window.location.href='/profil-company?id_entreprise= {{ entreprise.id_entreprise }}'">Voir profil entreprise</button>
                             </div>
                         </div>
                         <div class="offre-details">

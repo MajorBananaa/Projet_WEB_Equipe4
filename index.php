@@ -44,8 +44,11 @@ switch ($uri) {
     case '/offer':
         $controller->showSearchOffer($rights_user);
         break;
-    case '/entreprise':
+    case '/company':
         $controller->showSearchEntreprise($rights_user);
+        break;
+    case '/profil-company':
+        $controller->showProfilEntreprise();
         break;
     case '/login':
         if (isset($_SESSION['user_id'])) {
