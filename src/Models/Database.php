@@ -50,8 +50,6 @@ class Database {
                 return true;
             }
         } catch (PDOException $e) {
-            //print_r($e->getMessage());
-            //die;
             return false;
         }
     }

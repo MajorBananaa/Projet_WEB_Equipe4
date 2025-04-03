@@ -123,22 +123,21 @@ class SearchController
             if (isset($_POST["id-supr"]) && isset($_POST["remove"])) {
                 $company = new Entreprise();
                 $company->remove($_POST["id-supr"]);
-            }
-            elseif (isset($_POST["add"]) || isset($_POST["update"])) {
+            } elseif (isset($_POST["add"]) || isset($_POST["update"])) {
                 $filters_loc = [
                     isset($_POST["pays"]) ? htmlspecialchars($_POST["pays"]) : '',
                     isset($_POST["ville"]) ? htmlspecialchars($_POST["ville"]) : '',
                     isset($_POST["adresse"]) ? htmlspecialchars($_POST["adresse"]) : '',
                     isset($_POST["code_postal"]) ? htmlspecialchars($_POST["code_postal"]) : ''
                 ];
-        
+
                 $loc = new Localisation();
                 $loc->add($filters_loc);
                 $id_localisation = $loc->getLastId();
-        
+
                 $check_file = new UploadService($_FILES["profil_entreprise"], 10485760, ['image/jpeg', 'image/png'], 'fichier/profil-entreprise');
                 $chemin_photo_entreprise = $check_file->execute();
-        
+
                 $filters_company = [
                     isset($_POST["nom"]) ? htmlspecialchars($_POST["nom"]) : '',
                     isset($_POST["description"]) ? htmlspecialchars($_POST["description"]) : '',
@@ -147,22 +146,21 @@ class SearchController
                     $id_localisation->id_localisation,
                     isset($_POST["id_secteur"]) ? htmlspecialchars($_POST["id_secteur"]) : ''
                 ];
-        
+
                 $company = new Entreprise();
-        
+
                 if (isset($_POST["add"])) {
                     $company->add($filters_company);
-                }
-                elseif (isset($_POST["update"])) {
+                } elseif (isset($_POST["update"])) {
                     $filters_company[] = isset($_POST["offer_id-upd"]) ? htmlspecialchars($_POST["offer_id-upd"]) : '';
                     $company->update($filters_company);
                 }
             }
-        
+
             $_POST = [];
             $_FILES = [];
         }
-        
+
 
         $filters = [
             'search' => $_GET['search-bar'] ?? '',
@@ -179,8 +177,45 @@ class SearchController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST["id-supr"]) && isset($_POST["remove"])) {
                 $user->remove($_POST["id-supr"]);
+            } elseif (isset($_POST["add"]) || isset($_POST["update"])) {
+                $filters_loc = [
+                    isset($_POST["pays"]) ? htmlspecialchars($_POST["pays"]) : '',
+                    isset($_POST["ville"]) ? htmlspecialchars($_POST["ville"]) : '',
+                    isset($_POST["adresse"]) ? htmlspecialchars($_POST["adresse"]) : '',
+                    isset($_POST["code_postal"]) ? htmlspecialchars($_POST["code_postal"]) : ''
+                ];
+
+                $loc = new Localisation();
+                $loc->add($filters_loc);
+                $id_localisation = $loc->getLastId();
+
+                $check_file = new UploadService($_FILES["chemin_profil_picture"], 10485760, ['image/jpeg', 'image/png'], 'fichier/profil-student');
+                $chemin_photo = $check_file->execute();
+
+                $filters_user = [
+                    isset($_POST["nom"]) ? htmlspecialchars($_POST["nom"]) : '',
+                    isset($_POST["prenom"]) ? htmlspecialchars($_POST["prenom"]) : '',
+                    isset($_POST["description"]) ? htmlspecialchars($_POST["description"]) : '',
+                    isset($_POST["email"]) ? htmlspecialchars($_POST["email"]) : '',
+                    isset($_POST["telephone"]) ? htmlspecialchars($_POST["telephone"]) : '',
+                    isset($_POST["mots_de_passe"]) ? htmlspecialchars($_POST["mots_de_passe"]) : '',
+                    $chemin_photo,
+                    $id_localisation->id_localisation,
+                    $id_role
+                ];
+
+                $user = new Utilisateur();
+
+                if (isset($_POST["add"])) {
+                    $user->add($filters_user);
+                } elseif (isset($_POST["update"])) {
+                    $filters_user[] = isset($_POST["offer_id-upd"]) ? htmlspecialchars($_POST["offer_id-upd"]) : '';
+                    $user->update($filters_user);
+                }
             }
+
             $_POST = [];
+            $_FILES = [];
         }
 
         $filters = [

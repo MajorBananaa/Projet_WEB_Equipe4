@@ -17,74 +17,121 @@
 		{% include 'header.twig' %}
 		{% include 'popup-supr.twig' %}
 
-		<div id="popup-overlay-add">
-			<div class="popup-content">
-				<h2>Ajouter un étudiant</h2>
-				<form id="utilisateur-form" method="post" enctype="multipart/form-data" action="">
+		{% if droits['Créer un compte étudiant'] %}
+			<div id="popup-overlay-add">
+				<div class="popup-content">
+					<h2>Ajouter un utilisateur</h2>
+					<form id="utilisateur-form" method="post" enctype="multipart/form-data" action="">
 
-					<div class="form-group">
-						<label for="nom">Nom</label>
-						<input type="text" id="nom" name="nom" placeholder="Nom" required>
-					</div>
+						<div class="form-group">
+							<label for="nom">Nom</label>
+							<input type="text" id="nom" name="nom" placeholder="Nom" required>
+						</div>
 
-					<div class="form-group">
-						<label for="prenom">Prénom</label>
-						<input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
-					</div>
+						<div class="form-group">
+							<label for="prenom">Prénom</label>
+							<input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+						</div>
 
-					<div class="form-group">
-						<label for="description">Description</label>
-						<textarea id="description" name="description" rows="3" placeholder="Description" required></textarea>
-					</div>
+						<div class="form-group">
+							<label for="description">Description</label>
+							<textarea id="description" name="description" rows="3" placeholder="Description" required></textarea>
+						</div>
 
-					<div class="form-group">
-						<label for="email">Email</label>
-						<input type="email" id="email" name="email" placeholder="Email" required>
-					</div>
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="email" id="email" name="email" placeholder="Email" required>
+						</div>
 
-					<div class="form-group">
-						<label for="telephone">Téléphone</label>
-						<input type="tel" id="telephone" name="telephone" placeholder="Téléphone" required>
-					</div>
+						<div class="form-group">
+							<label for="telephone">Téléphone</label>
+							<input type="tel" id="telephone" name="telephone" placeholder="Téléphone" required>
+						</div>
 
-					<div class="form-group">
-						<label for="mots_de_passe">Mot de passe</label>
-						<input type="password" id="mots_de_passe" name="mots_de_passe" placeholder="Mot de passe" required>
-					</div>
+						<div class="form-group">
+							<label for="password">Mot de passe</label>
+							<input type="password" id="mots_de_passe" name="mots_de_passe" placeholder="Mot de passe" required>
+						</div>
 
-					<div class="form-group">
-						<label for="chemin_profil_picture">Image de profil</label>
-						<input type="file" id="chemin_profil_picture" name="chemin_profil_picture" accept="image/*" required>
-					</div>
+						<div class="form-group">
+							<label for="chemin_profil_picture">Image de profil</label>
+							<input type="file" id="chemin_profil_picture" name="chemin_profil_picture" accept="image/*" required>
+						</div>
 
-					<div class="form-group">
-						<label for="pays">Pays</label>
-						<input type="text" id="pays" name="pays" placeholder="Pays" required>
-					</div>
 
-					<div class="form-group">
-						<label for="ville">Ville</label>
-						<input type="text" id="ville" name="ville" placeholder="Ville" required>
-					</div>
+						<div class="form-group">
+							<label for="ville">Ville</label>
+							<input type="text" id="ville" name="ville" placeholder="Ville" required>
+						</div>
 
-					<div class="form-group">
-						<label for="adresse">Adresse</label>
-						<input type="text" id="adresse" name="adresse" placeholder="Adresse" required>
-					</div>
 
-					<div class="form-group">
-						<label for="code_postal">Code Postal</label>
-						<input type="text" id="code_postal" name="code_postal" placeholder="Code Postal" required>
-					</div>
+						<input type="hidden" id="add" name="add" value="1">
 
-					<input type="hidden" id="add" name="add" value="1">
-
-					<button type="submit" class="submit-btn">Ajouter l'utilisateur</button>
-				</form>
-				<a href="javascript:void(0)" onclick="togglePopupAdd()" class="popup-exit">×</a>
+						<button type="submit" class="submit-btn">Ajouter l'utilisateur</button>
+					</form>
+					<a href="javascript:void(0)" onclick="togglePopupAdd()" class="popup-exit">×</a>
+				</div>
 			</div>
-		</div>
+		{% endif %}
 
+		{% if droits['Modifier un compte étudiant'] %}
+			<div id="popup-overlay-modif">
+				<div class="popup-content">
+					<h2>Modifier un utilisateur</h2>
+					<form id="utilisateur-form" method="post" enctype="multipart/form-data" action="">
+
+						<input type="hidden" id="offer-id-upd" name="offer_id-upd">
+
+						<div class="form-group">
+							<label for="nom">Nom</label>
+							<input type="text" id="nom" name="nom" placeholder="Nom" required>
+						</div>
+
+						<div class="form-group">
+							<label for="prenom">Prénom</label>
+							<input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+						</div>
+
+						<div class="form-group">
+							<label for="description">Description</label>
+							<textarea id="description" name="description" rows="3" placeholder="Description" required></textarea>
+						</div>
+
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="email" id="email" name="email" placeholder="Email" required>
+						</div>
+
+						<div class="form-group">
+							<label for="telephone">Téléphone</label>
+							<input type="tel" id="telephone" name="telephone" placeholder="Téléphone" required>
+						</div>
+
+						<div class="form-group">
+							<label for="password">Mot de passe</label>
+							<input type="password" id="mots_de_passe" name="mots_de_passe" placeholder="Mot de passe" required>
+						</div>
+
+						<div class="form-group">
+							<label for="chemin_profil_picture">Image de profil</label>
+							<input type="file" id="chemin_profil_picture" name="chemin_profil_picture" accept="image/*" required>
+						</div>
+
+
+						<div class="form-group">
+							<label for="ville">Ville</label>
+							<input type="text" id="ville" name="ville" placeholder="Ville" required>
+						</div>
+
+
+						<input type="hidden" id="update" name="update" value="1">
+
+						<button type="submit" class="submit-btn">Ajouter l'utilisateur</button>
+					</form>
+					<a href="javascript:void(0)" onclick="togglePopupModif()" class="popup-exit">×</a>
+				</div>
+			</div>
+		{% endif %}
 
 		<form method="get">
 			<main class="bloc-page">
@@ -103,7 +150,7 @@
 									<h2>{{ user.nom }}
 										{{ user.prenom }}</h2>
 									<div class="offre-buttons">
-										<button id="modifier-btn">Modifier</button>
+										<button id="modifier-btn" type="button" onclick="togglePopupModif({{user.id_utilisateur}})">Modifier</button>
 										<button id="supprimer-btn" type="button" onclick="togglePopupSupr({{user.id_utilisateur}})">Supprimer</button>
 										{% if user_name != "pilote" %}
 											<button class="postuler-btn" type="button" onclick="window.location.href='/profil-student?id_student={{user.id_utilisateur}}'">Voir profil étudiant</button>
