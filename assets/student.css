@@ -116,7 +116,7 @@ main {
     height: auto;
     margin-left: 30px;
     margin-top: -25%;
-    padding-bottom: 20%;
+    padding-bottom: 40%;
 }
 
 .student-description {
@@ -154,5 +154,6 @@ main {
         width: 100%;
         position: relative;
         margin-top: 20px;
+        padding-bottom: 200%;
     }
 }
