@@ -41,9 +41,12 @@ class ProfilController {
         $offers = $offre->get($entreprise->id_entreprise);
 
         $candidature = new Candidature();
-        foreach($offre_s in $offers){
-            $candidat = $candidature->get($offre_s->id_offre);
-            $offre_s = count($candidat);
+        foreach($offers as $offre_s){
+            $candidat = $candidature->getOffre($offre_s->id_offres);
+
+            $offre_s->nbCandidats = $candidat->nbCandidats;
+
+
         }
 
         return ['entreprise' => $entreprise, 'offers' => $offers];
