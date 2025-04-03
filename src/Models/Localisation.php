@@ -5,9 +5,27 @@ use App\Models\Database;
 
 class Localisation extends Database {
     public function add($data) {
+        $sql = "INSERT INTO localisation (pays, ville, adresse, code_postal)
+                VALUES (?, ?, ?, ?);";
         
+        $this->connect();
+        $this->sth = $this->dbh->prepare($sql);
+        $result = $this->execute($data);
+        
+        return $result ?: [];
     }
     
+
+    public function getLastId() {
+        $sql = "SELECT LAST_INSERT_ID() AS id_localisation;";
+        
+        $this->sth = $this->dbh->prepare($sql);
+        $result = $this->execute(null, false);
+        $this->close();
+        
+        return $result ?: [];
+    }
+
     public function remove($id) {}
     
     public function update($data) {}
