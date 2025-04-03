@@ -4,7 +4,9 @@ namespace App\Models;
 use App\Models\Database;
 
 class Entreprise extends Database {
-    public function add($data) {}
+    public function add($data) {
+        
+    }
     
     public function remove($id) {
         $sql = "DELETE FROM entreprise WHERE id_entreprise = ?;".

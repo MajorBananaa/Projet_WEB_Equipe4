@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Models\Candidature;
 use App\Models\Contrat;
+use App\Models\Localisation;
 use App\Models\Offer;
 use App\Models\Entreprise;
 use App\Models\Secteur;
@@ -24,7 +25,7 @@ class SearchController {
         ];
     }
 
-    public function searchFilter() {
+    public function addModifFilter() {
         $filters = [];
         $entreprise = new Entreprise();
         $filters[] = $entreprise->getAllName();
@@ -73,15 +74,18 @@ class SearchController {
                 
                 $offre = [
                     'id_offres' => $_POST['offer_id-upd'],
+                    'titre' => $_POST['titre'] ?? 'Titre par défaut',
                     'description' => $_POST['description'] ?? 'Description par défaut',
                     'salaire' => $_POST['salaire'] ?? 0,
                     'teletravail' => $_POST['teletravail'] ?? 0,
                     'duree' => $_POST['duree'] ?? 0,
                     'id_etude' => $_POST['id_etude'] ?? 0,
                     'id_contrat' => $_POST['id_contrat'] ?? 0,
-                    'id_secteur' => $_POST['id_secteur'] ?? 0
+                    'id_secteur' => $_POST['id_secteur'] ?? 0,
+                    'id_entreprise' => $_POST['id_entreprise'] ?? 0
                 ];
                 $dbOffer->update($offre);
+
             } elseif (isset($_POST['offer_id-suprWish'])) {
                 $dbwish = new Wishlist();
                 $dbwish->removeWish([$_SESSION["user_id"], $_POST['offer_id-suprWish']]);
@@ -113,6 +117,27 @@ class SearchController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if  (isset($_POST["id-supr"]) && isset($_POST["remove"])) {
                 $company->remove($_POST["id-supr"]);
+            } elseif (isset($_POST["add"])) {
+                    $filters_company = [
+                    isset($_POST["nom"]) ? htmlspecialchars($_POST["nom"]) : '',
+                    isset($_POST["description"]) ? htmlspecialchars($_POST["description"]) : '',
+                    isset($_POST["mail"]) ? htmlspecialchars($_POST["mail"]) : '',
+                    isset($_POST["id_secteur"]) ? htmlspecialchars($_POST["id_secteur"]) : ''
+                ];
+
+                $filters_loc = [
+                    isset($_POST["pays"]) ? htmlspecialchars($_POST["pays"]) : '',
+                    isset($_POST["ville"]) ? htmlspecialchars($_POST["ville"]) : '',
+                    isset($_POST["adresse"]) ? htmlspecialchars($_POST["adresse"]) : '',
+                    isset($_POST["code_postal"]) ? htmlspecialchars($_POST["code_postal"]) : ''
+                ];
+
+                $loc = new Localisation();
+                $loc->add($filters_loc);
+                $filters_company[] = $loc->getLastId();
+
+                $company = new Entreprise();
+                $company->add($filters_company);
             }
             $_POST = [];
         }

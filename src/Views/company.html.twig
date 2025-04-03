@@ -17,37 +17,64 @@
 		{% include 'popup-supr.twig' %}
 
 		{% if droits['Modifier une offre'] %}
-			<div id="popup-overlay-modif">
+			<div id="popup-overlay-add">
 				<div class="popup-content">
-					<h2>Modifier l'entreprise</h2>
-					<form id="application-form" method="post">
+					<h2>Ajouter une entreprise</h2>
+					<form id="entreprise-form" method="post" enctype="multipart/form-data" action="">
+
 						<div class="form-group">
-							<label for="id_entreprise">id_entreprise</label>
-							<input type="text" id="id_entreprise" name="id_entreprise">
-						</div>
-						<div class="form-group">
-							<label for="nom">nom</label>
-							<input type="text" id="nom" name="nom">
-						</div>
-						<div class="form-group">
-							<label for="description">description</label>
-							<input type="text" id="description" name="description">
-						</div>
-						<div class="form-group">
-							<label for="mail">mail</label>
-							<input type="text" id="mail" name="mail">
-						</div>
-						<div class="form-group">
-							<label for="id_localisation">id_localisation</label>
-							<input type="text" id="id_localisation" name="id_localisation">
+							<label for="nom">Nom de l'entreprise</label>
+							<input type="text" id="nom" name="nom" placeholder="Nom de l'entreprise" required>
 						</div>
 
-						<input type="hidden" id="id-etiquette" name="id-etiquette">
-						<input type="hidden" id="update" name="update" value="1">
+						<div class="form-group">
+							<label for="description">Description</label>
+							<textarea id="description" name="description" rows="3" placeholder="Description de l'entreprise" required></textarea>
+						</div>
 
-						<button type="submit" class="submit-btn">Finaliser la modification</button>
+						<div class="form-group">
+							<label for="mail">Email</label>
+							<input type="email" id="mail" name="mail" placeholder="Email de contact" required>
+						</div>
+
+						<select name="id_secteur" id="secteur-select" class="form-group" required>
+							<option value="">Sélectionnez un secteur</option>
+							{% for secteur in secteurs %}
+								<option value="{{ secteur.id_secteur }}">{{ secteur.secteur }}</option>
+							{% endfor %}
+						</select>
+
+						<div class="form-group">
+							<label for="profil_entreprise">Image du profil</label>
+							<input type="file" id="profil_entreprise" name="profil_entreprise" accept="image/*" required>
+						</div>
+
+						<div class="form-group">
+							<label for="pays">Pays</label>
+							<input type="text" id="pays" name="pays" placeholder="Pays" required>
+						</div>
+
+						<div class="form-group">
+							<label for="ville">Ville</label>
+							<input type="text" id="ville" name="ville" placeholder="Ville" required>
+						</div>
+
+						<div class="form-group">
+							<label for="adresse">Adresse</label>
+							<input type="text" id="adresse" name="adresse" placeholder="Adresse" required>
+						</div>
+
+						<div class="form-group">
+							<label for="code_postal">Code Postal</label>
+							<input type="text" id="code_postal" name="code_postal" placeholder="Code Postal" required>
+						</div>
+
+
+						<input type="hidden" id="add" name="add" value="1">
+
+						<button type="submit" class="submit-btn">Ajouter l'entreprise</button>
 					</form>
-					<a href="javascript:void(0)" onclick="togglePopupModif()" class="popup-exit">×</a>
+					<a href="javascript:void(0)" onclick="togglePopupAdd()" class="popup-exit">×</a>
 				</div>
 			</div>
 		{% endif %}
@@ -98,57 +125,56 @@
 						{% if droits['Créer une entreprise'] %}
 							<button class="postuler-btn" type="button" onclick="togglePopupAdd()">Ajouter une entreprise</button>
 						{% endif %}
-							{% for entreprise in entreprises %}
-								<div class="offre">
-									<div class="offre-header">
-										<h2>{{ entreprise.nom }}</h2>
-										<div class="offre-buttons">
-											{% if droits['Modifier une entreprise'] %}
-												<button id="modifier-btn">Modifier</button>
-											{% endif %}
-											{% if droits['Supprimer une entreprise'] %}
-												<button id="supprimer-btn" type="button" onclick="togglePopupSupr({{entreprise.id_entreprise}})">Supprimer</button>
-											{% endif %}
-											<button class="postuler-btn" type="button" onclick="window.location.href='/profil-company?id_entreprise= {{ entreprise.id_entreprise }}'">Voir profil entreprise</button>
-										</div>
-									</div>
-									<div class="offre-details">
-										<p>
-											<strong>Secteur :</strong>
-											{{ entreprise.secteur }}</p>
-										<p>
-											<strong>Contact :</strong>
-											{{ entreprise.mail }}</p>
-										<p>
-											<strong>Localisation :</strong>
-											{{ entreprise.ville }}</p>
+						{% for entreprise in entreprises %}
+							<div class="offre">
+								<div class="offre-header">
+									<h2>{{ entreprise.nom }}</h2>
+									<div class="offre-buttons">
+										{% if droits['Modifier une entreprise'] %}
+											<button id="modifier-btn">Modifier</button>
+										{% endif %}
+										{% if droits['Supprimer une entreprise'] %}
+											<button id="supprimer-btn" type="button" onclick="togglePopupSupr({{entreprise.id_entreprise}})">Supprimer</button>
+										{% endif %}
+										<button class="postuler-btn" type="button" onclick="window.location.href='/profil-company?id_entreprise= {{ entreprise.id_entreprise }}'">Voir profil entreprise</button>
 									</div>
 								</div>
-							{% endfor %}
-						</div>
-						<!-- Pagination avec un seul formulaire -->
-						<div class="bloc-pagination">
-							{% if pageActuelle > 1 %}
-								<button type="submit" name="page" value="{{ pageActuelle - 1 }}">Précédent</button>
-							{% endif %}
+								<div class="offre-details">
+									<p>
+										<strong>Secteur :</strong>
+										{{ entreprise.secteur }}</p>
+									<p>
+										<strong>Contact :</strong>
+										{{ entreprise.mail }}</p>
+									<p>
+										<strong>Localisation :</strong>
+										{{ entreprise.ville }}</p>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+					<!-- Pagination avec un seul formulaire -->
+					<div class="bloc-pagination">
+						{% if pageActuelle > 1 %}
+							<button type="submit" name="page" value="{{ pageActuelle - 1 }}">Précédent</button>
+						{% endif %}
 
-							<span>
-								<p>Page
-									{{ pageActuelle }}
-									sur
-									{{ totalPages }}</p>
-							</span>
+						<span>
+							<p>Page
+								{{ pageActuelle }}
+								sur
+								{{ totalPages }}</p>
+						</span>
 
-							{% if pageActuelle < totalPages %}
-								<button type="submit" name="page" value="{{ pageActuelle + 1 }}">Suivant</button>
-							{% endif %}
-						</div>
-					</section>
-				</main>
-			</form>
+						{% if pageActuelle < totalPages %}
+							<button type="submit" name="page" value="{{ pageActuelle + 1 }}">Suivant</button>
+						{% endif %}
+					</div>
+				</section>
+			</main>
+		</form>
 
-			{% include 'footer.twig' %}
-			 <script src="../../scripts/popup.js"></script>
-		</body>
+		{% include 'footer.twig' %}
+		 <script src="../../scripts/popup.js"></script>
 	</body>
-</html>
+</html></body></html>

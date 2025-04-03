@@ -21,14 +21,11 @@ class ControllerPage {
     public function showSearchOffer() {
         $search = new SearchController();
         $varSearch = $search->searchOffer();
-        $filters = $search->searchFilter();
+        $filters = $search->addModifFilter();
         $pagination = $search->paginate($varSearch);
         
         $dbWish = new Wishlist();
         $wishOffers = $dbWish->getAll($_SESSION["user_id"]);
-        
-        //print_r($filters);
-        //die;
 
         echo $this->templateEngine->render('offer.html.twig', [
             'offres' => $pagination['data'],
@@ -52,14 +49,19 @@ class ControllerPage {
     public function showSearchEntreprise() {
         $search = new SearchController();
         $varSearch = $search->searchCompany();
+        $filters = $search->addModifFilter();
         $pagination = $search->paginate($varSearch);
         
+        //print_r($filters);
+        //die;
+
         echo $this->templateEngine->render('company.html.twig', [
             'entreprises' => $pagination['data'],
             'pageActuelle' => $pagination['currentPage'],
             'totalPages' => $pagination['totalPages'],
             'search' => $_GET['search-bar'] ?? '',
             'secteur' => $_GET['secteur'] ?? '',
+            'secteurs' => $filters[1],
             'droits' => $this->right
         ]);
     }

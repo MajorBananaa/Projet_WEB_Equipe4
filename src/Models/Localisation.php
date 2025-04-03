@@ -4,7 +4,9 @@ namespace App\Models;
 use App\Models\Database;
 
 class Localisation extends Database {
-    public function add($data) {}
+    public function add($data) {
+        
+    }
     
     public function remove($id) {}
     
@@ -21,7 +23,16 @@ class Localisation extends Database {
         return $result ?: [];
     }
     
-    public function getAll() {}
+    public function getAll() {
+        $sql = "SELECT * FROM localisation";
+        
+        $this->connect();
+        $this->sth = $this->dbh->prepare($sql);
+        $result = $this->execute(null, true);
+        $this->close();
+        
+        return $result ?: [];
+    }
 }
 
 ?>
