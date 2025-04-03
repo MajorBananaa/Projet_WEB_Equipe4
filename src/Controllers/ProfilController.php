@@ -21,9 +21,10 @@ class ProfilController {
 
     public function getProfilStudent() {
         $etudiant = new Utilisateur();
-        $student = $etudiant->get($this->id);
+        $student = $etudiant->get(['nom', 'prenom', 'email', 'chemin_profil_picture', 'description', 'id_localisation'], 'id_utilisateur', $this->id);
         $lieu = new Localisation();
-        $place = $lieu->get($student[0]->id_localisation);
+        $place = $lieu->get($student->id_localisation);
+
         return [
             'student' => $student,
             'place' => $place
