@@ -5,7 +5,7 @@ use App\Models\Offer;
 use App\Models\Entreprise;
 use App\Models\Utilisateur;
 use App\Models\Wishlist;
-
+use App\Models\Evaluation;
 class SearchController {
     public function paginate($data, $perPage = 10) {
         $totalItems = count($data);
@@ -95,7 +95,13 @@ class SearchController {
             }
             $_POST = [];
         }
-
+        elseif (isset($_POST['offer_id-suprEval'])) {
+            $dbeval = new Evaluation();
+            $dbeval->removeEval([$_SESSION["user_id"], $_POST['offer_id-suprEval']]);
+        } elseif (isset($_POST['offer_id-addEval'])) {
+            $dbevals = new Evaluation();
+            $dbevals->addEval([$_SESSION["user_id"], $_POST['offer_id-addEval']]);
+        }
         $filters = [
             'search' => $_GET['search-bar'] ?? '',
             'secteur' => $_GET['secteur'] ?? "",
