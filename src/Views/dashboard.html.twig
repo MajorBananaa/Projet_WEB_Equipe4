@@ -16,7 +16,7 @@
         <div class="dashboard-container">
             <div class="main-container">
 
-                <!--------CARD-->
+                <!--CARD-->
                 <div class="insights">
                     <div class="card">
                         <div class="card-container">
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-                <!--------Recent orders-->
+                <!-- Recent orders-->
                 <section class="recent-orders">
                     <div class="ro-title">
                         <h2 class="recent-order-title">Candidatures envoyées</h2>
@@ -107,7 +107,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for candidatures in candidature %}
+                            {% for candidature in candidatures %}
                                 <tr>
                                     <td>{{ candidatures.id_postuler }}</td>
                                     <td>{{ candidatures.offre_titre }}</td>

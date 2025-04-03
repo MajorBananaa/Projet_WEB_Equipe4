@@ -106,7 +106,7 @@ class ControllerPage {
         
     }
 
-    public function showDashboardStudent() {
+    public function showDashboard() {
         $candidat_stat = new DashboardController();
         $nb_candidat = $candidat_stat->searchDashboard();
         $nb_candidat_recentes = $candidat_stat->searchDashboardCandRecentes();
@@ -118,12 +118,9 @@ class ControllerPage {
             'nb_candidature_recentes' => $nb_candidat_recentes->nb_cand_recentes,
             'nb_evals' =>$nb_candidat_evals->nb_eval,
             'candidature' =>$candidature_send,
-            'wishlist' =>$wish_list
+            'wishlist' =>$wish_list,
+            'droits' => $this->right
         ]);
-    }
-
-    public function showDashboardPilote() {
-        // Show pilote dashboard
     }
 
     public function showAPropos() {
