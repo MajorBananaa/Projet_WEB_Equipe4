@@ -47,13 +47,14 @@ class Evaluation extends Database
 
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);
-        $result = $this->execute(['id' => $id]);
+        $result = $this->execute(['id' => $id], true);
         $this->close();
 
-        return $result ? $result[0] : null; // Retourne l'évaluation ou null si introuvée
+        return $result; // Retourne l'évaluation ou null si introuvée
     }
 
-    public function getAll($id) {
+    public function getAll($id)
+    {
         $sql = "SELECT t1.id_eval, t1.note, t1.id_entreprise, t1.id_utilisateur, 
                        t2.nom AS entreprise_nom, t3.nom AS utilisateur_nom
                 FROM evaluation t1
@@ -63,9 +64,9 @@ class Evaluation extends Database
 
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);
-        $result = $this->execute(['id' => $id], true); 
+        $result = $this->execute(['id' => $id], true);
         $this->close();
 
-        return $result ?: []; 
+        return $result ?: [];
     }
 }
