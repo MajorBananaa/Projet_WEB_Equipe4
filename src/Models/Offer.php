@@ -43,7 +43,20 @@ class Offer extends Database {
         $this->close();
     }
     
-    public function get($id) {}
+    public function get($id) {
+        $sql = 
+           "SELECT  
+            FROM offre
+            WHERE id_entreprise = :id
+        ";
+
+        $this->connect();
+        $this->sth = $this->dbh->prepare($sql, $id);
+        $result = $this->execute($params, true);
+        $this->close();
+
+        return $result ?: [];
+    }
     
     public function getAll($filters) {
         $sql = 

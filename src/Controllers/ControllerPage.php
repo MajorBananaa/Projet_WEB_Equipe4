@@ -87,7 +87,7 @@ class ControllerPage {
     public function showProfilEntreprise($id) {
         $company = new ProfilController($id);
         $resultat = $company->getProfilEntreprise();
-        echo $this->templateEngine->render('entreprise-profil.html.twig', ['entreprise' => $resultat['entreprise'][0], 'offers' => $resultat['offers'], 'place' => $resultat['place'][0], 'secteur' => $resultat['secteur'][0]]);
+        echo $this->templateEngine->render('entreprise-profil.html.twig',['entreprise' => $resultat]);
     }
 
     public function showDashboardStudent() {

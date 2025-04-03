@@ -59,6 +59,7 @@ switch ($uri) {
         break;
     default:
         //echo '404 Not Found <br>';
-        $controller->showProfilEntreprise(25);
+        //break;
+        $controller->showProfilStudent(2);
         break;
 }
