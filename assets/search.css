@@ -64,6 +64,12 @@ main {
   cursor: pointer;
 }
 
+.bloc-filters input[type="number"] {
+  color: whitesmoke;
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
 .bloc-filters select,
 .bloc-filters input[type="range"] {
   width: 100%;

@@ -5,14 +5,15 @@ use App\Models\Database;
 
 class Offer extends Database {
     public function add($data) {
-        $sql = "INSERT INTO Offre (titre, description, date_publication, salaire, teletravail, duree, id_etude, id_contact, id_secteur, id_entreprise) 
-            VALUES (:titre, :description, NOW(), :salaire, :teletravail, :duree, :id_etude, :id_contact, :id_secteur, :id_entreprise)";
-    
+        
+        $sql = "INSERT INTO offre (titre, description, date_publication, salaire, teletravail, duree, id_etude, id_contrat, id_secteur, id_entreprise) 
+            VALUES (:titre, :description, NOW(), :salaire, :teletravail, :duree, :id_etude, :id_contrat, :id_secteur, :id_entreprise)";
+
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);
         $result = $this->execute($data);
         $this->close();
-
+        
         return $result;
     }
     

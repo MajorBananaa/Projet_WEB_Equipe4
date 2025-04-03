@@ -1,8 +1,11 @@
 <?php 
 namespace App\Controllers;
 use App\Models\Candidature;
+use App\Models\Contrat;
 use App\Models\Offer;
 use App\Models\Entreprise;
+use App\Models\Secteur;
+use App\Models\Etude;
 use App\Models\Utilisateur;
 use App\Models\Wishlist;
 
@@ -20,6 +23,24 @@ class SearchController {
             'totalPages' => $totalPages
         ];
     }
+
+    public function searchFilter() {
+        $filters = [];
+        $entreprise = new Entreprise();
+        $filters[] = $entreprise->getAllName();
+
+        $secteur = new Secteur();
+        $filters[] = $secteur->getAll();
+
+        $contrat = new Contrat();
+        $filters[] = $contrat->getAll();
+
+        $contrat = new Etude();
+        $filters[] = $contrat->getAll();
+
+        return $filters;
+    }
+
     public function searchOffer() {
         $dbOffer = new Offer();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -42,11 +63,11 @@ class SearchController {
                     'teletravail' => $_POST['teletravail'] ?? 0,
                     'duree' => $_POST['duree'] ?? 0,
                     'id_etude' => $_POST['id_etude'] ?? 0,
-                    'id_contact' => $_POST['id_contact'] ?? 0,
+                    'id_contrat' => $_POST['id_contrat'] ?? 0,
                     'id_secteur' => $_POST['id_secteur'] ?? 0,
                     'id_entreprise' => $_POST['id_entreprise'] ?? 0
                 ];
-
+                
                 $dbOffer->add($offre);
             } elseif (isset($_POST["update"])) {
                 

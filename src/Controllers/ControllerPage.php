@@ -21,23 +21,31 @@ class ControllerPage {
     public function showSearchOffer() {
         $search = new SearchController();
         $varSearch = $search->searchOffer();
+        $filters = $search->searchFilter();
         $pagination = $search->paginate($varSearch);
         
         $dbWish = new Wishlist();
         $wishOffers = $dbWish->getAll($_SESSION["user_id"]);
         
+        //print_r($filters);
+        //die;
+
         echo $this->templateEngine->render('offer.html.twig', [
             'offres' => $pagination['data'],
             'pageActuelle' => $pagination['currentPage'],
             'totalPages' => $pagination['totalPages'],
             'search' => $_GET['search-bar'] ?? '',
-            'contrats' => $_GET['contrat'] ?? [],
+            'contrat' => $_GET['contrat'] ?? [],
             'salaire' => $_GET['salaire'] ?? 0,
             'teletravail' => $_GET['teletravail'] ?? '',
             'duree' => $_GET['duree'] ?? '',
             'niveau_etude' => $_GET['niveau_etude'] ?? '',
             'droits' => $this->right,
-            'wishlist' => $wishOffers
+            'wishlist' => $wishOffers,
+            'entreprises' => $filters[0],
+            'secteurs' => $filters[1],
+            'contrats' => $filters[2],
+            'etudes' => $filters[3]
         ]);
     }
 
@@ -114,7 +122,7 @@ class ControllerPage {
         $candidature_send = $candidat_stat->searchDashboardCandSend();
         $wish_list = $candidat_stat->searchDashboardWishList();
         echo $this->templateEngine->render('dashboard.html.twig', [
-            'nb_candidature' => $nb_candidat->nb_cand,
+            'nb_candidature' => $nb_candidat[0],
             'nb_candidature_recentes' => $nb_candidat_recentes->nb_cand_recentes,
             'nb_evals' =>$nb_candidat_evals->nb_eval,
             'candidature' =>$candidature_send,

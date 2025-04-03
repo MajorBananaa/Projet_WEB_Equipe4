@@ -56,6 +56,16 @@ class Entreprise extends Database {
         $this->close();
         return $result ?: [];
     }
+
+    public function getAllName() {
+        $sql = "SELECT id_entreprise, nom FROM entreprise";
+
+        $this->connect();
+        $this->sth = $this->dbh->prepare($sql);
+        $result = $this->execute(null, true);
+        $this->close();
+        return $result ?: [];
+    }
 }
 
 ?>
