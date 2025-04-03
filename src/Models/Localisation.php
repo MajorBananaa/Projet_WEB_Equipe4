@@ -11,7 +11,7 @@ class Localisation extends Database {
     public function update($data) {}
     
     public function get($id) {
-        $sql = "SELECT * FROM localisation WHERE id_localisation = :id'";
+        $sql = "SELECT * FROM localisation WHERE id_localisation = :id";
         
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);

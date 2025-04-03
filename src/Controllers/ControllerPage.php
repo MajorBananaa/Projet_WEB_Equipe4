@@ -87,11 +87,15 @@ class ControllerPage {
         ]);
     }
 
-    public function showProfilStudent($id) {
+    public function showProfilStudent() {
+        $id = $_GET['id_student'];
         $profil = new ProfilController($id);
         $resultat = $profil->getProfilStudent();
+
         echo $this->templateEngine->render('student-profil.html.twig', [
-            'entreprise' => $resultat
+            'student' => $resultat['student'],
+            'place' => $resultat['place'],
+            'droits' => $this->right
         ]);
     }
 
