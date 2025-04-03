@@ -158,13 +158,13 @@
 									{% if in_wishlist %}
 										{% if droits['Retirer une offre à la wish-list'] %}
 											<button id="supr-wish-btn" type="button" onclick="togglePopupSuprWish({{ offre.id_offres }})">
-												Supprimer de votre Wish-List
+												Supprimer de la Wish-List
 											</button>
 										{% endif %}
 									{% else %}
 										{% if droits['Ajouter une offre à la wish-list'] %}
 											<button id="add-wish-btn" type="button" onclick="togglePopupAddWish({{ offre.id_offres }})">
-												Ajouter à votre Wish-List
+												Ajouter à la Wish-List
 											</button>
 										{% endif %}
 									{% endif %}

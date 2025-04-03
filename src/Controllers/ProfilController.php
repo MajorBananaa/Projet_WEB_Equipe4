@@ -7,6 +7,9 @@ use App\Models\Entreprise;
 use App\Models\Secteur;
 use App\Models\Contrat;
 use App\Models\Utilisateur;
+use App\Models\Offer;
+use App\Models\Candidature;
+
 
 
 
@@ -34,7 +37,15 @@ class ProfilController {
     public function getProfilEntreprise() {
         $company = new Entreprise();
         $entreprise = $company->get($this->id);
-        
-        return $entreprise;
+        $offre = new Offer();
+        $offers = $offre->get($entreprise->id_entreprise);
+
+        $candidature = new Candidature();
+        foreach($offre_s in $offers){
+            $candidat = $candidature->get($offre_s->id_offre);
+            $offre_s = count($candidat);
+        }
+
+        return ['entreprise' => $entreprise, 'offers' => $offers];
     }
 }

@@ -108,7 +108,10 @@ class ControllerPage {
         if (isset($_GET["id_entreprise"])){
             $company = new ProfilController($_GET["id_entreprise"]);
             $resultat = $company->getProfilEntreprise();
-            echo $this->templateEngine->render('entreprise-profil.html.twig', ['entreprise' => $resultat]);
+            var_dump($resultat);
+            echo $this->templateEngine->render('entreprise-profil.html.twig', ['entreprise' => $resultat['entreprise'], 
+                                                                               'offers' => $resultat['offers'],
+                                                                               'droits' => $this->right]);
         } else {
             echo "Entreprise not found";
         }
