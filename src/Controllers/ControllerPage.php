@@ -49,7 +49,7 @@ class ControllerPage {
 
         $dbEval = new Evaluation();
         $evalOffers = $dbEval->getAll($_SESSION["user_id"]);
-        
+
         echo $this->templateEngine->render('company.html.twig', [
             'entreprises' => $pagination['data'],
             'pageActuelle' => $pagination['currentPage'],

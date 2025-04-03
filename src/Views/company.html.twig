@@ -51,11 +51,12 @@
 				</div>
 			</div>
 		{% endif %}
-		{% if droits['Evaluer une entreprise'] %}
+		{% if droits['Évaluer une entreprise'] %}
         <div id="popup-overlay-add-eval">
             <div class="popup-content">
-                <h2>Etes-vous sûr de vouloir ajouter cette evaluation ?</h2>
+                <h2>Attribuez une note à cette entreprise sur 5 !</h2>
                 <form id="application-form2" method="post" enctype="multipart/form-data" action="">
+					<input type="text" id="offer-note-addEval" name="offer_note-addEval">
                     <input type="hidden" id="offer-id-addEval" name="offer_id-addEval">
                     <input type="hidden" id="add_eval" name="add_eval" value="1">
                     <button type="submit" class="supprimer-btn">Oui</button>
@@ -67,7 +68,7 @@
 	{% if droits['Dévaloriser une entreprise'] %} 
         <div id="popup-overlay-supr-eval">
             <div class="popup-content">
-                <h2>Etes-vous sûr de vouloir supprimer cette evaluation</h2>
+                <h2>Êtes-vous sûr de vouloir supprimer cette évaluation ?</h2>
                 <form id="application-form2" method="post" enctype="multipart/form-data" action="">
                     <input type="hidden" id="offer-id-suprEval" name="offer_id-suprEval">
                     <input type="hidden" id="supr_eval" name="supr_eval" value="1">
@@ -130,23 +131,23 @@
 								{# Vérification si l'entreprise a une évaluation #}
 								{% set in_eval = false %}
 								{% if evaluation is defined and evaluation is not empty %}
-									{% set matches = evaluation|filter(item => item.id_entreprise == entreprise.id_entreprise) %}
-								{% if matches|length > 0 %}
-									{% set in_eval = true %}
-								{% endif %}
+										{% set matches = evaluation|filter(item => item.id_entreprise == entreprise.id_entreprise) %}
+									{% if matches|length > 0 %}
+										{% set in_eval = true %}
+									{% endif %}
 								{% endif %}
 								{% if in_eval %}
-								{% if droits['Dévaloriser une entreprise'] %}
-									<button id="supr-eval-btn" type="button" onclick="togglePopupSuprEval({{entreprise.id_entreprise}})">
-									Supprimer de vos evaluations
-									</button>
-								{% endif %}
+									{% if droits['Dévaloriser une entreprise'] %}
+										<button id="supr-eval-btn" type="button" onclick="togglePopupSuprEval({{entreprise.id_entreprise}})">
+										Supprimer de vos évaluations
+										</button>
+									{% endif %}
 								{% else %}
-								{% if droits['Évaluer une entreprise'] %}
-									<button id="add-eval-btn" type="button" onclick="togglePopupAddEval({{entreprise.id_entreprise}})">
-									Ajouter une évaluation
-									</button>
-								{% endif %}
+									{% if droits['Évaluer une entreprise'] %}
+										<button id="add-eval-btn" type="button" onclick="togglePopupAddEval({{entreprise.id_entreprise}})">
+										Ajouter une évaluation 
+										</button>
+									{% endif %}
 								{% endif %}
 										<button id="modifier-btn">Modifier</button>
 										<button id="supprimer-btn" type="button" onclick="togglePopupSupr({{entreprise.id_entreprise}})">Supprimer</button>
