@@ -8,8 +8,8 @@ function togglePopup(id) {
 function togglePopupModif(id) {
   const popup = document.getElementById("popup-overlay-modif");
   popup.classList.toggle("open");
-  
-  alert(document.getElementById("offer-id-upd").value());
+
+  document.getElementById("offer-id-upd").value = id;
 }
 
 function togglePopupAdd() {
