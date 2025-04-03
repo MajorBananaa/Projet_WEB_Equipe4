@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Models\Wishlist; 
+use App\Models\Evaluation; 
 class ControllerPage {
 
     private $templateEngine = null;
@@ -45,14 +46,18 @@ class ControllerPage {
         $search = new SearchController();
         $varSearch = $search->searchCompany();
         $pagination = $search->paginate($varSearch);
-        
+
+        $dbEval = new Evaluation();
+        $evalOffers = $dbEval->getAll($_SESSION["user_id"]);
+
         echo $this->templateEngine->render('company.html.twig', [
             'entreprises' => $pagination['data'],
             'pageActuelle' => $pagination['currentPage'],
             'totalPages' => $pagination['totalPages'],
             'search' => $_GET['search-bar'] ?? '',
             'secteur' => $_GET['secteur'] ?? '',
-            'droits' => $this->right
+            'droits' => $this->right,
+            'evaluation' =>$evalOffers
         ]);
     }
 

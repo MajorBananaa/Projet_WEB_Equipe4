@@ -4,7 +4,7 @@ require "vendor/autoload.php";
 
 use App\Controllers\ControllerPage;
 use App\Controllers\ControllerAuthentification;
-
+use App\Models\Evaluation;
 $loader = new \Twig\Loader\FilesystemLoader('src/Views');
 $twig = new \Twig\Environment($loader, [
     'debug' => true
@@ -70,5 +70,8 @@ switch ($uri) {
         break;
     default:
         echo '404 Not Found <br>';
+        $dbEval = new Evaluation();
+        $evalOffers = $dbEval->getAll("20");
+        print_r($evalOffers);
         break;
 }
