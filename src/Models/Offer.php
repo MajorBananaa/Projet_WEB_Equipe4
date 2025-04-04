@@ -5,14 +5,15 @@ use App\Models\Database;
 
 class Offer extends Database {
     public function add($data) {
-        $sql = "INSERT INTO Offre (titre, description, date_publication, salaire, teletravail, duree, id_etude, id_contact, id_secteur, id_entreprise) 
-            VALUES (:titre, :description, NOW(), :salaire, :teletravail, :duree, :id_etude, :id_contact, :id_secteur, :id_entreprise)";
-    
+        
+        $sql = "INSERT INTO offre (titre, description, date_publication, salaire, teletravail, duree, id_etude, id_contrat, id_secteur, id_entreprise) 
+            VALUES (:titre, :description, NOW(), :salaire, :teletravail, :duree, :id_etude, :id_contrat, :id_secteur, :id_entreprise)";
+
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);
         $result = $this->execute($data);
         $this->close();
-
+        
         return $result;
     }
     
@@ -26,15 +27,17 @@ class Offer extends Database {
     }
     
     public function update($data) {
-        $sql = "UPDATE Offre 
-            SET description = :description, 
-                salaire = :salaire, 
-                teletravail = :teletravail, 
-                duree = :duree, 
-                id_etude = :id_etude, 
-                id_contrat = :id_contrat, 
-                id_secteur = :id_secteur
-            WHERE id_offres = :id_offres";
+        $sql = "UPDATE offre SET 
+            titre = :titre,
+            description = :description,
+            salaire = :salaire,
+            teletravail = :teletravail,
+            duree = :duree,
+            id_etude = :id_etude,
+            id_contrat = :id_contrat,
+            id_secteur = :id_secteur,
+            id_entreprise = :id_entreprise
+        WHERE id_offres = :id_offres"; 
 
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);
@@ -42,23 +45,22 @@ class Offer extends Database {
         $this->close();
     }
     
-    public function get($id) {$sql = 
-        "SELECT t1.id_offres, t1.titre, t1.description, t1.salaire, t1.teletravail, t1.duree, t2.niveau_etude, t3.type_contrat, t4.secteur, t5.nom 
-         FROM `offre` t1
-         JOIN etude t2 ON t1.id_etude = t2.id_etude
-         JOIN contrat t3 ON t1.id_contrat = t3.id_contrat
-         JOIN secteur t4 ON t1.id_secteur = t4.id_secteur
-         JOIN entreprise t5 ON t1.id_entreprise = t5.id_entreprise
-         WHERE t1.id_entreprise = :id
-     ";
+    public function get($id_offre) {
+        $sql = 
+           "SELECT t1.id_offres, t1.titre, t1.description, t1.salaire, t1.teletravail, t1.duree, t2.niveau_etude, t3.type_contrat, t4.secteur, t5.nom 
+            FROM `offre` t1
+            JOIN etude t2 ON t1.id_etude = t2.id_etude
+            JOIN contrat t3 ON t1.id_contrat = t3.id_contrat
+            JOIN secteur t4 ON t1.id_secteur = t4.id_secteur
+            JOIN entreprise t5 ON t1.id_entreprise = t5.id_entreprise
+            WHERE t1.id_offres == ?
+        ";
 
-     $this->connect();
-     $this->sth = $this->dbh->prepare($sql);
- 
-     $result = $this->execute(['id' => $id], true);
-     $this->close();
-
-     return $result ?: [];}
+        $this->connect();
+        $this->sth = $this->dbh->prepare($sql);
+        $result = $this->execute([$id_offre]);
+        $this->close();
+    }
     
     public function getAll($filters) {
         $sql = 

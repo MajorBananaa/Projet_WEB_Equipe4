@@ -89,13 +89,13 @@
 					<h2>Filtres</h2>
 
 					<h3>Type de contrat</h3>
-					<label><input type="checkbox" name="contrat[]" value="stage" {% if 'stage' in contrats %} checked {% endif %}>
+					<label><input type="checkbox" name="contrat[]" value="stage" {% if 'stage' in contrat %} checked {% endif %}>
 						Stage</label>
-					<label><input type="checkbox" name="contrat[]" value="cdd" {% if 'cdd' in contrats %} checked {% endif %}>
+					<label><input type="checkbox" name="contrat[]" value="cdd" {% if 'cdd' in contrat %} checked {% endif %}>
 						CDD</label>
-					<label><input type="checkbox" name="contrat[]" value="cdi" {% if 'cdi' in contrats %} checked {% endif %}>
+					<label><input type="checkbox" name="contrat[]" value="cdi" {% if 'cdi' in contrat %} checked {% endif %}>
 						CDI</label>
-					<label><input type="checkbox" name="contrat[]" value="alternance" {% if 'alternance' in contrats %} checked {% endif %}>
+					<label><input type="checkbox" name="contrat[]" value="alternance" {% if 'alternance' in contrat %} checked {% endif %}>
 						Alternance</label>
 
 					<h3>Salaire</h3>
@@ -110,13 +110,8 @@
 					<label><input type="checkbox" name="teletravail" value="oui" {% if teletravail == 'oui' %} checked {% endif %}>
 						Télétravail possible</label>
 
-					<h3>Durée du stage</h3>
-					<select name="duree">
-						<option value="">-- Sélectionner --</option>
-						<option value="1" {% if duree == '1' %} selected {% endif %}>1 mois</option>
-						<option value="3" {% if duree == '3' %} selected {% endif %}>3 mois</option>
-						<option value="6" {% if duree == '6' %} selected {% endif %}>6 mois</option>
-					</select>
+					<h3>Durée du stage (mois)</h3>
+					<input type="number" id="duree" name="duree" placeholder="Durée en mois" value="{{duree}}">
 
 					<h3>Niveau d'étude</h3>
 					<select name="niveau_etude">
