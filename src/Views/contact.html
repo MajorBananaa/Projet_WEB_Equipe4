@@ -5,18 +5,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Single+Line&display=swap" rel="stylesheet">
+    
     <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
 
     <title>Contact</title>
     <link rel="stylesheet" href="/assets/0.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="/assets/sous-page-footer.css">
+            <style>
+                body {
+                    font-family: 'Inter', sans-serif;
+                    margin: 0;
+                    padding: 0;
+                }
+                .contact-container {
+                    max-width: 70%;
+                    margin: 40px auto;
+                    padding: 24px 32px;
+                    background: linear-gradient(to bottom, #fdf6ee, #fdf6ee);
+                    border-radius: 16px;
+                    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+                    text-align: justify;
+                }
+                .contact-container h2 {
+                    text-align: center;
+                    color: #1E1E1E;
+                }
+                .contact-form label {
+                    display: block;
+                    margin-top: 10px;
+                    font-weight: 600;
+                }
+                .contact-form input, .contact-form textarea {
+                    width: 100%;
+                    padding: 10px;
+                    margin-top: 5px;
+                    border-radius: 8px;
+                    border: 1px solid #ccc;
+                    font-size: 1rem;
+                }
+                .contact-form button {
+                    display: block;
+                    width: 100%;
+                    padding: 12px;
+                    margin-top: 15px;
+                    background-color: #fdd835;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: background 0.3s ease;
+                }
+                .contact-form button:hover {
+                    background-color: #e6be2b;
+                    width: 20%;
+                }
+                .map-container {
+                    margin-top: 20px;
+                    text-align: center;
+                }
+                iframe {
+                    width: 100%;
+                    height: 300px;
+                    border-radius: 16px;
+                    border: none;
+                }
+                .footer-sous-page {
+                    line-height: 1.6;
+                    text-align: justify;
+                    margin: 40px auto;
+                    padding: 24px 32px;
+                    max-width: 70%;
+                    background: linear-gradient(to bottom, #fefaf3, #fdf6ee);
+                    color: #1E1E1E;
+                    border-radius: 16px;
+                    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+                    font-size: 1rem;
+                }
+                .footer-sous-page a {
+                    color: #fdd835;
+                    font-weight: 600;
+                    text-decoration: none;
+                    transition: color 0.2s ease-in-out;
+                }
+                .footer-sous-page a:hover {
+                    color: #e6be2b;
+                    text-decoration: underline;
+                }
+            </style>
 </head>
 
-<body>
-    <!--header -->
-
-    <main class="footer-sous-page">
-
+        <body>
+            <div class="contact-container">
+                <h2>Nous contacter</h2>
+                <div class="contact-info">
+                    <p><strong>Adresse :</strong> 80 avenue Edmund Halley, St-Étienne-du-Rouvray, Seine-Maritime, France</p>
+                    <p><strong>Email :</strong> <a href="mailto:contact@cesistagefinder.com">contact@cesistagefinder.com</a></p>
+                    <p><strong>Téléphone :</strong> +33 2 32 00 00 00</p>
+                </div>
+                <form class="contact-form">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" required>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <button type="submit">Envoyer</button>
+                </form>
+                <div class="map-container">
+                    <h3>Notre localisation</h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2645.632320219213!2d1.0916759156543128!3d49.387522179345525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e0de1aafed0ad1%3A0xf63a994d5b6896c1!2s80%20Av.%20Edmund%20Halley%2C%2076800%20Saint-%C3%89tienne-du-Rouvray!5e0!3m2!1sfr!2sfr!4v1610000000000" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </body>
+        </html>
+      
     </main>
 
     <!--footer -->
