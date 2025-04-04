@@ -7,6 +7,10 @@
     font-family: "Roboto", sans-serif;
 }
 
+.strong{
+    font-weight: bold;
+}
+
 :root{
     --bg-color: #f9ecd6;
     --text-color: #000000;

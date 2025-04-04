@@ -76,23 +76,14 @@
                 <div class="offre">
                     <div class="offre-header">
                         <h2>{{offre.titre}}</h2>
-                        {% if droits['Modifier une offre'] %}
-							<button id="modifier-btn" type="button" onclick="togglePopupModif({{ offre.id_offres }})">Modifier</button>
-						{% endif %}
-						{% if droits['Supprimer une offre'] %}
-							<button id="supprimer-btn" type="button" onclick="togglePopupSupr({{ offre.id_offres }})">Supprimer</button>
-						{% endif %}
-						{% if droits['Postuler à une offre'] %}
-							<button class="postuler-btn" type="button" onclick="togglePopup({{ offre.id_offres }})">Postuler</button>
-						{% endif %}
                     </div>
                     <div class="offre-details">
-                        <p><strong>Entreprise :</strong> {{entreprise.nom}}</p>
-                        <p><strong>candidature :</strong> {{offre.nbCandidats}}</p>
-                        <p><strong>Durée :</strong> {{offre.duree}}</p>
-                        <p><strong>Salaire :</strong> {{offre.salaire}}</p>
-                        <p><strong>Télétravail :</strong> {{ offre.teletravail ? 'Oui' : 'Non' }}</p>
-                        <p><strong>Taille :</strong> Moyenne</p>
+                        <p class="strong">Entreprise : {{entreprise.nom}}</p>
+                        <p class="strong">candidature : {{offre.nbCandidats}}</p>
+                        <p class="strong">Durée : {{offre.duree}}</p>
+                        <p class="strong">Salaire : {{offre.salaire}}</p>
+                        <p class="strong">Télétravail : {{ offre.teletravail ? 'Oui' : 'Non' }}</p>
+                        <p class="strong">Taille : Moyenne</p>
                     </div>
 
                 </div>
