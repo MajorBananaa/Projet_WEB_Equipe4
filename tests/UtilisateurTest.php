@@ -1,63 +1,80 @@
 <?php
-
 use PHPUnit\Framework\TestCase;
 use App\Models\Utilisateur;
 use App\Models\Database;
 
-class EvaluationTest extends TestCase
+class UtilisateurTest extends TestCase
 {
-    private $evaluation;
+    private $utilisateur;
+    private $pdoMock;
+    private $sthMock;
 
-    protected function setAdd(): void
+    protected function setUp(): void
     {
-        // Créer une instance de la classe Evaluation avant chaque test
-        $this->evaluation = new Utilisateur();
+        $this->pdoMock = $this->createMock(PDO::class);
+        $this->sthMock = $this->createMock(PDOStatement::class);
+
+        $this->pdoMock->method('prepare')->willReturn($this->sthMock);
+        
+        $this->utilisateur = $this->getMockBuilder(Utilisateur::class)
+                                  ->setMethods(['connect', 'close'])
+                                  ->getMock();
+
+        $this->utilisateur->dbh = $this->pdoMock;
     }
 
-    // Test pour ajouter une évaluation
+    public function testAdd()
+    {
+        $this->sthMock->expects($this->once())->method('execute')->willReturn(true);
+
+        $data = ['John', 'Doe', 'Bio', 'john@example.com', '1234567890', 'password', 'path/to/profile.jpg', 1, 2];
+        $this->utilisateur->add($data);
+        
+        $this->assertTrue(true);
+    }
+
     public function testRemove()
     {
-        $data = ['4', 1, 1]; // Remplacer avec une note, un id_utilisateur, un id_entreprise
-        $result = $this->evaluation->add($data);
+        $this->sthMock->expects($this->once())->method('execute')->with([$this->equalTo(1)])->willReturn(true);
 
-        // Vérifier si l'ajout a réussi
-        $this->assertIsTrue($result, "L'ajout de l'évaluation a échoué.");
+        $this->utilisateur->remove(1);
+        
+        $this->assertTrue(true);
     }
 
-    // Test pour supprimer une évaluation
-    public function testupdate()
-{
-    // Ajouter une évaluation pour s'assurer qu'il y a bien une entrée à supprimer
-    $this->evaluation->add([4, 1, 1]);
-
-    // Maintenant on supprime
-    $id = [1, 1];
-    $result = $this->evaluation->removeEval($id);
-
-    // Vérifier si la suppression a réussi
-    $this->assertTrue($result, "La suppression de l'évaluation a échoué.");
-}
-
-    // Test pour récupérer une évaluation par son id
-    public function testget()
+    public function testUpdate()
     {
-        $id = 1; // Remplacer avec un ID d'évaluation existante
-        $result = $this->evaluation->get($id);
+        $this->sthMock->expects($this->once())->method('execute')->willReturn(true);
 
-        // Vérifier si l'évaluation existe et est retournée correctement
-        $this->assertIsArray($result, "Le résultat doit être un tableau.");
-        $this->assertNotEmpty($result, "L'évaluation n'a pas été trouvée.");
-        $this->assertObjectHasAttribute('id_eval', $result[0], "L'évaluation retournée doit avoir un id_eval.");
+        $data = ['John', 'Doe', 'Updated Bio', 'john@example.com', '1234567890', 'newpassword', 'path/to/new_profile.jpg', 1, 2, 1];
+        $this->utilisateur->update($data);
+        
+        $this->assertTrue(true);
     }
 
-    // Test pour récupérer toutes les évaluations pour un utilisateur
-    public function testgetAll()
+    public function testGet()
     {
-        $id = 1; // Remplacer avec un id_utilisateur valide
-        $result = $this->evaluation->getAll($id);
+        $this->sthMock->method('execute')->willReturn(true);
+        $this->sthMock->method('fetch')->willReturn(['nom' => 'John', 'prenom' => 'Doe']);
 
-        // Vérifier si des évaluations sont retournées pour cet utilisateur
-        $this->assertIsArray($result, "Le résultat doit être un tableau.");
-        $this->assertGreaterThan(0, count($result), "Il n'y a pas d'évaluations pour cet utilisateur.");
+        $result = $this->utilisateur->get(['nom', 'prenom'], 'id_utilisateur', 1);
+        
+        $this->assertNotEmpty($result);
+        $this->assertEquals('John', $result['nom']);
+        $this->assertEquals('Doe', $result['prenom']);
+    }
+
+    public function testGetAll()
+    {
+        $this->sthMock->method('execute')->willReturn(true);
+        $this->sthMock->method('fetchAll')->willReturn([
+            ['id_utilisateur' => 1, 'nom' => 'John', 'prenom' => 'Doe', 'email' => 'john@example.com']
+        ]);
+
+        $result = $this->utilisateur->getAll([]);
+        
+        $this->assertNotEmpty($result);
+        $this->assertCount(1, $result);
+        $this->assertEquals('John', $result[0]['nom']);
     }
 }

@@ -28,8 +28,7 @@ class EvaluationTest extends TestCase
     public function testRemoveEval()
 {
     // Ajouter une évaluation pour s'assurer qu'il y a bien une entrée à supprimer
-    $this->evaluation->add([4, 1, 1]);
-
+    $id_e = $this->evaluation->add([4, 1, 1]);
     // Maintenant on supprime
     $id = [1, 1];
     $result = $this->evaluation->removeEval($id);
