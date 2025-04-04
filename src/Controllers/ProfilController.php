@@ -38,7 +38,7 @@ class ProfilController {
         $company = new Entreprise();
         $entreprise = $company->get($this->id);
         $offre = new Offer();
-        $offers = $offre->get($entreprise->id_entreprise);
+        $offers = $offre->getE($entreprise->id_entreprise);
 
         $candidature = new Candidature();
         foreach($offers as $offre_s){

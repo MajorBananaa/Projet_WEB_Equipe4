@@ -63,7 +63,7 @@ class ControllerPage {
             'search' => $_GET['search-bar'] ?? '',
             'secteur' => $_GET['secteur'] ?? '',
             'secteurs' => $filters[1],
-            'droits' => $this->right
+            'droits' => $this->right,
             'evaluation' =>$evalOffers
         ]);
     }
@@ -132,7 +132,7 @@ class ControllerPage {
         $candidature_send = $candidat_stat->searchDashboardCandSend();
         $wish_list = $candidat_stat->searchDashboardWishList();
         echo $this->templateEngine->render('dashboard.html.twig', [
-            'nb_candidature' => $nb_candidat[0],
+            'nb_candidature' => $nb_candidat->nb_cand,
             'nb_candidature_recentes' => $nb_candidat_recentes->nb_cand_recentes,
             'nb_evals' =>$nb_candidat_evals->nb_eval,
             'candidature' =>$candidature_send,
