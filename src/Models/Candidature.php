@@ -55,7 +55,7 @@ class Candidature extends Database {
         }
 
         elseif ($idRole == 1){
-            $sql_promotion = "";
+            $sql .= " LIMIT 10";
         }
 
 
