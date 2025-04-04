@@ -75,7 +75,7 @@ class Statistique extends Database {
         }
     
         if ($idRole == 3) { 
-            $sql .= " AND t3.id_utilisateur = ?";
+            $sql .= " AND t1.id_utilisateur = ?";
             $params[] = $idUtilisateur;
         }
 

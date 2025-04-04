@@ -23,7 +23,8 @@ class Candidature extends Database {
                         t2.titre AS offre_titre, t3.nom AS utilisateur_nom
                     FROM candidature t1
                     JOIN offre t2 ON t1.id_offres = t2.id_offres
-                    JOIN utilisateur t3 ON t1.id_utilisateur = t3.id_utilisateur";
+                    JOIN utilisateur t3 ON t1.id_utilisateur = t3.id_utilisateur
+                    LIMIT 10;";
             $params = [];
 
         if ($idRole == 3){
