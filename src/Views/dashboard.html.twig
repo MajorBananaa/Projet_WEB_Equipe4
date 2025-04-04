@@ -100,8 +100,6 @@
                              <tr>
                                  <th>Id</th>
                                  <th>Offre</th>
-                                 <th>Entreprise</th>
-                                     <th>Lieu</th>
                                  <th>Date d'envoi</th> 
                             </tr>
                         </thead>
@@ -110,8 +108,6 @@
                                 <tr>
                                     <td>{{ candidature.id_postuler }}</td>
                                     <td>{{ candidature.offre_titre }}</td>
-                                    <td>{{ candidature.entreprise }}</td>
-                                    <td>{{ candidature.lieu }}</td>
                                     <td>{{ candidature.date_candidature|date("d/m/Y") }}</td>
                                 </tr>
                             {% else %}
@@ -133,7 +129,7 @@
                             <div class="update">
                                 <div class="message">
                                     <p><strong>Offre : </strong>{{ wishlists.nom_offre }}</p><br>
-                                    <p><strong>Salaire proposé : </strong>{{ wishlists.salaire }}$</p>
+                                    <p><strong>Salaire proposé : </strong>{{ wishlists.salaire }}€</p>
                                 </div>
                             </div>
                         {% endfor %}

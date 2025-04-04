@@ -34,15 +34,24 @@ class Candidature extends Database
         $this->close();
         return $result ?: [];
     }
+    
+    public function remove($id) {}
+    
+    public function update($data) {}
+    
+    public function get($idUtilisateur, $idRole) {
+            $sql = "SELECT t1.id_postuler, t1.date_candidature,
+                        t2.titre AS offre_titre, t3.nom AS utilisateur_nom
+                    FROM candidature t1
+                    JOIN offre t2 ON t1.id_offres = t2.id_offres
+                    JOIN utilisateur t3 ON t1.id_utilisateur = t3.id_utilisateur";
+            $params = [];
 
-
-    public function remove($id)
-    {
-    }
-
-    public function update($data)
-    {
-    }
+        if ($idRole == 3){
+        $sql .= " WHERE t1.id_utilisateur = ?
+        LIMIT 10";
+        $params[] = $idUtilisateur;
+        }
 
     /**
      * Récupère les informations des candidatures en fonction du rôle de l'utilisateur.
@@ -88,10 +97,11 @@ class Candidature extends Database
             $id_promotion = $promo->id_promotion;
 
             $this->close();
-
+    
             $sql .= " JOIN appartenir t4 ON t3.id_utilisateur = t4.id_utilisateur
-                    WHERE t4.id_promotion=?";
-            $params[] = $id_promotion;
+           		 	WHERE t4.id_promotion=?
+                    LIMIT 10";
+            $params[] = $id_promotion;    
         }
 
         $this->connect();
