@@ -203,7 +203,7 @@ class SearchController {
                     isset($_POST["description"]) ? htmlspecialchars($_POST["description"]) : '',
                     isset($_POST["email"]) ? htmlspecialchars($_POST["email"]) : '',
                     isset($_POST["telephone"]) ? htmlspecialchars($_POST["telephone"]) : '',
-                    isset($_POST["mots_de_passe"]) ? htmlspecialchars($_POST["mots_de_passe"]) : '',
+                    isset($_POST["mots_de_passe"]) ? password_hash(htmlspecialchars($_POST["mots_de_passe"]), PASSWORD_DEFAULT) : '',
                     $chemin_photo,
                     $id_localisation->id_localisation,
                     $id_role
