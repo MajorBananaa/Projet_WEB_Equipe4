@@ -32,6 +32,22 @@ class Candidature extends Database {
         }
 
         elseif ($idRole == 2){
+            $sql_promotion = "SELECT(t3.id_promotion) 
+            FROM Appartenir t3
+            WHERE t3.id_utilisateur = ?";
+            $params2[] = $idUtilisateur;
+    
+            $this->connect();
+            $this->sth = $this->dbh->prepare($sql_promotion);
+            $promo = $this->execute($params2, false);
+    
+            $id_promotion = $promo->id_promotion;
+            
+            $this->close();
+    
+            $sql .= " JOIN appartenir t4 ON t3.id_utilisateur = t4.id_utilisateur
+           		 	WHERE t4.id_promotion=?";
+            $params[] = $id_promotion;    
 
         }
 
