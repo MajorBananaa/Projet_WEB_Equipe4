@@ -1,21 +1,21 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use App\Models\Evaluation;
+use App\Models\Utilisateur;
 use App\Models\Database;
 
 class EvaluationTest extends TestCase
 {
     private $evaluation;
 
-    protected function setUp(): void
+    protected function setAdd(): void
     {
         // Créer une instance de la classe Evaluation avant chaque test
-        $this->evaluation = new Evaluation();
+        $this->evaluation = new Utilisateur();
     }
 
     // Test pour ajouter une évaluation
-    public function testAdd()
+    public function testRemove()
     {
         $data = ['4', 1, 1]; // Remplacer avec une note, un id_utilisateur, un id_entreprise
         $result = $this->evaluation->add($data);
@@ -25,7 +25,7 @@ class EvaluationTest extends TestCase
     }
 
     // Test pour supprimer une évaluation
-    public function testRemoveEval()
+    public function testupdate()
 {
     // Ajouter une évaluation pour s'assurer qu'il y a bien une entrée à supprimer
     $this->evaluation->add([4, 1, 1]);
@@ -39,7 +39,7 @@ class EvaluationTest extends TestCase
 }
 
     // Test pour récupérer une évaluation par son id
-    public function testGet()
+    public function testget()
     {
         $id = 1; // Remplacer avec un ID d'évaluation existante
         $result = $this->evaluation->get($id);
@@ -51,7 +51,7 @@ class EvaluationTest extends TestCase
     }
 
     // Test pour récupérer toutes les évaluations pour un utilisateur
-    public function testGetAll()
+    public function testgetAll()
     {
         $id = 1; // Remplacer avec un id_utilisateur valide
         $result = $this->evaluation->getAll($id);
