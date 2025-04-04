@@ -1,5 +1,4 @@
 <?php
-namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 use App\Models\Evaluation;
@@ -22,7 +21,7 @@ class EvaluationTest extends TestCase
         $result = $this->evaluation->add($data);
 
         // Vérifier si l'ajout a réussi
-        $this->assertTrue($result, "L'ajout de l'évaluation a échoué.");
+        $this->assertIsTrue($result, "L'ajout de l'évaluation a échoué.");
     }
 
     // Test pour supprimer une évaluation

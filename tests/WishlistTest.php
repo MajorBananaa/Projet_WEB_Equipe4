@@ -31,7 +31,7 @@ class WishlistTest extends TestCase
     public function testGet()
     {
         // Test simple pour vérifier si la méthode get retourne bien un tableau
-        $result = $this->wishlist->get(1);
+        $result = $this->wishlist->get(1,1);
         $this->assertIsArray($result, 'La méthode get doit retourner un tableau');
     }
 
