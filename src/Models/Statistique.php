@@ -17,7 +17,7 @@ class Statistique extends Database {
     $params = [];
 
     if ($idRole == 3) { 
-        $sql .= " AND t1.id_utilisateur = ?";
+        $sql .= " WHERE id_utilisateur = ?";
         $params[] = $idUtilisateur;
     }
 
@@ -41,7 +41,7 @@ class Statistique extends Database {
         }
     
         if ($idRole == 3) { 
-            $sql .= "AND t1.id_utilisateur = ?";
+            $sql .= "AND id_utilisateur = ?";
             $params[] = $idUtilisateur;
         }
 
@@ -63,11 +63,10 @@ class Statistique extends Database {
         }
     
         if ($idRole == 3) { 
-            $sql .= "WHERE id_utilisateur=?";
+            $sql .= " WHERE id_utilisateur = ?";
             $params[] = $idUtilisateur;
         }
         
-
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);
         $result = $this->execute($params, false);

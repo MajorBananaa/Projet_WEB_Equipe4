@@ -20,10 +20,10 @@ class DashboardController{
     }
     public function searchDashboardCandSend() {
         $dbstat = new Candidature();
-        return $dbstat->get($_SESSION["user_id"]);
+        return $dbstat->get($_SESSION["user_id"],$_SESSION["user_role"]);
     }
     public function searchDashboardWishList () {
         $dbstat = new Wishlist();
-        return $dbstat->get($_SESSION["user_id"]);
+        return $dbstat->get($_SESSION["user_id"],$_SESSION["user_role"]);
     }
 }

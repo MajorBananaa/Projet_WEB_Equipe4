@@ -117,7 +117,7 @@ class ControllerPage {
             'nb_candidature' => $nb_candidat->nb_cand,
             'nb_candidature_recentes' => $nb_candidat_recentes->nb_cand_recentes,
             'nb_evals' =>$nb_candidat_evals->nb_eval,
-            'candidature' =>$candidature_send,
+            'candidatures' =>$candidature_send,
             'wishlist' =>$wish_list,
             'droits' => $this->right
         ]);

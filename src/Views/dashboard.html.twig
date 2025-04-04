@@ -20,7 +20,7 @@
                 <div class="insights">
                     <div class="card">
                         <div class="card-container">
-                            <div class="card-header">
+                            <div class="card-header1">
                                 <span class="material-icons-sharp">
                                     bar_chart
                                 </span>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="card">
                         <div class="card-container">
-                            <div class="card-header">
+                            <div class="card-header2">
                                 <span class="material-icons-sharp">
                                     bar_chart
                                 </span>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="card">
                         <div class="card-container">
-                            <div class="card-header">
+                            <div class="card-header3">
                                 <span class="material-icons-sharp">
                                     bar_chart
                                 </span>
@@ -93,7 +93,6 @@
                 <section class="recent-orders">
                     <div class="ro-title">
                         <h2 class="recent-order-title">Candidatures envoyées</h2>
-                        <a href="#" class="Show all">Tout afficher</a>
                     </div>
 
                     <table>
@@ -107,13 +106,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for candidatures in candidature %}
+                            {% for candidature in candidatures %}
                                 <tr>
-                                    <td>{{ candidatures.id_postuler }}</td>
-                                    <td>{{ candidatures.offre_titre }}</td>
-                                    <td>{{ candidatures.entreprise }}</td>
-                                    <td>{{ candidatures.lieu }}</td>
-                                    <td>{{ candidatures.date_candidature|date("d/m/Y") }}</td>
+                                    <td>{{ candidature.id_postuler }}</td>
+                                    <td>{{ candidature.offre_titre }}</td>
+                                    <td>{{ candidature.entreprise }}</td>
+                                    <td>{{ candidature.lieu }}</td>
+                                    <td>{{ candidature.date_candidature|date("d/m/Y") }}</td>
                                 </tr>
                             {% else %}
                                 <tr>
@@ -143,9 +142,7 @@
 
 
         </div>
-
-
-
+        
         <script src="scripts/dashboard.js"></script>
     </body>
 </html>
