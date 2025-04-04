@@ -2,17 +2,36 @@
     line-height: 1.6;
     text-align: justify;
     margin: 40px auto;
-    padding: 20px;
-    max-width: 60%;
-    background-color: #f4f4f4;
-    color: #333;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background: white;
+    padding: 24px 32px;
+    max-width: 70%;
+    background: linear-gradient(to bottom, #fefaf3, #fdf6ee);
+    color: #1E1E1E;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
 }
 
-
-.footer-sous-page a{
-    color: rgb(255, 255, 0);
-    font-weight: bold;
+.footer-sous-page a {
+    color: #fdd835;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
 }
+
+.footer-sous-page a:hover {
+    color: #e6be2b;
+    text-decoration: underline;
+}
+
+/*
+##################################################
+contact
+##################################################
+*/
+
+
+
+/*
+##################################################
+*/
