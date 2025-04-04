@@ -13,8 +13,28 @@ class Statistique extends Database {
     public function getAll($idUtilisateur, $idRole) {
     $sql = "SELECT COUNT(t1.id_postuler) 
     AS nb_cand
-    FROM candidature t1";
+    FROM Candidature t1";
     $params = [];
+
+    if ($idRole == 2) { 
+        $sql_promotion = "SELECT(t3.id_promotion) 
+        FROM Appartenir t3
+        WHERE t3.id_utilisateur = ?";
+        $params2[] = $idUtilisateur;
+
+        $this->connect();
+        $this->sth = $this->dbh->prepare($sql_promotion);
+        $promo = $this->execute($params2, false);
+
+        $id_promotion = $promo->id_promotion;
+        
+        $this->close();
+
+        $sql .= " JOIN Utilisateur t2 ON t1.id_utilisateur = t2.id_utilisateur
+        JOIN Appartenir t3 ON t2.id_utilisateur = t3.id_utilisateur
+        WHERE t3.id_promotion=?";
+        $params[] = $id_promotion;
+    }
 
     if ($idRole == 3) { 
         $sql .= " WHERE id_utilisateur = ?";
@@ -30,18 +50,32 @@ class Statistique extends Database {
 }
 
     public function getAllRecentes($idUtilisateur, $idRole) {
-        $sql = "SELECT COUNT(date_candidature) 
+        $sql = "SELECT COUNT(t1.id_postuler) 
         AS nb_cand_recentes 
-        FROM candidature 
-        WHERE date_candidature >= DATE_SUB(CURDATE(), INTERVAL 2 DAY)";
+        FROM Candidature t1 
+        WHERE t1.date_candidature >= DATE_SUB(CURDATE(), INTERVAL 2 DAY)";
         $params = [];
 
-
         if ($idRole == 2) { 
+            $sql_promotion = "SELECT(t3.id_promotion) 
+            FROM Appartenir t3
+            WHERE t3.id_utilisateur = ?";
+            $params2[] = $idUtilisateur;
+    
+            $this->connect();
+            $this->sth = $this->dbh->prepare($sql_promotion);
+            $promo = $this->execute($params2,false);
+
+            $id_promotion = $promo->id_promotion;
+            
+            $this->close();
+    
+            $sql .= " AND t1.id_utilisateur IN (SELECT t2.id_utilisateur FROM Appartenir t2 WHERE t2.id_promotion = ?)";
+            $params[] = $id_promotion;
         }
     
         if ($idRole == 3) { 
-            $sql .= "AND id_utilisateur = ?";
+            $sql .= " AND t3.id_utilisateur = ?";
             $params[] = $idUtilisateur;
         }
 
@@ -54,14 +88,32 @@ class Statistique extends Database {
     }
 
     public function getAllEvals($idUtilisateur, $idRole) {
-        $sql = "SELECT COUNT(id_eval) 
+        $sql = "SELECT COUNT(t1.id_eval) 
         AS nb_eval 
-        FROM evaluation";
+        FROM Evaluation t1";
         $params = [];
+
         
         if ($idRole == 2) { 
-        }
+            $sql_promotion = "SELECT(t3.id_promotion) 
+            FROM Appartenir t3
+            WHERE t3.id_utilisateur = ?";
+            $params2[] = $idUtilisateur;
     
+            $this->connect();
+            $this->sth = $this->dbh->prepare($sql_promotion);
+            $promo = $this->execute($params2, false);
+    
+            $id_promotion = $promo->id_promotion;
+            
+            $this->close();
+    
+            $sql .= " JOIN Utilisateur t2 ON t1.id_utilisateur = t2.id_utilisateur
+            JOIN Appartenir t3 ON t2.id_utilisateur = t3.id_utilisateur
+            WHERE t3.id_promotion=?";
+            $params[] = $id_promotion;
+        }
+
         if ($idRole == 3) { 
             $sql .= " WHERE id_utilisateur = ?";
             $params[] = $idUtilisateur;
