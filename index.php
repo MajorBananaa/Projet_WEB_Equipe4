@@ -63,7 +63,7 @@ switch ($uri) {
         $controller->showLogin($auth);
         break;
     case '/dashboard':
-        $controller->showDashboardStudent();
+        $controller->showDashboard();
         break;
     case '/profil-student':
         $controller->showProfilStudent();

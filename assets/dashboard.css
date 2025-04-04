@@ -6,7 +6,6 @@
    --bg-color  (#f9ecd6)
    --text-color (#000000)
    --main-color (#FBE315)
-   Les couleurs “fuscha”, “cyan”, “yellow” sont remplacées par la couleur d'accent.
    Les ombres et survols utilisent des déclinaisons RGBA. 
 /* ========================================================================== */
 
@@ -14,11 +13,11 @@
   /* Variables principales issues de 0.css */
   --bg-color: #f9ecd6;
   --text-color: #000000;
-  --main-color: #FBE315;
+  --main-color: #3B2F2F;
 
   /* Teintes en alpha pour hover, box-shadow, etc. */
-  --main-color-alpha: rgba(251, 227, 21, 0.15);
-  --main-color-alpha2: rgba(251, 227, 21, 0.1);
+  --main-color-alpha: rgba(0, 0, 0, 0.15);
+  --main-color-alpha2: rgba(0, 0, 0, 0.1);
 
   /* Couleurs textes */
   --text-color-primary: var(--text-color);
@@ -27,7 +26,7 @@
 
   /* Ombres */
   --box-shadow-card: 8px 8px 32px var(--main-color-alpha);
-  --box-shadow-card-2: 8px 8px 32px rgba(0, 0, 0, 0.2);
+  --box-shadow-card-2: 8px 8px 32px #8b775485;
 
   /* Espacements et arrondis */
   --padding-card: 20px;
@@ -36,20 +35,6 @@
   --border-radius-8: 8px;
   --border-radius-12: 12px;
   --border-radius-card: var(--padding-card);
-}
-
-/* Mode sombre */
-.dark-mode {
-  --white: #393e46;
-  --light: #222831;
-  --main-color-alpha: rgba(251, 227, 21, 0.15);
-
-  --text-color-primary: #eee;
-  --text-color-secondary: #ccc;
-  --text-color-third: #888;
-
-  --box-shadow-card: 8px 8px 32px var(--main-color-alpha);
-  --box-shadow-card-2: 8px 8px 32px rgba(255, 255, 255, 0.15);
 }
 
 *, *::before, *::after {
@@ -66,11 +51,11 @@ html {
 body {
   /* On laisse le corps s'étendre et on autorise le scroll */
   min-height: 100vh;
-  background-color: var(--bg-color);
+  margin-top: 80px;
   color: var(--text-color-primary);
   /* Retrait du overflow-y: hidden pour autoriser le défilement vertical */
   overflow: auto;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
 }
 
 ul {
@@ -140,11 +125,13 @@ a:hover {
 
 .dashboard-container {
   /* Retrait du height: 100% pour laisser le conteneur s'ajuster. */
+  min-height: 100vh;
   height: auto;
   display: grid;
   grid-template-columns: 2fr 7fr 3fr;
   grid-template-areas: 'sidebar main extrabar';
   gap: 3rem;
+  background: #fdf6ee;
   /* On autorise le conteneur à occuper la hauteur nécessaire */
 }
 
@@ -266,7 +253,7 @@ a:hover {
 }
 
 .insights .card {
-  background-color: #fefaf3;
+  background-color: #f9ecd6;
   padding: 28px;
   border-radius: 28px;
   box-shadow: var(--box-shadow-card);
@@ -278,13 +265,31 @@ a:hover {
   transform: translateY(-4px);
 }
 
-.card .card-header span {
+.card .card-header1 span {
   padding: 12px;
   border-radius: var(--border-radius-rounded);
   font-size: 28px;
   margin-bottom: 18px;
   color: var(--main-color);
   border: 1px solid var(--main-color);
+}
+
+.card .card-header2 span {
+  padding: 12px;
+  border-radius: var(--border-radius-rounded);
+  font-size: 28px;
+  margin-bottom: 18px;
+  color: #007bff;
+  border: 1px solid #007bff ;
+}
+
+.card .card-header3 span {
+  padding: 12px;
+  border-radius: var(--border-radius-rounded);
+  font-size: 28px;
+  margin-bottom: 18px;
+  color: #dc3545;
+  border: 1px solid #dc3545;
 }
 
 .card-body {
@@ -348,7 +353,7 @@ a:hover {
 
 .recent-orders table {
   width: 100%;
-  background-color: var(--white);
+  background-color: #f9ecd6;
   padding: var(--padding-card);
   border-radius: var(--border-radius-card);
   box-shadow: var(--box-shadow-card);
@@ -441,7 +446,7 @@ a:hover {
 
 .recent-updates {
   margin-top: 65px; 
-  background-color: var(--white);
+  background-color: #f9ecd6;
   border-radius: var(--border-radius-card);
   padding: var(--padding-card);
   box-shadow: var(--box-shadow-card);

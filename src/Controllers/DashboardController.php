@@ -8,22 +8,22 @@ use App\Models\Wishlist;
 class DashboardController{
     public function searchDashboard() {
         $dbstat = new Statistique();
-        return $dbstat->getAll($_SESSION["user_id"]);
+        return $dbstat->getAll($_SESSION["user_id"],$_SESSION["user_role"] );
     }
     public function searchDashboardCandRecentes() {
         $dbstat = new Statistique();
-        return $dbstat->getAllRecentes($_SESSION["user_id"]);
+        return $dbstat->getAllRecentes($_SESSION["user_id"],$_SESSION["user_role"]);
     }
     public function searchDashboardEval() {
         $dbstat = new Statistique();
-        return $dbstat->getAllEvals($_SESSION["user_id"]);
+        return $dbstat->getAllEvals($_SESSION["user_id"],$_SESSION["user_role"]);
     }
     public function searchDashboardCandSend() {
         $dbstat = new Candidature();
-        return $dbstat->get($_SESSION["user_id"]);
+        return $dbstat->get($_SESSION["user_id"],$_SESSION["user_role"]);
     }
     public function searchDashboardWishList () {
         $dbstat = new Wishlist();
-        return $dbstat->get($_SESSION["user_id"]);
+        return $dbstat->get($_SESSION["user_id"],$_SESSION["user_role"]);
     }
 }

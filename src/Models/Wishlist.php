@@ -31,15 +31,19 @@ class Wishlist extends Database {
     
     public function update($data) {}
     
-    public function get($id) {
+    public function get($idUtilisateur, $idRole) {
         $sql = "SELECT o.titre AS nom_offre, o.salaire 
         FROM wish_lister wl 
         JOIN offre o ON wl.id_offres = o.id_offres 
         WHERE wl.id_utilisateur = :id;";
+        
+        if($idRole == 2 || 1 ){
+            $sql .= "";
+        }
 
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);
-        $result = $this->execute(['id' => $id], true);
+        $result = $this->execute(['id' => $idUtilisateur], true);
         $this->close();
         
         return $result;

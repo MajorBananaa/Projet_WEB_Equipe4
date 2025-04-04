@@ -18,18 +18,42 @@ class Candidature extends Database {
     
     public function update($data) {}
     
-    public function get($id) {
-        $sql = "SELECT t1.id_postuler, t1.date_candidature, t1.chemin_cv, t1.lettre_motivation,
-                    t2.titre AS offre_titre, t3.nom AS utilisateur_nom
-                FROM candidature t1
-                JOIN offre t2 ON t1.id_offres = t2.id_offres
-                JOIN utilisateur t3 ON t1.id_utilisateur = t3.id_utilisateur
-                WHERE t1.id_utilisateur = :id";
-         
-        
+    public function get($idUtilisateur, $idRole) {
+            $sql = "SELECT t1.id_postuler, t1.date_candidature,
+                        t2.titre AS offre_titre, t3.nom AS utilisateur_nom
+                    FROM candidature t1
+                    JOIN offre t2 ON t1.id_offres = t2.id_offres
+                    JOIN utilisateur t3 ON t1.id_utilisateur = t3.id_utilisateur";
+            $params = [];
+
+        if ($idRole == 3){
+        $sql .= " WHERE t1.id_utilisateur = ?";
+        $params[] = $idUtilisateur;
+        }
+
+        elseif ($idRole == 2){
+            $sql_promotion = "SELECT(t3.id_promotion) 
+            FROM Appartenir t3
+            WHERE t3.id_utilisateur = ?";
+            $params2[] = $idUtilisateur;
+    
+            $this->connect();
+            $this->sth = $this->dbh->prepare($sql_promotion);
+            $promo = $this->execute($params2, false);
+    
+            $id_promotion = $promo->id_promotion;
+            
+            $this->close();
+    
+            $sql .= " JOIN appartenir t4 ON t3.id_utilisateur = t4.id_utilisateur
+           		 	WHERE t4.id_promotion=?";
+            $params[] = $id_promotion;    
+
+        }
+
         $this->connect();
         $this->sth = $this->dbh->prepare($sql);
-        $result = $this->execute(['id' => $id], true);
+        $result = $this->execute($params, true);
         $this->close();
         
         return $result;

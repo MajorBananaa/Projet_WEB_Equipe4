@@ -246,6 +246,7 @@ media queries
     }
 }
 
+
 @media(max-width: 570px){
     .hero{
         height: 100vh;
