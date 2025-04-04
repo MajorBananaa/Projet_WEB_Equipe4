@@ -12,8 +12,29 @@ use App\Models\Wishlist;
 use App\Models\Evaluation;
 
 
-class SearchController {
-    public function paginate($data, $perPage = 10) {
+class SearchController
+{
+    /**
+     * Effectue la pagination d'un jeu de données.
+     *
+     * Cette méthode :
+     * - Calcule le nombre total d'éléments dans le tableau `$data`.
+     * - Calcule le nombre total de pages en fonction du nombre d'éléments et du nombre d'éléments par page (`$perPage`).
+     * - Détermine la page courante en fonction du paramètre `page` dans l'URL (par défaut, page 1).
+     * - Limite la page courante au nombre de pages disponibles.
+     * - Sélectionne les données correspondant à la page courante.
+     * - Retourne un tableau associatif contenant les données paginées, la page courante et le nombre total de pages.
+     *
+     * @param array $data Les données à paginer.
+     * @param int $perPage Le nombre d'éléments par page (par défaut 10).
+     * 
+     * @return array Un tableau associatif contenant :
+     *               - 'data' : les données paginées pour la page courante,
+     *               - 'currentPage' : la page courante,
+     *               - 'totalPages' : le nombre total de pages.
+     */
+    public function paginate($data, $perPage = 10)
+    {
         $totalItems = count($data);
         $totalPages = max(1, ceil($totalItems / $perPage));
         $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
@@ -27,6 +48,23 @@ class SearchController {
         ];
     }
 
+
+    /**
+     * Ajoute les filtres de recherche pour les entreprises, secteurs, contrats et études.
+     *
+     * Cette méthode :
+     * - Crée une instance de la classe `Entreprise` et récupère tous les noms d'entreprises pour filtrer les recherches.
+     * - Crée une instance de la classe `Secteur` et récupère tous les secteurs pour filtrer les recherches.
+     * - Crée une instance de la classe `Contrat` et récupère tous les types de contrats pour filtrer les recherches.
+     * - Crée une instance de la classe `Etude` et récupère tous les niveaux d'étude pour filtrer les recherches.
+     * - Retourne un tableau contenant les résultats de chaque filtre.
+     *
+     * @return array Un tableau contenant les résultats des filtres :
+     *               - [0] : la liste des entreprises,
+     *               - [1] : la liste des secteurs,
+     *               - [2] : la liste des types de contrats,
+     *               - [3] : la liste des niveaux d'étude.
+     */
     public function addModifFilter()
     {
         $filters = [];
@@ -45,6 +83,26 @@ class SearchController {
         return $filters;
     }
 
+
+    /**
+     * Effectue la recherche d'offres en fonction des filtres définis et gère les actions liées aux candidatures, suppression et ajout d'offres.
+     *
+     * Cette méthode :
+     * - Gère la soumission des candidatures avec un fichier CV et une lettre de motivation (avec vérification du fichier).
+     * - Permet de supprimer une offre existante.
+     * - Permet l'ajout d'une nouvelle offre.
+     * - Permet de mettre à jour une offre existante.
+     * - Permet d'ajouter ou de supprimer une offre de la liste de souhaits de l'utilisateur.
+     * 
+     * Les données sont envoyées via une requête POST, et la méthode gère les actions en fonction des paramètres reçus.
+     *
+     * Elle applique également des filtres (recherche par mots-clés, type de contrat, salaire, télétravail, durée, niveau d'étude) 
+     * lors de la récupération des offres via la méthode `getAll`.
+     *
+     * @return array|bool|object Retourne soit un tableau d'offres correspondant aux critères de recherche, 
+     *                            soit un booléen `false` si aucune offre n'est trouvée, 
+     *                            soit un objet en cas d'erreur ou de résultats spéciaux.
+     */
     public function searchOffer()
     {
         $dbOffer = new Offer();
@@ -101,8 +159,6 @@ class SearchController {
             $_FILES = [];
         }
 
-
-
         $filters = [
             'search' => $_GET['search-bar'] ?? '',
             'contrats' => $_GET['contrat'] ?? [],
@@ -115,6 +171,27 @@ class SearchController {
         return $dbOffer->getAll($filters) ?: [];
     }
 
+
+    /**
+     * Gère les actions liées aux entreprises : ajout, modification, suppression d'entreprise, évaluation d'offres, etc.
+     *
+     * Cette méthode :
+     * - Permet de supprimer une entreprise si une requête POST contient les données nécessaires.
+     * - Permet de supprimer une évaluation d'offre si l'utilisateur en fait la demande.
+     * - Permet d'ajouter ou de mettre à jour des évaluations d'offres.
+     * - Permet l'ajout ou la mise à jour d'une entreprise (avec ajout de localisation et photo de profil).
+     *
+     * Elle traite les données envoyées via POST, notamment :
+     * - Les informations sur l'entreprise (nom, description, secteur, etc.).
+     * - La gestion des fichiers (photo de profil de l'entreprise).
+     * - La gestion des évaluations d'offres liées à l'entreprise.
+     *
+     * Après traitement des données, la méthode applique des filtres de recherche (par secteur et mot-clé) et retourne les entreprises correspondantes.
+     *
+     * @return array|bool|object Retourne un tableau d'entreprises correspondant aux critères de recherche, 
+     *                            un booléen `false` si aucune entreprise n'est trouvée, 
+     *                            ou un objet si une erreur se produit ou dans un cas spécifique.
+     */
     public function searchCompany()
     {
         $company = new Entreprise();
@@ -166,7 +243,6 @@ class SearchController {
             $_FILES = [];
         }
 
-
         $filters = [
             'search' => $_GET['search-bar'] ?? '',
             'secteur' => $_GET['secteur'] ?? "",
@@ -175,6 +251,28 @@ class SearchController {
         return $company->getAll($filters) ?: [];
     }
 
+
+    /**
+     * Gère les actions liées aux utilisateurs en fonction de leur rôle : ajout, modification, suppression, etc.
+     *
+     * Cette méthode :
+     * - Permet de supprimer un utilisateur si une requête POST contient les données nécessaires.
+     * - Permet d'ajouter ou de mettre à jour un utilisateur (avec ajout de localisation et photo de profil).
+     * - Prend en compte le rôle de l'utilisateur (par exemple, étudiant, entreprise).
+     *
+     * Elle traite les données envoyées via POST, notamment :
+     * - Les informations sur l'utilisateur (nom, prénom, email, téléphone, mot de passe, etc.).
+     * - La gestion des fichiers (photo de profil).
+     * - La gestion de la localisation de l'utilisateur (pays, ville, adresse, code postal).
+     *
+     * Après traitement des données, la méthode applique un filtre de recherche basé sur l'ID de rôle et un mot-clé de recherche (s'il existe), puis retourne les utilisateurs correspondants.
+     *
+     * @param string $id_role Le rôle de l'utilisateur pour filtrer les résultats (par exemple, 'student', 'company').
+     * 
+     * @return array|bool|object Retourne un tableau d'utilisateurs correspondant aux critères de recherche,
+     *                            un booléen `false` si aucun utilisateur n'est trouvé,
+     *                            ou un objet si une erreur se produit ou dans un cas spécifique.
+     */
     public function searchUser($id_role)
     {
         $user = new Utilisateur();
@@ -230,4 +328,5 @@ class SearchController {
 
         return $user->getAll($filters) ?: [];
     }
+
 }
