@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Models\Wishlist; 
+use App\Models\Evaluation; 
 class ControllerPage {
 
     private $templateEngine = null;
@@ -51,9 +52,9 @@ class ControllerPage {
         $varSearch = $search->searchCompany();
         $filters = $search->addModifFilter();
         $pagination = $search->paginate($varSearch);
-        
-        //print_r($filters);
-        //die;
+
+        $dbEval = new Evaluation();
+        $evalOffers = $dbEval->getAll($_SESSION["user_id"]);
 
         echo $this->templateEngine->render('company.html.twig', [
             'entreprises' => $pagination['data'],
@@ -63,6 +64,7 @@ class ControllerPage {
             'secteur' => $_GET['secteur'] ?? '',
             'secteurs' => $filters[1],
             'droits' => $this->right
+            'evaluation' =>$evalOffers
         ]);
     }
 
@@ -97,11 +99,15 @@ class ControllerPage {
         ]);
     }
 
-    public function showProfilStudent($id) {
+    public function showProfilStudent() {
+        $id = $_GET['id_student'];
         $profil = new ProfilController($id);
         $resultat = $profil->getProfilStudent();
+
         echo $this->templateEngine->render('student-profil.html.twig', [
-            'entreprise' => $resultat
+            'student' => $resultat['student'],
+            'place' => $resultat['place'],
+            'droits' => $this->right
         ]);
     }
 
@@ -109,7 +115,9 @@ class ControllerPage {
         if (isset($_GET["id_entreprise"])){
             $company = new ProfilController($_GET["id_entreprise"]);
             $resultat = $company->getProfilEntreprise();
-            echo $this->templateEngine->render('entreprise-profil.html.twig', ['entreprise' => $resultat]);
+            echo $this->templateEngine->render('entreprise-profil.html.twig', ['entreprise' => $resultat['entreprise'], 
+                                                                               'offers' => $resultat['offers'],
+                                                                               'droits' => $this->right]);
         } else {
             echo "Entreprise not found";
         }

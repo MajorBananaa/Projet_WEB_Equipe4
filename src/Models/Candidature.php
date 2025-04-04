@@ -35,6 +35,19 @@ class Candidature extends Database {
         return $result;
     }
     
+    public function getOffre($id) {
+        $sql = "SELECT COUNT(*) AS nbCandidats 
+                FROM candidature
+                WHERE id_offres = :id";
+         
+        
+        $this->connect();
+        $this->sth = $this->dbh->prepare($sql);
+        $result = $this->execute(['id' => $id], false);
+        $this->close();
+        return $result;
+    }
+
     public function getAll() {
         $sql = "SELECT t1.id_postuler, t1.date_candidature, t1.chemin_cv, t1.lettre_motivation,
                        t2.titre AS offre_titre, t3.nom AS utilisateur_nom

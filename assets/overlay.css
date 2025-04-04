@@ -46,6 +46,54 @@ body {
     pointer-events: all;
 }
 
+#popup-overlay-supr-eval.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#popup-overlay-add-eval {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 9999;
+}
+
+#popup-overlay-add-eval.open {
+    opacity: 1;
+    pointer-events: all;
+}
+#popup-overlay-supr-eval {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 9999;
+}
+
+#popup-overlay-supr-eval.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
 /* Popup content */
 .popup-content {
     background-color: #fff;

@@ -22,7 +22,7 @@ function togglePopupSupr(id) {
   popup.classList.toggle("open");
 
   document.getElementById("id-supr").value = id;
-};
+}
 
 function togglePopupAddWish(id) {
   const popup = document.getElementById("popup-overlay-add-wish");
@@ -36,4 +36,15 @@ function togglePopupSuprWish(id) {
 
   document.getElementById("offer-id-suprWish").value = id;
 }
+function togglePopupAddEval(id) {
+  const popup = document.getElementById("popup-overlay-add-eval");
+  popup.classList.toggle("open");
 
+  document.getElementById("offer-id-addEval").value = id;
+}
+function togglePopupSuprEval(id) {
+  const popup = document.getElementById("popup-overlay-supr-eval");
+  popup.classList.toggle("open");
+
+  document.getElementById("offer-id-suprEval").value = id;
+}

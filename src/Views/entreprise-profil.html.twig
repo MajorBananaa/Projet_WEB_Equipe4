@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search - StageFinder</title>
     <link rel="stylesheet" href="assets/0.css">
+        <link rel="stylesheet" href="/assets/search.css">
     <link rel="stylesheet" href="assets/company.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Single+Line&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/Logo_cesi_2022.png">
@@ -74,16 +76,25 @@
                 <div class="offre">
                     <div class="offre-header">
                         <h2>{{offre.titre}}</h2>
-                        <button class="postuler-btn">Postuler</button>
+                        {% if droits['Modifier une offre'] %}
+							<button id="modifier-btn" type="button" onclick="togglePopupModif({{ offre.id_offres }})">Modifier</button>
+						{% endif %}
+						{% if droits['Supprimer une offre'] %}
+							<button id="supprimer-btn" type="button" onclick="togglePopupSupr({{ offre.id_offres }})">Supprimer</button>
+						{% endif %}
+						{% if droits['Postuler à une offre'] %}
+							<button class="postuler-btn" type="button" onclick="togglePopup({{ offre.id_offres }})">Postuler</button>
+						{% endif %}
                     </div>
                     <div class="offre-details">
                         <p><strong>Entreprise :</strong> {{entreprise.nom}}</p>
-                        <p><strong>Contrat :</strong> {{offre.contrat_nom}}</p>
+                        <p><strong>candidature :</strong> {{offre.nbCandidats}}</p>
                         <p><strong>Durée :</strong> {{offre.duree}}</p>
                         <p><strong>Salaire :</strong> {{offre.salaire}}</p>
                         <p><strong>Télétravail :</strong> {{ offre.teletravail ? 'Oui' : 'Non' }}</p>
                         <p><strong>Taille :</strong> Moyenne</p>
                     </div>
+
                 </div>
                 {% endfor %}
             </div>

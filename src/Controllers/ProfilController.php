@@ -7,6 +7,9 @@ use App\Models\Entreprise;
 use App\Models\Secteur;
 use App\Models\Contrat;
 use App\Models\Utilisateur;
+use App\Models\Offer;
+use App\Models\Candidature;
+
 
 
 
@@ -21,9 +24,10 @@ class ProfilController {
 
     public function getProfilStudent() {
         $etudiant = new Utilisateur();
-        $student = $etudiant->get($this->id);
+        $student = $etudiant->get(['nom', 'prenom', 'email', 'chemin_profil_picture', 'description', 'id_localisation'], 'id_utilisateur', $this->id);
         $lieu = new Localisation();
-        $place = $lieu->get($student[0]->id_localisation);
+        $place = $lieu->get($student->id_localisation);
+
         return [
             'student' => $student,
             'place' => $place
@@ -33,7 +37,18 @@ class ProfilController {
     public function getProfilEntreprise() {
         $company = new Entreprise();
         $entreprise = $company->get($this->id);
-        
-        return $entreprise;
+        $offre = new Offer();
+        $offers = $offre->get($entreprise->id_entreprise);
+
+        $candidature = new Candidature();
+        foreach($offers as $offre_s){
+            $candidat = $candidature->getOffre($offre_s->id_offres);
+
+            $offre_s->nbCandidats = $candidat->nbCandidats;
+
+
+        }
+
+        return ['entreprise' => $entreprise, 'offers' => $offers];
     }
 }

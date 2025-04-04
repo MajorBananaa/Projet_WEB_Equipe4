@@ -9,11 +9,11 @@ use App\Models\Secteur;
 use App\Models\Etude;
 use App\Models\Utilisateur;
 use App\Models\Wishlist;
+use App\Models\Evaluation;
 
-class SearchController
-{
-    public function paginate($data, $perPage = 10)
-    {
+
+class SearchController {
+    public function paginate($data, $perPage = 10) {
         $totalItems = count($data);
         $totalPages = max(1, ceil($totalItems / $perPage));
         $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
@@ -123,6 +123,12 @@ class SearchController
             if (isset($_POST["id-supr"]) && isset($_POST["remove"])) {
                 $company = new Entreprise();
                 $company->remove($_POST["id-supr"]);
+            } elseif (isset($_POST['offer_id-suprEval'])) {
+                $dbeval = new Evaluation();
+                $dbeval->removeEval([$_SESSION["user_id"], $_POST['offer_id-suprEval']]);
+            } elseif (isset($_POST['offer_id-addEval'])) {
+                $dbevals = new Evaluation();
+                $dbevals->add([$_POST['offer_note-addEval'], $_SESSION["user_id"], $_POST['offer_id-addEval']]);
             } elseif (isset($_POST["add"]) || isset($_POST["update"])) {
                 $filters_loc = [
                     isset($_POST["pays"]) ? htmlspecialchars($_POST["pays"]) : '',
@@ -156,7 +162,6 @@ class SearchController
                     $company->update($filters_company);
                 }
             }
-
             $_POST = [];
             $_FILES = [];
         }
